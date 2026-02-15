@@ -3,38 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CLUB ARENA INTERNACIONAL CHASQUI & VELASCO</title>
+<title>Clube Arena Internacional Chasqui & Velasco</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+font-family:'Poppins',sans-serif;
+background:#0f172a;
+color:white;
+}
+
+header{
+height:90vh;
+background:url('https://images.unsplash.com/photo-1574629810360-7efbbe195018') center/cover no-repeat;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+
+header h1{
+font-size:48px;
+background:rgba(0,0,0,0.6);
+padding:20px;
+border-radius:15px;
+}
+
+header p{
+margin-top:15px;
+font-size:20px;
+background:rgba(0,0,0,0.6);
+padding:10px 20px;
+border-radius:10px;
+}
+
+section{
+padding:80px 20px;
+text-align:center;
+}
+
+.section-title{
+font-size:36px;
+margin-bottom:40px;
+color:#00ff88;
+}
+
+.cards{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+}
+
+.card{
+background:#1e293b;
+width:300px;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 0 20px rgba(0,0,0,0.5);
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+}
+
+.card h3{
+margin:15px 0;
+color:#00ff88;
+}
+
+.card p{
+padding:0 15px 20px;
+font-size:14px;
+}
+
+.big-section{
+background:#111827;
+}
+
+footer{
+background:black;
+padding:30px;
+text-align:center;
+font-size:14px;
+}
+
+.button{
+margin-top:30px;
+display:inline-block;
+padding:15px 35px;
+background:#00ff88;
+color:black;
+font-weight:bold;
+border-radius:30px;
+text-decoration:none;
+}
+
+.button:hover{
+background:#00cc66;
+}
+
+@media(max-width:768px){
+header h1{font-size:28px;}
+.section-title{font-size:26px;}
+}
+</style>
 </head>
 
-<body style="margin:0;font-family:Arial;background:#111;color:white;text-align:center;">
+<body>
 
-<div style="background:#00c853;padding:20px;">
-<h1>⚽ CLUB ARENA INTERNACIONAL CHASQUI & VELASCO</h1>
-<p>Quadra Society • CHASQUI LA PAZ</p>
+<header>
+<h1>CLUBE ARENA INTERNACIONAL<br>CHASQUI & VELASCO</h1>
+<p>Esporte • Lazer • Diversão para toda a família</p>
+<a href="#" class="button">Reservar Agora</a>
+</header>
+
+<section>
+<h2 class="section-title">🏟️ Quadras A e B</h2>
+<div class="cards">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e">
+<h3>Quadra A</h3>
+<p>Quadra moderna para campeonatos, treinos e jogos entre amigos.</p>
 </div>
 
-<div style="padding:40px;">
-
-<h2>🏟️ Quadra A</h2>
-<p>Ideal para campeonatos</p>
-
-<h2>🏟️ Quadra B</h2>
-<p>Perfeita para jogos entre amigos</p>
-
-<h2>🎱 Mesa de Sinuca</h2>
-<p>Área de lazer disponível</p>
-
-<h2>🚗 Estacionamento</h2>
-<p>Capacidade para até 50 carros</p>
-
-<h2>📞 Contato</h2>
-<p>Reservas pelo WhatsApp</p>
-
+<div class="card">
+<img src="https://images.unsplash.com/photo-1508098682722-e99c643e7f0b">
+<h3>Quadra B</h3>
+<p>Espaço ideal para diversão das crianças e partidas animadas.</p>
 </div>
 
-<div style="background:black;padding:20px;">
-© 2026 CLUB ARENA INTERNACIONAL CHASQUI & VELASCO
 </div>
+</section>
+
+<section class="big-section">
+<h2 class="section-title">🎉 Salão Grande - Chasqui La Paz</h2>
+<div class="cards">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205">
+<h3>Salão de Festas</h3>
+<p>Salão amplo para aniversários, eventos e confraternizações.</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e">
+<h3>Estacionamento Interno</h3>
+<p>Estacionamento dentro do local com capacidade para até 50 carros.</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1603079843585-8b5a6a0c97c7">
+<h3>Área de Sinuca</h3>
+<p>2 mesas de sinuca na área da quadra onde crianças e adultos podem se divertir.</p>
+</div>
+
+</div>
+</section>
+
+<footer>
+© 2026 Clube Arena Internacional Chasqui & Velasco - Chasqui La Paz<br>
+Todos os direitos reservados.
+</footer>
 
 </body>
 </html>
