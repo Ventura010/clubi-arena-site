@@ -17,37 +17,52 @@ color:white;
 
 header{
 height:90vh;
-background:url('https://images.unsplash.com/photo-1574629810360-7efbbe195018') center/cover no-repeat;
+background:url('SUA_IMAGEM_AQUI.jpg') center/cover no-repeat;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
+padding:20px;
 }
 
 header h1{
-font-size:48px;
-background:rgba(0,0,0,0.6);
+font-size:38px;
+background:rgba(0,0,0,0.7);
 padding:20px;
 border-radius:15px;
 }
 
 header p{
-margin-top:15px;
-font-size:20px;
-background:rgba(0,0,0,0.6);
+margin-top:10px;
+background:rgba(0,0,0,0.7);
 padding:10px 20px;
 border-radius:10px;
 }
 
+.button{
+margin-top:25px;
+padding:15px 35px;
+background:#00ff88;
+color:black;
+text-decoration:none;
+border-radius:30px;
+font-weight:bold;
+font-size:18px;
+}
+
+.button:hover{
+background:#00cc66;
+}
+
 section{
-padding:80px 20px;
+padding:70px 20px;
 text-align:center;
 }
 
 .section-title{
-font-size:36px;
-margin-bottom:40px;
+font-size:30px;
+margin-bottom:30px;
 color:#00ff88;
 }
 
@@ -55,67 +70,29 @@ color:#00ff88;
 display:flex;
 flex-wrap:wrap;
 justify-content:center;
-gap:30px;
+gap:25px;
 }
 
 .card{
 background:#1e293b;
 width:300px;
 border-radius:20px;
-overflow:hidden;
+padding:25px;
 box-shadow:0 0 20px rgba(0,0,0,0.5);
-transition:0.3s;
-}
-
-.card:hover{
-transform:scale(1.05);
-}
-
-.card img{
-width:100%;
-height:200px;
-object-fit:cover;
-}
-
-.card h3{
-margin:15px 0;
-color:#00ff88;
-}
-
-.card p{
-padding:0 15px 20px;
-font-size:14px;
-}
-
-.big-section{
-background:#111827;
 }
 
 footer{
 background:black;
 padding:30px;
 text-align:center;
-font-size:14px;
 }
 
-.button{
-margin-top:30px;
-display:inline-block;
-padding:15px 35px;
-background:#00ff88;
-color:black;
-font-weight:bold;
-border-radius:30px;
+.social a{
+margin:0 15px;
+color:#00ff88;
 text-decoration:none;
-}
-
-.button:hover{
-background:#00cc66;
-}
-
-@media(max-width:768px){
-header h1{font-size:28px;}
-.section-title{font-size:26px;}
+font-weight:bold;
+font-size:18px;
 }
 </style>
 </head>
@@ -125,56 +102,65 @@ header h1{font-size:28px;}
 <header>
 <h1>CLUBE ARENA INTERNACIONAL<br>CHASQUI & VELASCO</h1>
 <p>Esporte • Lazer • Diversão para toda a família</p>
-<a href="#" class="button">Reservar Agora</a>
+<a href="https://wa.me/5511998470234" class="button" target="_blank">
+Reservar pelo WhatsApp
+</a>
 </header>
 
 <section>
-<h2 class="section-title">🏟️ Quadras A e B</h2>
+<h2 class="section-title">🏟️ Estrutura Completa</h2>
 <div class="cards">
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e">
 <h3>Quadra A</h3>
-<p>Quadra moderna para campeonatos, treinos e jogos entre amigos.</p>
+<p>Quadra moderna ideal para campeonatos e jogos entre amigos.</p>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1508098682722-e99c643e7f0b">
 <h3>Quadra B</h3>
-<p>Espaço ideal para diversão das crianças e partidas animadas.</p>
+<p>Espaço perfeito para diversão das crianças e partidas recreativas.</p>
 </div>
-
-</div>
-</section>
-
-<section class="big-section">
-<h2 class="section-title">🎉 Salão Grande - Chasqui La Paz</h2>
-<div class="cards">
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205">
-<h3>Salão de Festas</h3>
+<h3>Salão Grande - Chasqui La Paz</h3>
 <p>Salão amplo para aniversários, eventos e confraternizações.</p>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e">
 <h3>Estacionamento Interno</h3>
-<p>Estacionamento dentro do local com capacidade para até 50 carros.</p>
+<p>Capacidade para até 50 carros dentro do local com segurança.</p>
 </div>
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1603079843585-8b5a6a0c97c7">
 <h3>Área de Sinuca</h3>
-<p>2 mesas de sinuca na área da quadra onde crianças e adultos podem se divertir.</p>
+<p>2 mesas de sinuca na área da quadra onde adultos e crianças podem se divertir.</p>
 </div>
 
 </div>
 </section>
 
+<section>
+<h2 class="section-title">📅 Dias de Agendamento</h2>
+<p>Segunda a Domingo</p>
+<p>Horário: 08:00 às 23:00</p>
+</section>
+
+<section>
+<h2 class="section-title">📍 Localização</h2>
+<p>R. Anézio Ruivo, 620 - Jardim Bonsucesso</p>
+</section>
+
 <footer>
-© 2026 Clube Arena Internacional Chasqui & Velasco - Chasqui La Paz<br>
+
+<div class="social">
+<a href="https://www.tiktok.com/@chasqui_velasco" target="_blank">TikTok</a>
+</div>
+
+<br>
+
+© 2026 Clube Arena Internacional Chasqui & Velasco  
 Todos os direitos reservados.
+
 </footer>
 
 </body>
