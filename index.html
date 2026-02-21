@@ -3,166 +3,286 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Arena Chasqui & Velasco</title>
+<title>Arena Velasco</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins', sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
 body{
-    background: linear-gradient(135deg, #0f3d0f, #145214);
-    color:white;
-    overflow-x:hidden;
+color:white;
+background:black;
+overflow-x:hidden;
 }
 
-/* HEADER */
-header{
-    background: linear-gradient(90deg,#0d2e0d,#1f7a1f);
-    padding:25px;
-    text-align:center;
-    box-shadow:0 5px 20px rgba(0,0,0,0.5);
-    animation: fadeDown 1.2s ease;
+/* ===== VIDEO FUNDO ===== */
+.video-bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
 }
 
-header h1{
-    font-size:40px;
-    font-weight:800;
-    color:#FFD700;
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(rgba(0,0,0,0.7),rgba(0,50,0,0.8));
+z-index:-1;
 }
 
-header p{
-    color:#00BFFF;
-    font-weight:300;
+/* ===== MENU FIXO ===== */
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:rgba(0,0,0,0.8);
+backdrop-filter:blur(8px);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+z-index:1000;
 }
 
-/* HERO */
+nav h1{
+color:#FFD700;
+}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:25px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#00ff00;
+}
+
+/* ===== HERO ===== */
 .hero{
-    text-align:center;
-    padding:80px 20px;
-    animation: fadeUp 1.5s ease;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding-top:80px;
 }
 
 .hero h2{
-    font-size:35px;
-    margin-bottom:20px;
+font-size:45px;
+margin-bottom:20px;
 }
 
 .botao{
-    display:inline-block;
-    padding:15px 35px;
-    background: linear-gradient(45deg,#FFD700,#ffcc00);
-    color:black;
-    font-weight:600;
-    border-radius:50px;
-    text-decoration:none;
-    transition:0.4s;
+padding:15px 35px;
+background:linear-gradient(45deg,#FFD700,#00ff00);
+color:black;
+border-radius:40px;
+text-decoration:none;
+font-weight:600;
+transition:0.4s;
 }
 
 .botao:hover{
-    transform:scale(1.1);
-    box-shadow:0 0 20px #FFD700;
+transform:scale(1.1);
 }
 
-/* SEÇÕES */
+/* ===== SEÇÕES ===== */
 section{
-    padding:60px 20px;
-    text-align:center;
+padding:80px 20px;
+text-align:center;
 }
 
 h2{
-    font-size:32px;
-    margin-bottom:30px;
-    color:#FFD700;
+margin-bottom:40px;
+font-size:35px;
+color:#FFD700;
 }
 
-/* GALERIA */
+/* ===== CONTADOR ===== */
+.contador{
+font-size:40px;
+color:#00ff00;
+margin-top:20px;
+}
+
+/* ===== GALERIA ===== */
 .galeria{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-    padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
 }
 
 .galeria img{
-    width:100%;
-    border-radius:20px;
-    transition:0.5s;
-    cursor:pointer;
-    box-shadow:0 10px 25px rgba(0,0,0,0.6);
+width:100%;
+border-radius:20px;
+cursor:pointer;
+transition:0.4s;
 }
 
 .galeria img:hover{
-    transform:scale(1.07);
+transform:scale(1.05);
 }
 
-/* CONTATO */
-.contato{
-    background:#0d2e0d;
-    padding:40px;
+/* LIGHTBOX */
+.lightbox{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+justify-content:center;
+align-items:center;
+z-index:2000;
+}
+
+.lightbox img{
+max-width:90%;
+max-height:90%;
+border-radius:20px;
+}
+
+/* ===== AGENDA ===== */
+.agenda-box{
+background:rgba(0,0,0,0.7);
+padding:30px;
+border-radius:20px;
+max-width:600px;
+margin:auto;
+}
+
+input, button{
+padding:10px;
+margin:10px;
+border-radius:10px;
+border:none;
+}
+
+button{
+background:#00ff00;
+cursor:pointer;
 }
 
 footer{
-    background:black;
-    padding:20px;
-    text-align:center;
-    font-size:14px;
-}
-
-/* ANIMAÇÕES */
-@keyframes fadeUp{
-    from{opacity:0; transform:translateY(40px);}
-    to{opacity:1; transform:translateY(0);}
-}
-
-@keyframes fadeDown{
-    from{opacity:0; transform:translateY(-40px);}
-    to{opacity:1; transform:translateY(0);}
+background:black;
+padding:20px;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Arena Chasqui & Velasco</h1>
-    <p>Guarulhos - Brasil</p>
-</header>
+<video class="video-bg" autoplay muted loop>
+<source src="https://cdn.coverr.co/videos/coverr-football-stadium-1574/1080p.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<nav>
+<h1>Arena Velasco</h1>
+<ul>
+<li><a href="#galeria">Galeria</a></li>
+<li><a href="#agenda">Agenda</a></li>
+<li><a href="#contato">Contato</a></li>
+</ul>
+</nav>
 
 <section class="hero">
-    <h2>O melhor complexo esportivo da região</h2>
-    <a class="botao" href="https://wa.me/5511998470234" target="_blank">
-        Reservar Agora
-    </a>
+<h2>O Melhor Complexo de San Ignacio de Velasco</h2>
+<a class="botao" href="#">Reservar Agora</a>
+<div class="contador" id="contador">0 Reservas</div>
 </section>
 
-<section>
-    <h2>📸 Nossa Estrutura</h2>
-    <div class="galeria">
-        <img src="95a1e71e-acf6-4637-9a6e-000b53258026.jpg">
-        <img src="d4ff4a14-b701-4133-86e7-b5451894a2c9.jpg">
-        <img src="dcc1dc14-a6f9-4562-88b1-a679396fa6da.jpg">
-        <img src="e8a52323-5e85-4c0e-8ca1-6b9b35ecd307.jpg">
-        <img src="fefc8c1f-697a-4a89-823e-48fb0eabf7e2.jpg">
-    </div>
+<section id="galeria">
+<h2>Galeria</h2>
+<div class="galeria">
+<img src="95a1e71e-acf6-4637-9a6e-000b53258026.jpg">
+<img src="d4ff4a14-b701-4133-86e7-b5451894a2c9.jpg">
+<img src="dcc1dc14-a6f9-4562-88b1-a679396fa6da.jpg">
+<img src="e8a52323-5e85-4c0e-8ca1-6b9b35ecd307.jpg">
+<img src="fefc8c1f-697a-4a89-823e-48fb0eabf7e2.jpg">
+</div>
 </section>
 
-<section class="contato">
-    <h2>📍 Contato</h2>
-    <p>📞 Telefone: (11) 99847-0234</p>
-    <p>📲 WhatsApp: (11) 99847-0234</p>
-    <p>📍 Rua Anezio Ruivo 620 - Guarulhos - Brasil</p>
-    <p>📧 Email: campochasquivelasco@gmail.com</p>
+<section id="agenda">
+<h2>Agenda</h2>
+<div class="agenda-box">
+<p id="status">Disponível</p>
+
+<div id="adminArea" style="display:none;">
+<input type="text" id="novoStatus" placeholder="Ex: Alugado hoje">
+<button onclick="salvar()">Salvar</button>
+</div>
+
+<button onclick="login()">Editar Agenda (Somente dono)</button>
+</div>
+</section>
+
+<section id="contato">
+<h2>Contato</h2>
+<p>San Ignacio de Velasco</p>
 </section>
 
 <footer>
-    © 2026 Arena Chasqui & Velasco - Todos os direitos reservados
+© 2026 Arena Velasco
 </footer>
+
+<div class="lightbox" id="lightbox">
+<img id="lightImg">
+</div>
+
+<script>
+// CONTADOR ANIMADO
+let count = 0;
+let contador = document.getElementById("contador");
+let intervalo = setInterval(()=>{
+count++;
+contador.innerText = count + " Reservas";
+if(count >= 120){ clearInterval(intervalo); }
+},30);
+
+// LIGHTBOX
+document.querySelectorAll(".galeria img").forEach(img=>{
+img.addEventListener("click",()=>{
+document.getElementById("lightbox").style.display="flex";
+document.getElementById("lightImg").src=img.src;
+});
+});
+document.getElementById("lightbox").onclick=function(){
+this.style.display="none";
+}
+
+// LOGIN DONO
+function login(){
+let senha = prompt("Digite a senha de administrador:");
+if(senha === "velasco123"){
+document.getElementById("adminArea").style.display="block";
+}else{
+alert("Senha incorreta!");
+}
+}
+
+function salvar(){
+let novo = document.getElementById("novoStatus").value;
+document.getElementById("status").innerText = novo;
+}
+</script>
 
 </body>
 </html>
