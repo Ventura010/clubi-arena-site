@@ -382,7 +382,7 @@ text-align: center;
         <div class="calendar-grid" id="calendarGrid">
             </div>
         <div style="margin-top: 30px;">
-            <button class="btn-calendar" onclick="adminLogin()">Editar Agenda (Senha: MEV2000)</button>
+            <button class="btn-calendar" onclick="adminLogin()">Administrar Agenda (Dono)</button>
         </div>
     </div>
 </section>
@@ -472,7 +472,7 @@ function renderCalendar() {
                     renderCalendar();
                 }
             } else {
-                alert("Clique em 'Editar Agenda' e coloque a senha para fazer alterações.");
+                alert("Apenas o dono pode editar. Clique em 'Administrar Agenda' para entrar.");
             }
         };
         grid.appendChild(dayDiv);
@@ -488,7 +488,7 @@ function adminLogin() {
     const senha = prompt("Digite a senha de administrador:");
     if(senha === "MEV2000") {
         sessionStorage.setItem('isArenaAdmin', 'true');
-        alert("Acesso liberado! Clique nos dias do calendário para adicionar ou remover reservas.");
+        alert("Acesso liberado! Agora você pode clicar nos dias para marcar as locações.");
         renderCalendar();
     } else {
         alert("Senha incorreta!");
