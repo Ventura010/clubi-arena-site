@@ -6,6 +6,7 @@
 <title>Arena Chasqui & Velasco</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
@@ -104,6 +105,16 @@ padding:80px 20px;
 text-align:center;
 }
 
+.texto-informativo {
+max-width: 850px;
+margin: 0 auto 40px auto;
+line-height: 1.8;
+background: rgba(255,255,255,0.05);
+padding: 25px;
+border-radius: 20px;
+text-align: left;
+}
+
 h2{
 margin-bottom:40px;
 font-size:35px;
@@ -135,6 +146,80 @@ transition:0.4s;
 transform:scale(1.05);
 }
 
+/* REDES SOCIAIS FLUTUANTES */
+.redes-flutuantes {
+position: fixed;
+bottom: 25px;
+right: 25px;
+display: flex;
+flex-direction: column;
+gap: 15px;
+z-index: 3000;
+}
+
+.icone-social {
+width: 60px;
+height: 60px;
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 30px;
+color: white;
+text-decoration: none;
+transition: 0.3s;
+box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.zap { background-color: #25d366; }
+.tk { background-color: #000000; border: 2px solid #fff; }
+
+.icone-social:hover { transform: translateY(-5px) scale(1.1); }
+
+/* AGENDA / CALENDÁRIO */
+.calendar-container {
+    background: rgba(0,0,0,0.85);
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 900px;
+    margin: auto;
+    border: 1px solid #FFD700;
+}
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+.day-name { color: #FFD700; font-weight: 800; padding-bottom: 10px; font-size: 14px;}
+.day {
+    background: rgba(255,255,255,0.05);
+    min-height: 90px;
+    padding: 8px;
+    border-radius: 12px;
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.day:hover { background: rgba(255,255,255,0.15); }
+.event-tag {
+    display: block;
+    margin-top: 5px;
+    background: #e74c3c;
+    color: white;
+    padding: 3px 6px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 600;
+}
+.btn-calendar { background: #FFD700; color: black; border: none; padding: 8px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+
 /* LIGHTBOX */
 .lightbox{
 display:none;
@@ -155,30 +240,10 @@ max-height:90%;
 border-radius:20px;
 }
 
-/* AGENDA */
-.agenda-box{
-background:rgba(0,0,0,0.7);
-padding:30px;
-border-radius:20px;
-max-width:600px;
-margin:auto;
-}
-
-input, button{
-padding:10px;
-margin:10px;
-border-radius:10px;
-border:none;
-}
-
-button{
-background:#00ff00;
-cursor:pointer;
-}
-
 footer{
 background:black;
-padding:20px;
+padding:40px 20px;
+text-align: center;
 }
 </style>
 </head>
@@ -194,21 +259,64 @@ padding:20px;
 <nav>
 <h1>Arena Chasqui & Velasco</h1>
 <ul>
-<li><a href="#galeria">Galeria</a></li>
-<li><a href="#times">Times Campeões</a></li>
+<li><a href="#quadras">Quadras</a></li>
+<li><a href="#salao">Salão</a></li>
+<li><a href="#times">Times</a></li>
 <li><a href="#agenda">Agenda</a></li>
 <li><a href="#contato">Contato</a></li>
 </ul>
 </nav>
 
+<div class="redes-flutuantes">
+    <a href="https://wa.me/5511998470234" target="_blank" class="icone-social zap"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.tiktok.com/@chasqui_velasco" target="_blank" class="icone-social tk"><i class="fab fa-tiktok"></i></a>
+</div>
+
 <section class="hero">
 <h2>A Melhor Quadra de Guarulhos</h2>
-<a class="botao" href="#">Reservar Agora</a>
+<a class="botao" href="#agenda">Reservar Agora</a>
 <div class="contador" id="contador">0 Reservas</div>
 </section>
 
+<section id="quadras">
+    <h2>QUADRA CHASQUI & VELASCO</h2>
+    <div class="texto-informativo">
+        <p>A Arena conta com <strong>2 quadras</strong> preparadas para o seu melhor jogo!</p><br>
+        <p><strong>Quadra Espaçosa:</strong> A Quadra CHASQUI VELASCO é ampla e espaçosa, proporcionando um ambiente confortável para a prática de diversas modalidades esportivas.</p>
+        <p><strong>Ambiente Seguro:</strong> Projetada com segurança em mente, a quadra oferece um ambiente tranquilo e protegido para que você possa se divertir com tranquilidade.</p>
+        <p><strong>Conforto e Lazer:</strong> Com cadeiras disponíveis, a quadra é um lugar sossegado e agradável para jogar e se divertir com amigos e familiares.</p>
+        <p><strong>Estacionamento Gratuito:</strong> A quadra possui estacionamento interno, que é gratuito para os usuários, exceto em dias de eventos especiais.</p>
+    </div>
+    <div class="galeria">
+        <img src="c2643024-93aa-46b6-8444-ef0bf2fbff1e.jpg">
+        <img src="c1f1e9ee-dd27-426f-a2c4-62015412d94c.jpg">
+        <img src="401cf3b1-c876-467e-bcb7-84c20709091e.jpg">
+    </div>
+</section>
+
+<section id="salao">
+    <h2>SALÃO DE FESTA CHASQUI LA PAZ</h2>
+    <div class="texto-informativo">
+        <p><strong>Salão de Festas – Estrutura Completa para o Seu Evento:</strong> Nosso salão é amplo e coberto, ideal para diversos tipos de eventos, com espaço de sobra para seus convidados.</p>
+        <p>Contamos com um <strong>palco grande</strong>, perfeito para apresentações ao vivo, grupos musicais, DJs ou atrações variadas.</p>
+        <p>Estacionamento espaçoso no próprio local, garantindo comodidade.</p>
+        <p><strong>Eventos que Realizamos:</strong> Festas de 15 anos, Batizados, Cortes de cabelo em grupo, Aniversários, Despedidas e Confraternizações!</p>
+        <p><em>Entre em contato para agendar uma visita e conhecer nossos pacotes.</em></p>
+    </div>
+</section>
+
+<section id="diversao">
+    <h2>ÁREA DE DIVERSÃO</h2>
+    <div class="texto-informativo">
+        <p>Para quem não dispensa uma boa resenha, nossa área de diversão conta com <strong>2 mesas de sinuca</strong>. É o lugar perfeito para relaxar, desafiar os amigos e aproveitar o tempo livre com muita descontração e lazer.</p>
+    </div>
+    <div class="galeria" style="display: flex; justify-content: center;">
+        <img src="c2a96f49-d828-40af-84b7-d6447ae7d5b4.jpg" style="max-width: 600px; width: 100%;">
+    </div>
+</section>
+
 <section id="galeria">
-<h2>Galeria</h2>
+<h2>Galeria de Fotos</h2>
 <div class="galeria">
 <img src="95a1e71e-acf6-4637-9a6e-000b53258026.jpg">
 <img src="d4ff4a14-b701-4133-86e7-b5451894a2c9.jpg">
@@ -221,7 +329,6 @@ padding:20px;
 <section id="times">
 <h2>🏆 Times Campeões na Arena Chasqui & Velasco</h2>
 <div class="galeria">
-
 <img src="084b14cf-e85c-4bee-bdc5-cc4f332d9a9c.jpg">
 <img src="3250db03-b976-4667-8732-5c91940fd70f.jpg">
 <img src="37b97771-2970-4693-9f01-35ec34eebeeb.jpg">
@@ -261,20 +368,23 @@ padding:20px;
 <img src="e2ac1b94-6f08-45e2-a774-59ab688b2a7f.jpg">
 <img src="e8440e66-e892-4501-a149-29de91bee37f.jpg">
 <img src="f880ccb5-9a47-43d7-b4e1-511189dcf7d7.jpg">
-
 </div>
 </section>
 
 <section id="agenda">
-<h2>Agenda</h2>
-<div class="agenda-box">
-<p id="status">Disponível</p>
-<div id="adminArea" style="display:none;">
-<input type="text" id="novoStatus" placeholder="Ex: Alugado hoje">
-<button onclick="salvar()">Salvar</button>
-</div>
-<button onclick="login()">Editar Agenda (Somente dono)</button>
-</div>
+    <h2>Agenda de Locação</h2>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button class="btn-calendar" onclick="changeMonth(-1)">Anterior</button>
+            <h3 id="monthDisplay">Mês Ano</h3>
+            <button class="btn-calendar" onclick="changeMonth(1)">Próximo</button>
+        </div>
+        <div class="calendar-grid" id="calendarGrid">
+            </div>
+        <div style="margin-top: 30px;">
+            <button class="btn-calendar" onclick="adminLogin()">Editar Agenda (Senha: MEV2000)</button>
+        </div>
+    </div>
 </section>
 
 <section id="contato">
@@ -293,7 +403,7 @@ padding:20px;
 </div>
 
 <script>
-// CONTADOR
+// --- CONTADOR ORIGINAL ---
 let count = 0;
 let contador = document.getElementById("contador");
 let intervalo = setInterval(()=>{
@@ -302,7 +412,7 @@ contador.innerText = count + " Reservas";
 if(count >= 120){ clearInterval(intervalo); }
 },30);
 
-// LIGHTBOX
+// --- LIGHTBOX ORIGINAL ---
 document.querySelectorAll(".galeria img").forEach(img=>{
 img.addEventListener("click",()=>{
 document.getElementById("lightbox").style.display="flex";
@@ -314,20 +424,78 @@ document.getElementById("lightbox").onclick=function(){
 this.style.display="none";
 }
 
-// LOGIN DONO
-function login(){
-let senha = prompt("Digite a senha de administrador:");
-if(senha === "MEV2000"){
-document.getElementById("adminArea").style.display="block";
-}else{
-alert("Senha incorreta!");
-}
+// --- LÓGICA DA AGENDA (CALENDÁRIO) ---
+let currentDate = new Date();
+let events = JSON.parse(localStorage.getItem('arenaAgenda')) || {};
+
+function renderCalendar() {
+    const grid = document.getElementById("calendarGrid");
+    const monthYear = document.getElementById("monthDisplay");
+    grid.innerHTML = "";
+    
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    
+    const namesMonths = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+    monthYear.innerText = `${namesMonths[month]} ${year}`;
+
+    const weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+    weekDays.forEach(d => {
+        const dDiv = document.createElement("div");
+        dDiv.className = "day-name";
+        dDiv.innerText = d;
+        grid.appendChild(dDiv);
+    });
+
+    for(let i=0; i<firstDay; i++) { grid.appendChild(document.createElement("div")); }
+
+    for(let i=1; i<=daysInMonth; i++) {
+        const dayDiv = document.createElement("div");
+        dayDiv.className = "day";
+        const dateKey = `${year}-${month}-${i}`;
+        dayDiv.innerHTML = `<strong>${i}</strong>`;
+        
+        if(events[dateKey]) {
+            dayDiv.innerHTML += `<span class="event-tag">${events[dateKey]}</span>`;
+        }
+
+        dayDiv.onclick = () => {
+            if(sessionStorage.getItem('isArenaAdmin') === 'true') {
+                const info = prompt("Descreva a reserva para este dia (ou deixe vazio para excluir):", events[dateKey] || "");
+                if(info !== null) {
+                    if(info === "") delete events[dateKey];
+                    else events[dateKey] = info;
+                    localStorage.setItem('arenaAgenda', JSON.stringify(events));
+                    renderCalendar();
+                }
+            } else {
+                alert("Clique em 'Editar Agenda' e coloque a senha para fazer alterações.");
+            }
+        };
+        grid.appendChild(dayDiv);
+    }
 }
 
-function salvar(){
-let novo = document.getElementById("novoStatus").value;
-document.getElementById("status").innerText = novo;
+function changeMonth(dir) {
+    currentDate.setMonth(currentDate.getMonth() + dir);
+    renderCalendar();
 }
+
+function adminLogin() {
+    const senha = prompt("Digite a senha de administrador:");
+    if(senha === "MEV2000") {
+        sessionStorage.setItem('isArenaAdmin', 'true');
+        alert("Acesso liberado! Clique nos dias do calendário para adicionar ou remover reservas.");
+        renderCalendar();
+    } else {
+        alert("Senha incorreta!");
+    }
+}
+
+renderCalendar();
 </script>
 
 </body>
