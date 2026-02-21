@@ -5,110 +5,173 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Clube Arena Internacional Chasqui & Velasco</title>
 
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0072ff">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+
 <style>
+*{margin:0;padding:0;box-sizing:border-box}
+
 body{
-margin:0;
-font-family:Arial, sans-serif;
-background:#0f2027;
+font-family:'Poppins',sans-serif;
+background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#000000);
+background-size:400% 400%;
+animation:gradient 12s ease infinite;
 color:white;
+overflow-x:hidden;
+}
+
+@keyframes gradient{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
 
 header{
-background:linear-gradient(90deg,#1f4037,#99f2c8);
-padding:40px;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
 text-align:center;
-color:black;
+backdrop-filter:blur(10px);
+}
+
+header h1{
+font-size:38px;
+font-weight:900;
+letter-spacing:2px;
+}
+
+header p{
+margin-top:15px;
+opacity:0.9;
+}
+
+.botao{
+display:inline-block;
+margin:15px;
+padding:14px 30px;
+border-radius:40px;
+background:linear-gradient(90deg,#00e0ff,#0072ff);
+color:white;
+text-decoration:none;
+font-weight:bold;
+transition:0.4s;
+box-shadow:0 0 20px rgba(0,224,255,0.6);
+}
+
+.botao:hover{
+transform:scale(1.05);
+box-shadow:0 0 30px rgba(0,224,255,1);
 }
 
 section{
-padding:60px 20px;
+padding:100px 20px;
 text-align:center;
+opacity:0;
+transform:translateY(40px);
+transition:1s;
+}
+
+section.show{
+opacity:1;
+transform:translateY(0);
 }
 
 h2{
-color:#00ffcc;
+font-size:30px;
 margin-bottom:30px;
+background:linear-gradient(90deg,#00e0ff,#00ffaa);
+-webkit-background-clip:text;
+color:transparent;
 }
 
 .galeria{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:15px;
+gap:20px;
 }
 
 .galeria img{
 width:100%;
-border-radius:12px;
-height:250px;
+height:240px;
 object-fit:cover;
-}
-
-.descricao{
-max-width:900px;
-margin:auto;
-font-size:18px;
-line-height:1.6;
-}
-
-.calendario{
-background:#1b1b1b;
-padding:30px;
 border-radius:15px;
-margin:20px auto;
-max-width:900px;
-text-align:left;
+transition:0.5s;
+filter:brightness(0.8);
 }
 
-.mes{
-margin-bottom:25px;
+.galeria img:hover{
+transform:scale(1.07);
+filter:brightness(1);
 }
 
-.botao{
+.calendar{
+max-width:1000px;
+margin:auto;
+}
+
+.month{
+margin-bottom:40px;
+}
+
+.day{
 display:inline-block;
-background:#00ffcc;
-color:black;
-padding:14px 30px;
-margin:10px;
-text-decoration:none;
-border-radius:10px;
-font-weight:bold;
+width:32px;
+height:32px;
+line-height:32px;
+margin:4px;
+border-radius:8px;
+cursor:pointer;
+font-size:12px;
 transition:0.3s;
+background:rgba(255,255,255,0.08);
 }
 
-.botao:hover{
-background:white;
+.day.booked{background:#ff2e2e}
+.day.available{background:#00b894}
+
+.day:hover{transform:scale(1.2)}
+
+iframe{
+width:100%;
+height:350px;
+border:none;
+border-radius:20px;
+margin-top:20px;
 }
 
 footer{
-background:black;
-padding:30px;
+padding:40px;
 text-align:center;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
 }
 </style>
 </head>
 <body>
 
 <header>
-<h1>CLUBE ARENA INTERNACIONAL CHASQUI & VELASCO</h1>
-<p>Quadras Society & Salão de Festas</p>
+<h1>CLUBE ARENA INTERNACIONAL</h1>
+<p>Quadras Society • Salão de Festas • Eventos Premium</p>
+<a class="botao" href="https://wa.me/5511998470234" target="_blank">WhatsApp</a>
+<a class="botao" href="https://www.tiktok.com/@chasqui_velasco" target="_blank">TikTok</a>
 </header>
 
 <section>
-<h2>🏟️ SOBRE O LOCAL</h2>
-<div class="descricao">
-O Clube Arena Internacional Chasqui & Velasco é um espaço completo para eventos, campeonatos e festas.  
-Contamos com um salão de festas grande com palco amplo ideal para shows e apresentações.  
-
-Possuímos estacionamento próprio, 2 quadras society, banheiros estruturados, lanchonete equipada onde o locatário pode vender suas próprias bebidas e alimentos.  
-
-Também oferecemos área de lazer com mesa de sinuca (billar), pebolim e cadeiras disponíveis para acomodação dos convidados.  
-
-Um espaço moderno, organizado e preparado para receber seu evento com conforto e segurança.
-</div>
+<h2>🏟 Sobre o Espaço</h2>
+<p>
+Salão amplo com palco profissional, estacionamento,
+2 quadras society, banheiros estruturados,
+lanchonete equipada, sinuca, pebolim e estrutura completa
+para eventos e campeonatos.
+</p>
 </section>
 
 <section>
-<h2>📸 GALERIA</h2>
+<h2>📸 Galeria</h2>
 <div class="galeria">
 <img src="quadra1.jpg">
 <img src="quadra2.jpg">
@@ -118,99 +181,64 @@ Um espaço moderno, organizado e preparado para receber seu evento com conforto 
 </section>
 
 <section>
-<h2>📅 AGENDAMENTO 2026</h2>
+<h2>📅 Agendamento</h2>
+<div class="calendar" id="calendar"></div>
+</section>
 
-<div class="calendario">
-
-<div class="mes">
-<strong>JANEIRO</strong><br>
-05 🔴 Alugado<br>
-12 🟢 Disponível<br>
-20 🔴 Alugado<br>
-</div>
-
-<div class="mes">
-<strong>FEVEREIRO</strong><br>
-03 🟢 Disponível<br>
-15 🔴 Alugado<br>
-</div>
-
-<div class="mes">
-<strong>MARÇO</strong><br>
-10 🟢 Disponível<br>
-22 🔴 Alugado<br>
-</div>
-
-<div class="mes">
-<strong>ABRIL</strong><br>
-05 🟢 Disponível<br>
-18 🔴 Alugado<br>
-</div>
-
-<div class="mes">
-<strong>MAIO</strong><br>
-08 🟢 Disponível<br>
-25 🔴 Alugado<br>
-</div>
-
-<div class="mes">
-<strong>JUNHO</strong><br>
-12 🟢 Disponível<br>
-30 🔴 Alugado<br>
-</div>
-
-<div class="mes">
-<strong>JULHO</strong><br>
-04 🟢 Disponível<br>
-19 🔴 Alugado<br>
-</div>
-
-<div class="mes">
-<strong>AGOSTO</strong><br>
-09 🟢 Disponível<br>
-23 🔴 Alugado<br>
-</div>
-
-<div class="mes">
-<strong>SETEMBRO</strong><br>
-14 🟢 Disponível<br>
-28 🔴 Alugado<br>
-</div>
-
-<div class="mes">
-<strong>OUTUBRO</strong><br>
-11 🟢 Disponível<br>
-26 🔴 Alugado<br>
-</div>
-
-<div class="mes">
-<strong>NOVEMBRO</strong><br>
-07 🟢 Disponível<br>
-21 🔴 Alugado<br>
-</div>
-
-<div class="mes">
-<strong>DEZEMBRO</strong><br>
-05 🔴 Alugado<br>
-18 🟢 Disponível<br>
-</div>
-
-</div>
-
-<a class="botao" href="https://wa.me/5511998470234" target="_blank">
-📲 FALAR NO WHATSAPP
-</a>
-
-<a class="botao" href="https://www.tiktok.com/@chasqui_velasco" target="_blank">
-🎵 VER NO TIKTOK
-</a>
-
+<section>
+<h2>📍 Localização</h2>
+<iframe src="https://www.google.com/maps?q=R.+Anézio+Ruivo,+620+-+Jardim+Bonsucesso&output=embed"></iframe>
 </section>
 
 <footer>
-<p>📍 R. Anézio Ruivo, 620 - Jardim Bonsucesso</p>
-<p>© 2026 Clube Arena Internacional Chasqui & Velasco</p>
+© 2026 Clube Arena Internacional Chasqui & Velasco
 </footer>
+
+<script>
+
+// animação ao rolar
+const sections=document.querySelectorAll("section");
+window.addEventListener("scroll",()=>{
+sections.forEach(sec=>{
+const top=sec.getBoundingClientRect().top;
+if(top<window.innerHeight-100){
+sec.classList.add("show");
+}
+});
+});
+
+// calendário
+const meses=["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+let reservas=JSON.parse(localStorage.getItem("reservas"))||{};
+const calendario=document.getElementById("calendar");
+
+meses.forEach((mes,mesIndex)=>{
+let divMes=document.createElement("div");
+divMes.classList.add("month");
+divMes.innerHTML="<h3>"+mes+"</h3>";
+
+for(let dia=1;dia<=31;dia++){
+let chave=mesIndex+"-"+dia;
+let diaDiv=document.createElement("div");
+diaDiv.classList.add("day");
+diaDiv.textContent=dia;
+
+if(reservas[chave]){diaDiv.classList.add("booked")}
+else{diaDiv.classList.add("available")}
+
+diaDiv.onclick=function(){
+if(reservas[chave]){delete reservas[chave]}
+else{reservas[chave]=true}
+localStorage.setItem("reservas",JSON.stringify(reservas));
+location.reload();
+};
+
+divMes.appendChild(diaDiv);
+}
+calendario.appendChild(divMes);
+});
+
+</script>
 
 </body>
 </html>
