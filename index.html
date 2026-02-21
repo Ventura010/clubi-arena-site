@@ -3,91 +3,124 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clube Arena Internacional Chasqui & Velasco</title>
+<title>Arena Velasco</title>
 
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0072ff">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
 body{
-font-family:'Poppins',sans-serif;
-background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#000000);
-background-size:400% 400%;
-animation:gradient 12s ease infinite;
 color:white;
+background:black;
 overflow-x:hidden;
 }
 
-@keyframes gradient{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
+/* ===== VIDEO FUNDO ===== */
+.video-bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
 }
 
-header{
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:linear-gradient(rgba(0,0,0,0.7),rgba(0,50,0,0.8));
+z-index:-1;
+}
+
+/* ===== MENU FIXO ===== */
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:rgba(0,0,0,0.8);
+backdrop-filter:blur(8px);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+z-index:1000;
+}
+
+nav h1{
+color:#FFD700;
+}
+
+nav ul{
+list-style:none;
+display:flex;
+gap:25px;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#00ff00;
+}
+
+/* ===== HERO ===== */
+.hero{
 height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-backdrop-filter:blur(10px);
+padding-top:80px;
 }
 
-header h1{
-font-size:38px;
-font-weight:900;
-letter-spacing:2px;
-}
-
-header p{
-margin-top:15px;
-opacity:0.9;
+.hero h2{
+font-size:45px;
+margin-bottom:20px;
 }
 
 .botao{
-display:inline-block;
-margin:15px;
-padding:14px 30px;
+padding:15px 35px;
+background:linear-gradient(45deg,#FFD700,#00ff00);
+color:black;
 border-radius:40px;
-background:linear-gradient(90deg,#00e0ff,#0072ff);
-color:white;
 text-decoration:none;
-font-weight:bold;
+font-weight:600;
 transition:0.4s;
-box-shadow:0 0 20px rgba(0,224,255,0.6);
 }
 
 .botao:hover{
-transform:scale(1.05);
-box-shadow:0 0 30px rgba(0,224,255,1);
+transform:scale(1.1);
 }
 
+/* ===== SEÇÕES ===== */
 section{
-padding:100px 20px;
+padding:80px 20px;
 text-align:center;
-opacity:0;
-transform:translateY(40px);
-transition:1s;
-}
-
-section.show{
-opacity:1;
-transform:translateY(0);
 }
 
 h2{
-font-size:30px;
-margin-bottom:30px;
-background:linear-gradient(90deg,#00e0ff,#00ffaa);
--webkit-background-clip:text;
-color:transparent;
+margin-bottom:40px;
+font-size:35px;
+color:#FFD700;
 }
 
+/* ===== CONTADOR ===== */
+.contador{
+font-size:40px;
+color:#00ff00;
+margin-top:20px;
+}
+
+/* ===== GALERIA ===== */
 .galeria{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -96,148 +129,159 @@ gap:20px;
 
 .galeria img{
 width:100%;
-height:240px;
-object-fit:cover;
-border-radius:15px;
-transition:0.5s;
-filter:brightness(0.8);
+border-radius:20px;
+cursor:pointer;
+transition:0.4s;
 }
 
 .galeria img:hover{
-transform:scale(1.07);
-filter:brightness(1);
+transform:scale(1.05);
 }
 
-.calendar{
-max-width:1000px;
+/* LIGHTBOX */
+.lightbox{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+justify-content:center;
+align-items:center;
+z-index:2000;
+}
+
+.lightbox img{
+max-width:90%;
+max-height:90%;
+border-radius:20px;
+}
+
+/* ===== AGENDA ===== */
+.agenda-box{
+background:rgba(0,0,0,0.7);
+padding:30px;
+border-radius:20px;
+max-width:600px;
 margin:auto;
 }
 
-.month{
-margin-bottom:40px;
-}
-
-.day{
-display:inline-block;
-width:32px;
-height:32px;
-line-height:32px;
-margin:4px;
-border-radius:8px;
-cursor:pointer;
-font-size:12px;
-transition:0.3s;
-background:rgba(255,255,255,0.08);
-}
-
-.day.booked{background:#ff2e2e}
-.day.available{background:#00b894}
-
-.day:hover{transform:scale(1.2)}
-
-iframe{
-width:100%;
-height:350px;
+input, button{
+padding:10px;
+margin:10px;
+border-radius:10px;
 border:none;
-border-radius:20px;
-margin-top:20px;
+}
+
+button{
+background:#00ff00;
+cursor:pointer;
 }
 
 footer{
-padding:40px;
-text-align:center;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(10px);
+background:black;
+padding:20px;
 }
 </style>
 </head>
+
 <body>
 
-<header>
-<h1>CLUBE ARENA INTERNACIONAL</h1>
-<p>Quadras Society • Salão de Festas • Eventos Premium</p>
-<a class="botao" href="https://wa.me/5511998470234" target="_blank">WhatsApp</a>
-<a class="botao" href="https://www.tiktok.com/@chasqui_velasco" target="_blank">TikTok</a>
-</header>
+<video class="video-bg" autoplay muted loop>
+<source src="https://cdn.coverr.co/videos/coverr-football-stadium-1574/1080p.mp4" type="video/mp4">
+</video>
 
-<section>
-<h2>🏟 Sobre o Espaço</h2>
-<p>
-Salão amplo com palco profissional, estacionamento,
-2 quadras society, banheiros estruturados,
-lanchonete equipada, sinuca, pebolim e estrutura completa
-para eventos e campeonatos.
-</p>
+<div class="overlay"></div>
+
+<nav>
+<h1>Arena Velasco</h1>
+<ul>
+<li><a href="#galeria">Galeria</a></li>
+<li><a href="#agenda">Agenda</a></li>
+<li><a href="#contato">Contato</a></li>
+</ul>
+</nav>
+
+<section class="hero">
+<h2>O Melhor Complexo de San Ignacio de Velasco</h2>
+<a class="botao" href="#">Reservar Agora</a>
+<div class="contador" id="contador">0 Reservas</div>
 </section>
 
-<section>
-<h2>📸 Galeria</h2>
+<section id="galeria">
+<h2>Galeria</h2>
 <div class="galeria">
-<img src="quadra1.jpg">
-<img src="quadra2.jpg">
-<img src="trofeus.jpg">
-<img src="salao.jpg">
+<img src="95a1e71e-acf6-4637-9a6e-000b53258026.jpg">
+<img src="d4ff4a14-b701-4133-86e7-b5451894a2c9.jpg">
+<img src="dcc1dc14-a6f9-4562-88b1-a679396fa6da.jpg">
+<img src="e8a52323-5e85-4c0e-8ca1-6b9b35ecd307.jpg">
+<img src="fefc8c1f-697a-4a89-823e-48fb0eabf7e2.jpg">
 </div>
 </section>
 
-<section>
-<h2>📅 Agendamento</h2>
-<div class="calendar" id="calendar"></div>
+<section id="agenda">
+<h2>Agenda</h2>
+<div class="agenda-box">
+<p id="status">Disponível</p>
+
+<div id="adminArea" style="display:none;">
+<input type="text" id="novoStatus" placeholder="Ex: Alugado hoje">
+<button onclick="salvar()">Salvar</button>
+</div>
+
+<button onclick="login()">Editar Agenda (Somente dono)</button>
+</div>
 </section>
 
-<section>
-<h2>📍 Localização</h2>
-<iframe src="https://www.google.com/maps?q=R.+Anézio+Ruivo,+620+-+Jardim+Bonsucesso&output=embed"></iframe>
+<section id="contato">
+<h2>Contato</h2>
+<p>San Ignacio de Velasco</p>
 </section>
 
 <footer>
-© 2026 Clube Arena Internacional Chasqui & Velasco
+© 2026 Arena Velasco
 </footer>
 
+<div class="lightbox" id="lightbox">
+<img id="lightImg">
+</div>
+
 <script>
+// CONTADOR ANIMADO
+let count = 0;
+let contador = document.getElementById("contador");
+let intervalo = setInterval(()=>{
+count++;
+contador.innerText = count + " Reservas";
+if(count >= 120){ clearInterval(intervalo); }
+},30);
 
-// animação ao rolar
-const sections=document.querySelectorAll("section");
-window.addEventListener("scroll",()=>{
-sections.forEach(sec=>{
-const top=sec.getBoundingClientRect().top;
-if(top<window.innerHeight-100){
-sec.classList.add("show");
+// LIGHTBOX
+document.querySelectorAll(".galeria img").forEach(img=>{
+img.addEventListener("click",()=>{
+document.getElementById("lightbox").style.display="flex";
+document.getElementById("lightImg").src=img.src;
+});
+});
+document.getElementById("lightbox").onclick=function(){
+this.style.display="none";
 }
-});
-});
 
-// calendário
-const meses=["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
-let reservas=JSON.parse(localStorage.getItem("reservas"))||{};
-const calendario=document.getElementById("calendar");
-
-meses.forEach((mes,mesIndex)=>{
-let divMes=document.createElement("div");
-divMes.classList.add("month");
-divMes.innerHTML="<h3>"+mes+"</h3>";
-
-for(let dia=1;dia<=31;dia++){
-let chave=mesIndex+"-"+dia;
-let diaDiv=document.createElement("div");
-diaDiv.classList.add("day");
-diaDiv.textContent=dia;
-
-if(reservas[chave]){diaDiv.classList.add("booked")}
-else{diaDiv.classList.add("available")}
-
-diaDiv.onclick=function(){
-if(reservas[chave]){delete reservas[chave]}
-else{reservas[chave]=true}
-localStorage.setItem("reservas",JSON.stringify(reservas));
-location.reload();
-};
-
-divMes.appendChild(diaDiv);
+// LOGIN DONO
+function login(){
+let senha = prompt("Digite a senha de administrador:");
+if(senha === "velasco123"){
+document.getElementById("adminArea").style.display="block";
+}else{
+alert("Senha incorreta!");
 }
-calendario.appendChild(divMes);
-});
+}
 
+function salvar(){
+let novo = document.getElementById("novoStatus").value;
+document.getElementById("status").innerText = novo;
+}
 </script>
 
 </body>
