@@ -9,7 +9,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
 
 body{
 background: linear-gradient(135deg,#0f3d0f,#145214);
@@ -25,13 +30,26 @@ text-align:center;
 box-shadow:0 5px 20px rgba(0,0,0,0.5);
 animation:fadeDown 1.2s ease;
 }
-header h1{font-size:40px;font-weight:800;color:#FFD700;}
-header p{color:#00BFFF;font-weight:300;}
+header h1{
+font-size:40px;
+font-weight:800;
+color:#FFD700;
+}
+header p{
+color:#00BFFF;
+font-weight:300;
+}
 
 /* HERO */
-.hero{text-align:center;padding:80px 20px;animation:fadeUp 1.5s ease;}
-.hero h2{font-size:35px;margin-bottom:20px;}
-
+.hero{
+text-align:center;
+padding:80px 20px;
+animation:fadeUp 1.5s ease;
+}
+.hero h2{
+font-size:35px;
+margin-bottom:20px;
+}
 .botao{
 display:inline-block;
 padding:15px 35px;
@@ -42,10 +60,21 @@ border-radius:50px;
 text-decoration:none;
 transition:0.4s;
 }
-.botao:hover{transform:scale(1.1);box-shadow:0 0 20px #FFD700;}
+.botao:hover{
+transform:scale(1.1);
+box-shadow:0 0 20px #FFD700;
+}
 
-section{padding:60px 20px;text-align:center;}
-h2{font-size:32px;margin-bottom:30px;color:#FFD700;}
+/* SEÇÕES */
+section{
+padding:60px 20px;
+text-align:center;
+}
+h2{
+font-size:32px;
+margin-bottom:30px;
+color:#FFD700;
+}
 
 /* GALERIA */
 .galeria{
@@ -61,7 +90,9 @@ transition:0.5s;
 cursor:pointer;
 box-shadow:0 10px 25px rgba(0,0,0,0.6);
 }
-.galeria img:hover{transform:scale(1.07);}
+.galeria img:hover{
+transform:scale(1.07);
+}
 
 /* CALENDÁRIO */
 .calendar{
@@ -76,17 +107,24 @@ background:#1f7a1f;
 border-radius:8px;
 cursor:pointer;
 }
-.day.booked{background:#b22222;}
+.day.booked{
+background:#b22222;
+}
 
 /* CONTATO */
-.contato{background:#0d2e0d;padding:40px;}
+.contato{
+background:#0d2e0d;
+padding:40px;
+}
 .icons a{
 color:white;
 font-size:28px;
 margin:0 15px;
 transition:0.3s;
 }
-.icons a:hover{color:#FFD700;}
+.icons a:hover{
+color:#FFD700;
+}
 
 /* BOTÃO FLUTUANTE */
 .whatsapp-float{
@@ -106,13 +144,14 @@ text-decoration:none;
 box-shadow:0 5px 20px rgba(0,0,0,0.4);
 }
 
+/* ANIMAÇÕES */
 @keyframes fadeUp{
-from{opacity:0;transform:translateY(40px);}
-to{opacity:1;transform:translateY(0);}
+from{opacity:0; transform:translateY(40px);}
+to{opacity:1; transform:translateY(0);}
 }
 @keyframes fadeDown{
-from{opacity:0;transform:translateY(-40px);}
-to{opacity:1;transform:translateY(0);}
+from{opacity:0; transform:translateY(-40px);}
+to{opacity:1; transform:translateY(0);}
 }
 
 footer{
@@ -132,13 +171,8 @@ font-size:14px;
 </header>
 
 <section class="hero">
-<h2>Complexo Esportivo Completo</h2>
+<h2>O melhor complexo esportivo da região</h2>
 <a class="botao" href="https://wa.me/5511998470234" target="_blank">Reservar Agora</a>
-</section>
-
-<section>
-<h2>Sobre a Arena</h2>
-<p>Contamos com 2 quadras, lanchonete completa, mesa de sinuca, pebolim, salão de festa enorme com palco grande, lanchonete interna para venda própria e estacionamento amplo e seguro.</p>
 </section>
 
 <section>
@@ -154,14 +188,14 @@ font-size:14px;
 
 <section>
 <h2>Agenda do Mês</h2>
-<p>Dias em vermelho estão alugados.</p>
+<p>Dias vermelhos estão alugados.</p>
 <div class="calendar" id="calendar"></div>
 <br>
 <button onclick="admin()">Modo Dono</button>
 </section>
 
 <section class="contato">
-<h2>Contato</h2>
+<h2>📍 Contato</h2>
 
 <div class="icons">
 <a href="https://wa.me/5511998470234" target="_blank"><i class="fab fa-whatsapp"></i></a>
@@ -171,7 +205,7 @@ font-size:14px;
 
 <br><br>
 
-<p><strong>Endereço:</strong> Rua Anezio Ruivo, 620 - Guarulhos - Brasil</p>
+<p><strong>Endereço:</strong> Rua Anezio Ruivo, 620 – Guarulhos – Brasil</p>
 
 <iframe 
 src="https://www.google.com/maps?q=Rua+Anezio+Ruivo+620+Guarulhos&output=embed"
