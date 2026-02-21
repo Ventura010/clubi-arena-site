@@ -6,159 +6,123 @@
 <title>Arena Chasqui & Velasco</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
 }
 
 body{
-background: linear-gradient(135deg,#0f3d0f,#145214);
-color:white;
-overflow-x:hidden;
+    background: linear-gradient(135deg, #0f3d0f, #145214);
+    color:white;
+    overflow-x:hidden;
 }
 
 /* HEADER */
 header{
-background: linear-gradient(90deg,#0d2e0d,#1f7a1f);
-padding:25px;
-text-align:center;
-box-shadow:0 5px 20px rgba(0,0,0,0.5);
-animation:fadeDown 1.2s ease;
+    background: linear-gradient(90deg,#0d2e0d,#1f7a1f);
+    padding:25px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,0.5);
+    animation: fadeDown 1.2s ease;
 }
+
 header h1{
-font-size:40px;
-font-weight:800;
-color:#FFD700;
+    font-size:40px;
+    font-weight:800;
+    color:#FFD700;
 }
+
 header p{
-color:#00BFFF;
-font-weight:300;
+    color:#00BFFF;
+    font-weight:300;
 }
 
 /* HERO */
 .hero{
-text-align:center;
-padding:80px 20px;
-animation:fadeUp 1.5s ease;
+    text-align:center;
+    padding:80px 20px;
+    animation: fadeUp 1.5s ease;
 }
+
 .hero h2{
-font-size:35px;
-margin-bottom:20px;
+    font-size:35px;
+    margin-bottom:20px;
 }
+
 .botao{
-display:inline-block;
-padding:15px 35px;
-background:linear-gradient(45deg,#FFD700,#ffcc00);
-color:black;
-font-weight:600;
-border-radius:50px;
-text-decoration:none;
-transition:0.4s;
+    display:inline-block;
+    padding:15px 35px;
+    background: linear-gradient(45deg,#FFD700,#ffcc00);
+    color:black;
+    font-weight:600;
+    border-radius:50px;
+    text-decoration:none;
+    transition:0.4s;
 }
+
 .botao:hover{
-transform:scale(1.1);
-box-shadow:0 0 20px #FFD700;
+    transform:scale(1.1);
+    box-shadow:0 0 20px #FFD700;
 }
 
 /* SEÇÕES */
 section{
-padding:60px 20px;
-text-align:center;
+    padding:60px 20px;
+    text-align:center;
 }
+
 h2{
-font-size:32px;
-margin-bottom:30px;
-color:#FFD700;
+    font-size:32px;
+    margin-bottom:30px;
+    color:#FFD700;
 }
 
 /* GALERIA */
 .galeria{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:20px;
-}
-.galeria img{
-width:100%;
-border-radius:20px;
-transition:0.5s;
-cursor:pointer;
-box-shadow:0 10px 25px rgba(0,0,0,0.6);
-}
-.galeria img:hover{
-transform:scale(1.07);
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:20px;
 }
 
-/* CALENDÁRIO */
-.calendar{
-display:grid;
-grid-template-columns:repeat(7,1fr);
-gap:8px;
-margin-top:20px;
+.galeria img{
+    width:100%;
+    border-radius:20px;
+    transition:0.5s;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(0,0,0,0.6);
 }
-.day{
-padding:15px;
-background:#1f7a1f;
-border-radius:8px;
-cursor:pointer;
-}
-.day.booked{
-background:#b22222;
+
+.galeria img:hover{
+    transform:scale(1.07);
 }
 
 /* CONTATO */
 .contato{
-background:#0d2e0d;
-padding:40px;
-}
-.icons a{
-color:white;
-font-size:28px;
-margin:0 15px;
-transition:0.3s;
-}
-.icons a:hover{
-color:#FFD700;
+    background:#0d2e0d;
+    padding:40px;
 }
 
-/* BOTÃO FLUTUANTE */
-.whatsapp-float{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#25d366;
-color:white;
-width:60px;
-height:60px;
-border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:30px;
-text-decoration:none;
-box-shadow:0 5px 20px rgba(0,0,0,0.4);
+footer{
+    background:black;
+    padding:20px;
+    text-align:center;
+    font-size:14px;
 }
 
 /* ANIMAÇÕES */
 @keyframes fadeUp{
-from{opacity:0; transform:translateY(40px);}
-to{opacity:1; transform:translateY(0);}
-}
-@keyframes fadeDown{
-from{opacity:0; transform:translateY(-40px);}
-to{opacity:1; transform:translateY(0);}
+    from{opacity:0; transform:translateY(40px);}
+    to{opacity:1; transform:translateY(0);}
 }
 
-footer{
-background:black;
-padding:20px;
-text-align:center;
-font-size:14px;
+@keyframes fadeDown{
+    from{opacity:0; transform:translateY(-40px);}
+    to{opacity:1; transform:translateY(0);}
 }
 </style>
 </head>
@@ -166,98 +130,39 @@ font-size:14px;
 <body>
 
 <header>
-<h1>ARENA CHASQUI & VELASCO</h1>
-<p>Guarulhos - Brasil</p>
+    <h1>Arena Chasqui & Velasco</h1>
+    <p>Guarulhos - Brasil</p>
 </header>
 
 <section class="hero">
-<h2>O melhor complexo esportivo da região</h2>
-<a class="botao" href="https://wa.me/5511998470234" target="_blank">Reservar Agora</a>
+    <h2>O melhor complexo esportivo da região</h2>
+    <a class="botao" href="https://wa.me/5511998470234" target="_blank">
+        Reservar Agora
+    </a>
 </section>
 
 <section>
-<h2>📸 Nossa Estrutura</h2>
-<div class="galeria">
-<img src="95a1e71e-acf6-4637-9a6e-000b53258026.jpg">
-<img src="d4ff4a14-b701-4133-86e7-b5451894a2c9.jpg">
-<img src="dcc1dc14-a6f9-4562-88b1-a679396fa6da.jpg">
-<img src="e8a52323-5e85-4c0e-8ca1-6b9b35ecd307.jpg">
-<img src="fefc8c1f-697a-4a89-823e-48fb0eabf7e2.jpg">
-</div>
-</section>
-
-<section>
-<h2>Agenda do Mês</h2>
-<p>Dias vermelhos estão alugados.</p>
-<div class="calendar" id="calendar"></div>
-<br>
-<button onclick="admin()">Modo Dono</button>
+    <h2>📸 Nossa Estrutura</h2>
+    <div class="galeria">
+        <img src="95a1e71e-acf6-4637-9a6e-000b53258026.jpg">
+        <img src="d4ff4a14-b701-4133-86e7-b5451894a2c9.jpg">
+        <img src="dcc1dc14-a6f9-4562-88b1-a679396fa6da.jpg">
+        <img src="e8a52323-5e85-4c0e-8ca1-6b9b35ecd307.jpg">
+        <img src="fefc8c1f-697a-4a89-823e-48fb0eabf7e2.jpg">
+    </div>
 </section>
 
 <section class="contato">
-<h2>📍 Contato</h2>
-
-<div class="icons">
-<a href="https://wa.me/5511998470234" target="_blank"><i class="fab fa-whatsapp"></i></a>
-<a href="https://www.tiktok.com/@chasqui_velasco" target="_blank"><i class="fab fa-tiktok"></i></a>
-<a href="mailto:campochasquivelasco@gmail.com"><i class="fas fa-envelope"></i></a>
-</div>
-
-<br><br>
-
-<p><strong>Endereço:</strong> Rua Anezio Ruivo, 620 – Guarulhos – Brasil</p>
-
-<iframe 
-src="https://www.google.com/maps?q=Rua+Anezio+Ruivo+620+Guarulhos&output=embed"
-width="100%" height="300" style="border:0;border-radius:10px;">
-</iframe>
-
+    <h2>📍 Contato</h2>
+    <p>📞 Telefone: (11) 99847-0234</p>
+    <p>📲 WhatsApp: (11) 99847-0234</p>
+    <p>📍 Rua Anezio Ruivo 620 - Guarulhos - Brasil</p>
+    <p>📧 Email: campochasquivelasco@gmail.com</p>
 </section>
 
-<a href="https://wa.me/5511998470234" class="whatsapp-float" target="_blank">
-<i class="fab fa-whatsapp"></i>
-</a>
-
 <footer>
-© 2026 Arena Chasqui & Velasco - Todos os direitos reservados
+    © 2026 Arena Chasqui & Velasco - Todos os direitos reservados
 </footer>
-
-<script>
-const calendar=document.getElementById("calendar");
-let booked=JSON.parse(localStorage.getItem("bookedDays"))||[];
-
-for(let i=1;i<=31;i++){
-let d=document.createElement("div");
-d.classList.add("day");
-d.innerText=i;
-if(booked.includes(i)){d.classList.add("booked");}
-
-d.onclick=function(){
-if(adminMode){
-if(d.classList.contains("booked")){
-d.classList.remove("booked");
-booked=booked.filter(x=>x!==i);
-}else{
-d.classList.add("booked");
-booked.push(i);
-}
-localStorage.setItem("bookedDays",JSON.stringify(booked));
-}
-}
-calendar.appendChild(d);
-}
-
-let adminMode=false;
-function admin(){
-let senha=prompt("Digite a senha:");
-if(senha==="MEV2000"){
-adminMode=true;
-alert("Modo dono ativado!");
-}else{
-alert("Senha incorreta!");
-}
-}
-</script>
 
 </body>
 </html>
