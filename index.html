@@ -245,6 +245,16 @@ background:black;
 padding:40px 20px;
 text-align: center;
 }
+
+/* MAPA */
+.map-container {
+    width: 100%;
+    max-width: 850px;
+    margin: 20px auto;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid #FFD700;
+}
 </style>
 </head>
 
@@ -372,7 +382,7 @@ text-align: center;
 </section>
 
 <section id="agenda">
-    <h2>Agenda de Locação</h2>
+    <h2>Agenda do Salão de Festa</h2>
     <div class="calendar-container">
         <div class="calendar-header">
             <button class="btn-calendar" onclick="changeMonth(-1)">Anterior</button>
@@ -388,10 +398,23 @@ text-align: center;
 </section>
 
 <section id="contato">
-<h2>Contato</h2>
-<p>Rua Anezio Ruivo 620 - Guarulhos - Brasil</p>
-<p>WhatsApp: 11 99847-0234</p>
-<p>Email: campochasquivelasco@gmail.com</p>
+<h2>Localização & Contato</h2>
+<div class="texto-informativo" style="text-align: center;">
+    <p>Rua Anezio Ruivo, 620 - Sítio São Francisco - Guarulhos - SP</p>
+    <p>WhatsApp: 11 99847-0234</p>
+    <p>Email: campochasquivelasco@gmail.com</p>
+    
+    <div class="map-container">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3660.180562624364!2d-46.4022648!3d-23.4539659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce7d8486255731%3A0xc3f17387d3dfa561!2sR.%20An%C3%A9zio%20Ruivo%2C%20620%20-%20S%C3%ADtio%20S%C3%A3o%20Francisco%2C%20Guarulhos%20-%20SP%2C%2007260-150!5e0!3m2!1spt-BR!2sbr!4v1700000000000" 
+            width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+    </div>
+    <br>
+    <a class="botao" href="https://www.google.com/maps/dir/?api=1&destination=Rua+Anezio+Ruivo+620+Guarulhos" target="_blank">
+        <i class="fas fa-location-arrow"></i> Abrir no GPS (Google Maps)
+    </a>
+</div>
 </section>
 
 <footer>
@@ -402,7 +425,26 @@ text-align: center;
 <img id="lightImg">
 </div>
 
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+// COLOQUE SUAS CHAVES DO FIREBASE AQUI PARA FUNCIONAR REALMENTE
+const firebaseConfig = {
+  apiKey: "SUA_API_KEY",
+  authDomain: "SEU_PROJETO.firebaseapp.com",
+  databaseURL: "https://SEU_PROJETO.firebaseio.com",
+  projectId: "SEU_PROJETO",
+  storageBucket: "SEU_PROJETO.appspot.com",
+  messagingSenderId: "ID",
+  appId: "APP_ID"
+};
+
+// Iniciar Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const agendaRef = ref(db, 'agenda_salao');
+
 // --- CONTADOR ORIGINAL ---
 let count = 0;
 let contador = document.getElementById("contador");
@@ -424,9 +466,15 @@ document.getElementById("lightbox").onclick=function(){
 this.style.display="none";
 }
 
-// --- LÓGICA DA AGENDA (CALENDÁRIO) ---
+// --- LÓGICA DA AGENDA (CALENDÁRIO SINCRONIZADO) ---
 let currentDate = new Date();
-let events = JSON.parse(localStorage.getItem('arenaAgenda')) || {};
+let events = {};
+
+// Escuta os dados do banco de dados e atualiza para todos
+onValue(agendaRef, (snapshot) => {
+    events = snapshot.val() || {};
+    renderCalendar();
+});
 
 function renderCalendar() {
     const grid = document.getElementById("calendarGrid");
@@ -435,9 +483,6 @@ function renderCalendar() {
     
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
-    
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
     
     const namesMonths = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
     monthYear.innerText = `${namesMonths[month]} ${year}`;
@@ -449,6 +494,9 @@ function renderCalendar() {
         dDiv.innerText = d;
         grid.appendChild(dDiv);
     });
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
 
     for(let i=0; i<firstDay; i++) { grid.appendChild(document.createElement("div")); }
 
@@ -466,29 +514,32 @@ function renderCalendar() {
             if(sessionStorage.getItem('isArenaAdmin') === 'true') {
                 const info = prompt("Descreva a reserva para este dia (ou deixe vazio para excluir):", events[dateKey] || "");
                 if(info !== null) {
-                    if(info === "") delete events[dateKey];
-                    else events[dateKey] = info;
-                    localStorage.setItem('arenaAgenda', JSON.stringify(events));
-                    renderCalendar();
+                    const updatedEvents = {...events};
+                    if(info === "") delete updatedEvents[dateKey];
+                    else updatedEvents[dateKey] = info;
+                    
+                    // Salva no banco de dados (aparece para todos)
+                    set(agendaRef, updatedEvents);
                 }
             } else {
-                alert("Apenas o dono pode editar. Clique em 'Administrar Agenda' para entrar.");
+                alert("Apenas o dono pode editar as locações.");
             }
         };
         grid.appendChild(dayDiv);
     }
 }
 
-function changeMonth(dir) {
+// Funções para os botões (precisam ser globais no tipo module)
+window.changeMonth = (dir) => {
     currentDate.setMonth(currentDate.getMonth() + dir);
     renderCalendar();
 }
 
-function adminLogin() {
+window.adminLogin = () => {
     const senha = prompt("Digite a senha de administrador:");
     if(senha === "MEV2000") {
         sessionStorage.setItem('isArenaAdmin', 'true');
-        alert("Acesso liberado! Agora você pode clicar nos dias para marcar as locações.");
+        alert("Acesso liberado! Suas edições agora aparecerão para todos os usuários.");
         renderCalendar();
     } else {
         alert("Senha incorreta!");
