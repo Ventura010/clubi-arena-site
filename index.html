@@ -93,6 +93,7 @@ border-radius:40px;
 text-decoration:none;
 font-weight:600;
 transition:0.4s;
+display: inline-block;
 }
 
 .botao:hover{
@@ -130,131 +131,61 @@ margin-top:20px;
 
 /* GALERIA */
 .galeria{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
+display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;
 }
 
 .galeria img{
-width:100%;
-border-radius:20px;
-cursor:pointer;
-transition:0.4s;
+width:100%; border-radius:20px; cursor:pointer; transition:0.4s;
 }
 
 .galeria img:hover{
 transform:scale(1.05);
 }
 
-/* REDES SOCIAIS FLUTUANTES */
+/* REDES SOCIAIS */
 .redes-flutuantes {
-position: fixed;
-bottom: 25px;
-right: 25px;
-display: flex;
-flex-direction: column;
-gap: 15px;
-z-index: 3000;
+position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 15px; z-index: 3000;
 }
 
 .icone-social {
-width: 60px;
-height: 60px;
-border-radius: 50%;
-display: flex;
-justify-content: center;
-align-items: center;
-font-size: 30px;
-color: white;
-text-decoration: none;
-transition: 0.3s;
-box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; color: white; text-decoration: none; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
 .zap { background-color: #25d366; }
 .tk { background-color: #000000; border: 2px solid #fff; }
 
-.icone-social:hover { transform: translateY(-5px) scale(1.1); }
-
-/* AGENDA / CALENDÁRIO */
+/* AGENDA */
 .calendar-container {
-    background: rgba(0,0,0,0.85);
-    padding: 20px;
-    border-radius: 20px;
-    max-width: 900px;
-    margin: auto;
-    border: 1px solid #FFD700;
+background: rgba(0,0,0,0.85); padding: 20px; border-radius: 20px; max-width: 900px; margin: auto; border: 1px solid #FFD700;
 }
 .calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
 }
 .calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
+display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px;
 }
 .day-name { color: #FFD700; font-weight: 800; padding-bottom: 10px; font-size: 14px;}
 .day {
-    background: rgba(255,255,255,0.05);
-    min-height: 90px;
-    padding: 8px;
-    border-radius: 12px;
-    font-size: 13px;
-    text-align: left;
-    cursor: pointer;
-    transition: 0.3s;
+background: rgba(255,255,255,0.05); min-height: 90px; padding: 8px; border-radius: 12px; font-size: 13px; text-align: left; cursor: pointer;
 }
-.day:hover { background: rgba(255,255,255,0.15); }
 .event-tag {
-    display: block;
-    margin-top: 5px;
-    background: #e74c3c;
-    color: white;
-    padding: 3px 6px;
-    border-radius: 5px;
-    font-size: 10px;
-    font-weight: 600;
+display: block; margin-top: 5px; background: #e74c3c; color: white; padding: 3px 6px; border-radius: 5px; font-size: 10px; font-weight: 600;
 }
 .btn-calendar { background: #FFD700; color: black; border: none; padding: 8px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; }
 
-/* LIGHTBOX */
-.lightbox{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.9);
-justify-content:center;
-align-items:center;
-z-index:2000;
-}
-
-.lightbox img{
-max-width:90%;
-max-height:90%;
-border-radius:20px;
-}
-
-footer{
-background:black;
-padding:40px 20px;
-text-align: center;
-}
-
 /* MAPA */
 .map-container {
-    width: 100%;
-    max-width: 850px;
-    margin: 20px auto;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 2px solid #FFD700;
+width: 100%; max-width: 850px; margin: 20px auto; border-radius: 20px; overflow: hidden; border: 2px solid #FFD700;
 }
+
+/* LIGHTBOX */
+.lightbox{
+display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:2000;
+}
+
+.lightbox img{ max-width:90%; max-height:90%; border-radius:20px; }
+
+footer{ background:black; padding:40px 20px; text-align: center; }
 </style>
 </head>
 
@@ -292,10 +223,9 @@ text-align: center;
     <h2>QUADRA CHASQUI & VELASCO</h2>
     <div class="texto-informativo">
         <p>A Arena conta com <strong>2 quadras</strong> preparadas para o seu melhor jogo!</p><br>
-        <p><strong>Quadra Espaçosa:</strong> A Quadra CHASQUI VELASCO é ampla e espaçosa, proporcionando um ambiente confortável para a prática de diversas modalidades esportivas.</p>
-        <p><strong>Ambiente Seguro:</strong> Projetada com segurança em mente, a quadra oferece um ambiente tranquilo e protegido para que você possa se divertir com tranquilidade.</p>
-        <p><strong>Conforto e Lazer:</strong> Com cadeiras disponíveis, a quadra é um lugar sossegado e agradável para jogar e se divertir com amigos e familiares.</p>
-        <p><strong>Estacionamento Gratuito:</strong> A quadra possui estacionamento interno, que é gratuito para os usuários, exceto em dias de eventos especiais.</p>
+        <p><strong>Quadra Espaçosa:</strong> A Quadra CHASQUI VELASCO é ampla e espaçosa, proporcionando um ambiente confortável.</p>
+        <p><strong>Ambiente Seguro:</strong> Projetada com segurança em mente.</p>
+        <p><strong>Estacionamento Gratuito:</strong> A quadra possui estacionamento interno gratuito.</p>
     </div>
     <div class="galeria">
         <img src="c2643024-93aa-46b6-8444-ef0bf2fbff1e.jpg">
@@ -307,92 +237,22 @@ text-align: center;
 <section id="salao">
     <h2>SALÃO DE FESTA CHASQUI LA PAZ</h2>
     <div class="texto-informativo">
-        <p><strong>Salão de Festas – Estrutura Completa para o Seu Evento:</strong> Nosso salão é amplo e coberto, ideal para diversos tipos de eventos, com espaço de sobra para seus convidados.</p>
-        <p>Contamos com um <strong>palco grande</strong>, perfeito para apresentações ao vivo, grupos musicais, DJs ou atrações variadas.</p>
-        <p>Estacionamento espaçoso no próprio local, garantindo comodidade.</p>
-        <p><strong>Eventos que Realizamos:</strong> Festas de 15 anos, Batizados, Cortes de cabelo em grupo, Aniversários, Despedidas e Confraternizações!</p>
-        <p><em>Entre em contato para agendar uma visita e conhecer nossos pacotes.</em></p>
+        <p><strong>Salão de Festas – Estrutura Completa:</strong> Nosso salão é amplo e coberto, ideal para eventos.</p>
+        <p><strong>Eventos:</strong> Festas de 15 anos, Batizados, Aniversários e Confraternizações!</p>
     </div>
-</section>
-
-<section id="diversao">
-    <h2>ÁREA DE DIVERSÃO</h2>
-    <div class="texto-informativo">
-        <p>Para quem não dispensa uma boa resenha, nossa área de diversão conta com <strong>2 mesas de sinuca</strong>. É o lugar perfeito para relaxar, desafiar os amigos e aproveitar o tempo livre com muita descontração e lazer.</p>
-    </div>
-    <div class="galeria" style="display: flex; justify-content: center;">
-        <img src="c2a96f49-d828-40af-84b7-d6447ae7d5b4.jpg" style="max-width: 600px; width: 100%;">
-    </div>
-</section>
-
-<section id="galeria">
-<h2>Galeria de Fotos</h2>
-<div class="galeria">
-<img src="95a1e71e-acf6-4637-9a6e-000b53258026.jpg">
-<img src="d4ff4a14-b701-4133-86e7-b5451894a2c9.jpg">
-<img src="dcc1dc14-a6f9-4562-88b1-a679396fa6da.jpg">
-<img src="e8a52323-5e85-4c0e-8ca1-6b9b35ecd307.jpg">
-<img src="fefc8c1f-697a-4a89-823e-48fb0eabf7e2.jpg">
-</div>
-</section>
-
-<section id="times">
-<h2>🏆 Times Campeões na Arena Chasqui & Velasco</h2>
-<div class="galeria">
-<img src="084b14cf-e85c-4bee-bdc5-cc4f332d9a9c.jpg">
-<img src="3250db03-b976-4667-8732-5c91940fd70f.jpg">
-<img src="37b97771-2970-4693-9f01-35ec34eebeeb.jpg">
-<img src="4677dfb4-ffac-4f2b-86ec-2b640f871808.jpg">
-<img src="4b51828f-d00f-455f-86a6-7f241bb0b1b3.jpg">
-<img src="54021891-3e1a-46f1-af68-414a53f81a45.jpg">
-<img src="6284b0a9-2464-473b-bdae-4f6bb1c9ad3b.jpg">
-<img src="64d3e89b-9b65-43e6-bf6d-6aae6f02f80c.jpg">
-<img src="6d60a556-eefc-479d-bef7-0539feab43dd.jpg">
-<img src="6ef26115-6891-48ef-8f40-f20a99e03d3f.jpg">
-<img src="727e38c1-bc80-48ae-972d-021201cf4b22.jpg">
-<img src="74dcb9e5-a2d6-491b-a57e-18c405fb8c49.jpg">
-<img src="793d18f4-45ac-4ec5-8cc8-fc20b9e8d516.jpg">
-<img src="7c88a27f-7fa1-40c9-8b9e-2eb3da5511a7.jpg">
-<img src="7f5c72a1-e348-48fb-b3f9-61ae6fa46391.jpg">
-<img src="85df22e3-7daa-4c29-a1e1-a0510be2a004.jpg">
-<img src="85fff9fe-e29d-462c-a679-83ddd6ff74d0.jpg">
-<img src="9c49857d-e352-4a27-9d4e-afbf42ea4100.jpg">
-<img src="a0f89150-2fd0-4d51-8ad1-cdb36c27ed50.jpg">
-<img src="a123e4fc-7c8c-43db-93f2-9161552ce990.jpg">
-<img src="a168fe36-f5f0-42b2-bfc8-71d6c97f2386.jpg">
-<img src="a4d5dc34-5b97-4e29-be8e-67d28a454744.jpg">
-<img src="a6654b4b-836e-4767-afcc-6b2cff2bf334.jpg">
-<img src="a85415cb-8341-42e8-ba1e-4134b3e23638.jpg">
-<img src="ae8fc60d-4295-42c6-a549-c61410db55f2.jpg">
-<img src="b699b5b3-7310-4da3-8eef-777b7e548c56.jpg">
-<img src="b85ad644-47c8-4e58-9cc9-f87ff4579eab.jpg">
-<img src="c50d18ec-98e8-48db-89de-f183b86748f3.jpg">
-<img src="ccde1b49-2370-4a16-af21-d783dedf9bda.jpg">
-<img src="cdee124e-f0f7-4d58-bc0a-c3c18e210b0f.jpg">
-<img src="d2b8625b-36f9-467f-b146-482a8693b376.jpg">
-<img src="d324c233-178d-461d-b0ce-c96580f71452.jpg">
-<img src="d925e1d8-3eba-4a37-a64b-d3036df2bab0.jpg">
-<img src="deb977ed-c509-495f-b883-d2e606ab221f.jpg">
-<img src="e05d5979-92b3-4e91-9ef7-1caf7f49229f.jpg">
-<img src="e2aad443-c850-4213-b341-fa7802fbc76a.jpg">
-<img src="e2ac1b94-6f08-45e2-a774-59ab688b2a7f.jpg">
-<img src="e8440e66-e892-4501-a149-29de91bee37f.jpg">
-<img src="f880ccb5-9a47-43d7-b4e1-511189dcf7d7.jpg">
-</div>
 </section>
 
 <section id="agenda">
     <h2>Agenda do Salão de Festa</h2>
     <div class="calendar-container">
         <div class="calendar-header">
-            <button class="btn-calendar" onclick="changeMonth(-1)">Anterior</button>
+            <button class="btn-calendar" id="btnPrev">Anterior</button>
             <h3 id="monthDisplay">Mês Ano</h3>
-            <button class="btn-calendar" onclick="changeMonth(1)">Próximo</button>
+            <button class="btn-calendar" id="btnNext">Próximo</button>
         </div>
-        <div class="calendar-grid" id="calendarGrid">
-            </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
         <div style="margin-top: 30px;">
-            <button class="btn-calendar" onclick="adminLogin()">Administrar Agenda (Dono)</button>
+            <button class="btn-calendar" id="btnAdmin">Administrar Agenda (Dono)</button>
         </div>
     </div>
 </section>
@@ -401,17 +261,11 @@ text-align: center;
 <h2>Localização & Contato</h2>
 <div class="texto-informativo" style="text-align: center;">
     <p>Rua Anezio Ruivo, 620 - Sítio São Francisco - Guarulhos - SP</p>
-    <p>WhatsApp: 11 99847-0234</p>
-    <p>Email: campochasquivelasco@gmail.com</p>
-    
     <div class="map-container">
-        <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3660.180562624364!2d-46.4022648!3d-23.4539659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce7d8486255731%3A0xc3f17387d3dfa561!2sR.%20An%C3%A9zio%20Ruivo%2C%20620%20-%20S%C3%ADtio%20S%C3%A3o%20Francisco%2C%20Guarulhos%20-%20SP%2C%2007260-150!5e0!3m2!1spt-BR!2sbr!4v1700000000000" 
-            width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy">
-        </iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3661.168123456789!2d-46.4061!3d-23.4474!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce876543210987%3A0xabcdef123456789!2sR.%20An%C3%A9zio%20Ruivo%2C%20620%20-%20S%C3%ADtio%20S%C3%A3o%20Francisco%2C%20Guarulhos%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1234567890" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
     <br>
-    <a class="botao" href="https://www.google.com/maps/dir/?api=1&destination=Rua+Anezio+Ruivo+620+Guarulhos" target="_blank">
+    <a class="botao" href="https://www.google.com/maps/dir//Rua+Anezio+Ruivo,+620+-+S%C3%ADtio+S%C3%A3o+Francisco,+Guarulhos+-+SP" target="_blank">
         <i class="fas fa-location-arrow"></i> Abrir no GPS (Google Maps)
     </a>
 </div>
@@ -421,56 +275,30 @@ text-align: center;
 © 2026 Arena Chasqui & Velasco
 </footer>
 
-<div class="lightbox" id="lightbox">
-<img id="lightImg">
-</div>
+<div class="lightbox" id="lightbox"><img id="lightImg"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-// COLOQUE SUAS CHAVES DO FIREBASE AQUI PARA FUNCIONAR REALMENTE
+// SUAS CHAVES DO FIREBASE INTEGRADAS
 const firebaseConfig = {
-  apiKey: "SUA_API_KEY",
-  authDomain: "SEU_PROJETO.firebaseapp.com",
-  databaseURL: "https://SEU_PROJETO.firebaseio.com",
-  projectId: "SEU_PROJETO",
-  storageBucket: "SEU_PROJETO.appspot.com",
-  messagingSenderId: "ID",
-  appId: "APP_ID"
+  apiKey: "AIzaSyCE-hdY_R8PsRgqUDRi2TlA8y3kU84RC7s",
+  authDomain: "arena-chasqui-velasco-6a21b.firebaseapp.com",
+  databaseURL: "https://arena-chasqui-velasco-6a21b-default-rtdb.firebaseio.com",
+  projectId: "arena-chasqui-velasco-6a21b",
+  storageBucket: "arena-chasqui-velasco-6a21b.firebasestorage.app",
+  messagingSenderId: "278041356492",
+  appId: "1:278041356492:web:9467602b630af6aed57a69"
 };
 
-// Iniciar Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const agendaRef = ref(db, 'agenda_salao');
 
-// --- CONTADOR ORIGINAL ---
-let count = 0;
-let contador = document.getElementById("contador");
-let intervalo = setInterval(()=>{
-count++;
-contador.innerText = count + " Reservas";
-if(count >= 120){ clearInterval(intervalo); }
-},30);
-
-// --- LIGHTBOX ORIGINAL ---
-document.querySelectorAll(".galeria img").forEach(img=>{
-img.addEventListener("click",()=>{
-document.getElementById("lightbox").style.display="flex";
-document.getElementById("lightImg").src=img.src;
-});
-});
-
-document.getElementById("lightbox").onclick=function(){
-this.style.display="none";
-}
-
-// --- LÓGICA DA AGENDA (CALENDÁRIO SINCRONIZADO) ---
 let currentDate = new Date();
 let events = {};
 
-// Escuta os dados do banco de dados e atualiza para todos
 onValue(agendaRef, (snapshot) => {
     events = snapshot.val() || {};
     renderCalendar();
@@ -480,74 +308,51 @@ function renderCalendar() {
     const grid = document.getElementById("calendarGrid");
     const monthYear = document.getElementById("monthDisplay");
     grid.innerHTML = "";
-    
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
-    
     const namesMonths = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
     monthYear.innerText = `${namesMonths[month]} ${year}`;
-
     const weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
     weekDays.forEach(d => {
         const dDiv = document.createElement("div");
-        dDiv.className = "day-name";
-        dDiv.innerText = d;
-        grid.appendChild(dDiv);
+        dDiv.className = "day-name"; dDiv.innerText = d; grid.appendChild(dDiv);
     });
-
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-
     for(let i=0; i<firstDay; i++) { grid.appendChild(document.createElement("div")); }
-
     for(let i=1; i<=daysInMonth; i++) {
         const dayDiv = document.createElement("div");
         dayDiv.className = "day";
         const dateKey = `${year}-${month}-${i}`;
         dayDiv.innerHTML = `<strong>${i}</strong>`;
-        
-        if(events[dateKey]) {
-            dayDiv.innerHTML += `<span class="event-tag">${events[dateKey]}</span>`;
-        }
-
+        if(events[dateKey]) { dayDiv.innerHTML += `<span class="event-tag">${events[dateKey]}</span>`; }
         dayDiv.onclick = () => {
             if(sessionStorage.getItem('isArenaAdmin') === 'true') {
-                const info = prompt("Descreva a reserva para este dia (ou deixe vazio para excluir):", events[dateKey] || "");
+                const info = prompt("Reserva:", events[dateKey] || "");
                 if(info !== null) {
-                    const updatedEvents = {...events};
-                    if(info === "") delete updatedEvents[dateKey];
-                    else updatedEvents[dateKey] = info;
-                    
-                    // Salva no banco de dados (aparece para todos)
-                    set(agendaRef, updatedEvents);
+                    const upEv = {...events};
+                    if(info === "") delete upEv[dateKey];
+                    else upEv[dateKey] = info;
+                    set(agendaRef, upEv);
                 }
-            } else {
-                alert("Apenas o dono pode editar as locações.");
-            }
+            } else { alert("Entre em contato para reservar!"); }
         };
         grid.appendChild(dayDiv);
     }
 }
 
-// Funções para os botões (precisam ser globais no tipo module)
-window.changeMonth = (dir) => {
-    currentDate.setMonth(currentDate.getMonth() + dir);
-    renderCalendar();
-}
+document.getElementById("btnPrev").onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
+document.getElementById("btnNext").onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
+document.getElementById("btnAdmin").onclick = () => {
+    if(prompt("Senha:") === "MEV2000") { sessionStorage.setItem('isArenaAdmin', 'true'); alert("Admin On!"); renderCalendar(); }
+    else { alert("Erro!"); }
+};
 
-window.adminLogin = () => {
-    const senha = prompt("Digite a senha de administrador:");
-    if(senha === "MEV2000") {
-        sessionStorage.setItem('isArenaAdmin', 'true');
-        alert("Acesso liberado! Suas edições agora aparecerão para todos os usuários.");
-        renderCalendar();
-    } else {
-        alert("Senha incorreta!");
-    }
-}
-
+let count = 0;
+setInterval(()=>{ if(count < 120){ count++; document.getElementById("contador").innerText = count + " Reservas"; }},30);
+document.querySelectorAll(".galeria img").forEach(img=>{ img.onclick=()=>{ document.getElementById("lightbox").style.display="flex"; document.getElementById("lightImg").src=img.src; }});
+document.getElementById("lightbox").onclick=function(){this.style.display="none";}
 renderCalendar();
 </script>
-
 </body>
 </html>
