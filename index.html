@@ -39,8 +39,9 @@ h2{margin-bottom:40px;font-size:35px;color:#FFD700;}
 .btn-calendar { background: #FFD700; color: black; border: none; padding: 8px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; }
 .feedback-container {max-width: 850px; margin: auto; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 20px; margin-bottom: 40px;}
 .feedback-list {text-align: left; margin-top: 30px; max-height: 400px; overflow-y: auto;}
-.feedback-item {background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; margin-bottom: 15px; border-left: 4px solid #FFD700;}
+.feedback-item {background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; margin-bottom: 15px; border-left: 4px solid #FFD700; position: relative;}
 .stars {color: #FFD700; margin-bottom: 5px;}
+.btn-delete { background: #ff4d4d; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; position: absolute; top: 10px; right: 10px; display: none;}
 input, textarea, select {width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: none; background: rgba(255,255,255,0.1); color: white;}
 .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:2000;}
 .lightbox img{max-width:90%;max-height:90%;border-radius:20px;}
@@ -73,7 +74,7 @@ footer{background:black;padding:40px 20px;text-align: center;}
 <section class="hero">
 <h2>A Melhor Quadra de Guarulhos</h2>
 <a class="botao" href="#agenda">Ver Agenda do Salão</a>
-<div class="contador" id="contador" style="font-size: 30px; color: #00ff00; margin-top: 15px;">0 Reservas</div>
+<div class="contador" id="contador" style="font-size: 30px; color: #00ff00; margin-top: 15px;">0 Reservas este mês</div>
 </section>
 
 <section id="quadras">
@@ -166,7 +167,7 @@ footer{background:black;padding:40px 20px;text-align: center;}
         </div>
         <div class="calendar-grid" id="calendarGrid"></div>
         <div style="margin-top: 30px;">
-            <button class="btn-calendar" id="btnAdmin">Administrar Agenda (Dono)</button>
+            <button class="btn-calendar" id="btnAdmin">Administrar Arena (Dono)</button>
         </div>
     </div>
 </section>
@@ -194,10 +195,10 @@ footer{background:black;padding:40px 20px;text-align: center;}
         <p>Rua Anezio Ruivo, 620 - Sítio São Francisco - Guarulhos - SP</p>
         <br>
         <div class="map-container" style="border-radius: 20px; overflow: hidden; border: 2px solid #FFD700;">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3660.7027546872594!2d-46.4116039237691!3d-23.435105256958444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce7d5d288d6b9d%3A0x6b4c3e80f55b1a62!2sR.%20An%C3%A9zio%20Ruivo%2C%20620%20-%20S%C3%ADtio%20S%C3%A3o%20Francisco%2C%20Guarulhos%20-%20SP%2C%2007261-260!5e0!3m2!1spt-BR!2sbr!4v1715000000000" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3661.161110058966!2d-46.39869852542457!3d-23.41133185637217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce8092ec0f3a4b%3A0xe51737e192994406!2sR.%20An%C3%A9zio%20Ruivo%2C%20620%20-%20S%C3%ADtio%20S%C3%A3o%20Francisco%2C%20Guarulhos%20-%20SP%2C%2007260-170!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
         <br>
-        <a class="botao" href="https://www.google.com/maps/dir/?api=1&destination=-23.4351053,-46.4116039" target="_blank">
+        <a class="botao" href="https://www.google.com/maps?q=Rua+Anezio+Ruivo+620+Guarulhos" target="_blank">
             <i class="fas fa-location-arrow"></i> Abrir no GPS (Google Maps)
         </a>
     </div>
@@ -208,7 +209,7 @@ footer{background:black;padding:40px 20px;text-align: center;}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, set, onValue, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, set, onValue, push, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCE-hdY_R8PsRgqUDRi2TlA8y3kU84RC7s",
@@ -237,17 +238,27 @@ onValue(fbRef, (snapshot) => {
     const list = document.getElementById("feedbackList");
     list.innerHTML = "";
     const data = snapshot.val();
+    const isAdmin = sessionStorage.getItem('isArenaAdmin') === 'true';
+
     if(data) {
-        Object.values(data).reverse().forEach(fb => {
+        Object.entries(data).reverse().forEach(([key, fb]) => {
             const div = document.createElement("div");
             div.className = "feedback-item";
-            div.innerHTML = `<div class="stars">${"⭐".repeat(fb.estrelas)}</div>
-                             <strong>${fb.nome}</strong>
-                             <p>${fb.texto}</p>`;
+            div.innerHTML = `
+                <button class="btn-delete" style="display: ${isAdmin ? 'block' : 'none'}" onclick="window.apagarFB('${key}')">Excluir</button>
+                <div class="stars">${"⭐".repeat(fb.estrelas)}</div>
+                <strong>${fb.nome}</strong>
+                <p>${fb.texto}</p>`;
             list.appendChild(div);
         });
     }
 });
+
+window.apagarFB = (key) => {
+    if(confirm("Dono, deseja apagar esse comentário?")) {
+        remove(ref(db, 'feedbacks/' + key));
+    }
+};
 
 document.getElementById("btnEnviarFeedback").onclick = () => {
     const nome = document.getElementById("fbNome").value;
@@ -299,8 +310,13 @@ function renderCalendar() {
 
 document.getElementById("btnPrev").onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
 document.getElementById("btnNext").onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
+
 document.getElementById("btnAdmin").onclick = () => {
-    if(prompt("Senha:") === "MEV2000") { sessionStorage.setItem('isArenaAdmin', 'true'); alert("Dono Logado!"); renderCalendar(); }
+    if(prompt("Senha:") === "MEV2000") { 
+        sessionStorage.setItem('isArenaAdmin', 'true'); 
+        alert("Dono Logado! Você agora pode apagar comentários e editar a agenda."); 
+        location.reload(); 
+    }
     else { alert("Senha Errada!"); }
 };
 
