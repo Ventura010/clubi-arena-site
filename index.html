@@ -18,14 +18,13 @@ nav a{color:white;text-decoration:none;transition:0.3s;}
 nav a:hover{color:#00ff00;}
 .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:80px;}
 .hero h2{font-size:45px;margin-bottom:20px;}
-.botao{padding:15px 35px;background:linear-gradient(45deg,#FFD700,#00ff00);color:black;border-radius:40px;text-decoration:none;font-weight:600;transition:0.4s;display:inline-block;}
+.botao{padding:15px 35px;background:linear-gradient(45deg,#FFD700,#00ff00);color:black;border-radius:40px;text-decoration:none;font-weight:600;transition:0.4s;display:inline-block;border:none;cursor:pointer;}
 .botao:hover{transform:scale(1.1);}
 section{padding:80px 20px;text-align:center;}
-.texto-informativo {max-width: 850px;margin: 0 auto 40px auto;line-height: 1.8;background: rgba(255,255,255,0.05);padding: 25px;border-radius: 20px;text-align: left;}
+.texto-informativo {max-width: 850px;margin: 0 auto 40px auto;line-height: 1.8;background: rgba(255,255,255,0.05);padding: 25px;border-radius: 20px;text-align: left;border: 1px solid rgba(255,215,0,0.2);}
 h2{margin-bottom:40px;font-size:35px;color:#FFD700;}
-.contador{font-size:40px;color:#00ff00;margin-top:20px;}
-.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
-.galeria img{width:100%;border-radius:20px;cursor:pointer;transition:0.4s;}
+.galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;}
+.galeria img{width:100%;border-radius:20px;cursor:pointer;transition:0.4s;aspect-ratio: 1/1;object-fit: cover;}
 .galeria img:hover{transform:scale(1.05);}
 .redes-flutuantes {position: fixed;bottom: 25px;right: 25px;display: flex;flex-direction: column;gap: 15px;z-index: 3000;}
 .icone-social {width: 60px;height: 60px;border-radius: 50%;display: flex;justify-content: center;align-items: center;font-size: 30px;color: white;text-decoration: none;transition: 0.3s;box-shadow: 0 4px 15px rgba(0,0,0,0.5);}
@@ -38,7 +37,14 @@ h2{margin-bottom:40px;font-size:35px;color:#FFD700;}
 .day {background: rgba(255,255,255,0.05);min-height: 90px;padding: 8px;border-radius: 12px;font-size: 13px;text-align: left;cursor: pointer;}
 .event-tag {display: block;margin-top: 5px;background: #e74c3c;color: white;padding: 3px 6px;border-radius: 5px;font-size: 10px;font-weight: 600;}
 .btn-calendar { background: #FFD700; color: black; border: none; padding: 8px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; }
-.map-container {width: 100%;max-width: 850px;margin: 20px auto;border-radius: 20px;overflow: hidden;border: 2px solid #FFD700;}
+
+/* Estilos Feedback */
+.feedback-container {max-width: 850px; margin: auto; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 20px; margin-bottom: 40px;}
+.feedback-list {text-align: left; margin-top: 30px; max-height: 400px; overflow-y: auto;}
+.feedback-item {background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; margin-bottom: 15px;}
+.stars {color: #FFD700; margin-bottom: 5px;}
+input, textarea, select {width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: none; background: rgba(255,255,255,0.1); color: white;}
+
 .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:2000;}
 .lightbox img{max-width:90%;max-height:90%;border-radius:20px;}
 footer{background:black;padding:40px 20px;text-align: center;}
@@ -56,9 +62,9 @@ footer{background:black;padding:40px 20px;text-align: center;}
 <ul>
 <li><a href="#quadras">Quadras</a></li>
 <li><a href="#salao">Salão</a></li>
+<li><a href="#diversao">Diversão</a></li>
 <li><a href="#times">Times</a></li>
-<li><a href="#agenda">Agenda</a></li>
-<li><a href="#contato">Contato</a></li>
+<li><a href="#avaliacoes">Avaliações</a></li>
 </ul>
 </nav>
 
@@ -69,17 +75,17 @@ footer{background:black;padding:40px 20px;text-align: center;}
 
 <section class="hero">
 <h2>A Melhor Quadra de Guarulhos</h2>
-<a class="botao" href="#agenda">Reservar Agora</a>
-<div class="contador" id="contador">0 Reservas</div>
+<a class="botao" href="#agenda">Reservar Agenda</a>
+<div class="contador" id="contador" style="font-size: 30px; color: #00ff00; margin-top: 15px;">0 Reservas</div>
 </section>
 
 <section id="quadras">
     <h2>QUADRA CHASQUI & VELASCO</h2>
     <div class="texto-informativo">
         <p>A Arena conta com <strong>2 quadras</strong> preparadas para o seu melhor jogo!</p>
-        <p><strong>Quadra Espaçosa:</strong> A Quadra CHASQUI VELASCO é ampla e espaçosa.</p>
-        <p><strong>Ambiente Seguro:</strong> Projetada com segurança em mente.</p>
-        <p><strong>Estacionamento Gratuito:</strong> A quadra possui estacionamento interno gratuito.</p>
+        <p><strong>Quadra Espaçosa:</strong> A Quadra CHASQUI VELASCO é ampla, com gramado de alta qualidade e iluminação profissional.</p>
+        <p><strong>Ambiente Seguro:</strong> Monitoramento e estrutura planejada para o conforto da sua família.</p>
+        <p><strong>Estacionamento Gratuito:</strong> Amplo estacionamento interno para maior comodidade dos jogadores.</p>
     </div>
     <div class="galeria">
         <img src="c2643024-93aa-46b6-8444-ef0bf2fbff1e.jpg">
@@ -91,16 +97,18 @@ footer{background:black;padding:40px 20px;text-align: center;}
 <section id="salao">
     <h2>SALÃO DE FESTA CHASQUI LA PAZ</h2>
     <div class="texto-informativo">
-        <p><strong>Salão de Festas:</strong> Nosso salão é amplo e coberto, ideal para diversos tipos de eventos.</p>
-        <p>Contamos com um <strong>palco grande</strong> para apresentações ao vivo.</p>
-        <p><strong>Eventos:</strong> Festas de 15 anos, Batizados, Aniversários e Confraternizações!</p>
+        <p><strong>Estrutura Completa para o Seu Evento:</strong> Nosso salão é amplo e coberto, ideal para diversos tipos de celebrações.</p>
+        <p>Contamos com um <strong>palco grande</strong>, perfeito para apresentações ao vivo, DJs ou grupos musicais.</p>
+        <p><strong>Eventos Realizados:</strong> Festas de 15 anos, Batizados, Aniversários, Casamentos e Confraternizações de empresas!</p>
+        <p>Temos mesas, cadeiras e toda a infraestrutura para receber seus convidados com excelência.</p>
     </div>
 </section>
 
 <section id="diversao">
     <h2>ÁREA DE DIVERSÃO</h2>
     <div class="texto-informativo">
-        <p>Nossa área de diversão conta com <strong>2 mesas de sinuca</strong>.</p>
+        <p>Para quem não dispensa uma boa resenha após o jogo, nossa área de diversão conta com <strong>2 mesas de sinuca profissionais</strong>.</p>
+        <p>É o espaço ideal para relaxar, tomar uma bebida gelada e desafiar os amigos em um ambiente descontraído.</p>
     </div>
     <div class="galeria" style="display: flex; justify-content: center;">
         <img src="c2a96f49-d828-40af-84b7-d6447ae7d5b4.jpg" style="max-width: 600px; width: 100%;">
@@ -121,45 +129,45 @@ footer{background:black;padding:40px 20px;text-align: center;}
 <section id="times">
 <h2>🏆 Times Campeões na Arena Chasqui & Velasco</h2>
 <div class="galeria">
-<img src="084b14cf-e85c-4bee-bdc5-cc4f332d9a9c.jpg">
-<img src="3250db03-b976-4667-8732-5c91940fd70f.jpg">
-<img src="37b97771-2970-4693-9f01-35ec34eebeeb.jpg">
-<img src="4677dfb4-ffac-4f2b-86ec-2b640f871808.jpg">
-<img src="4b51828f-d00f-455f-86a6-7f241bb0b1b3.jpg">
-<img src="54021891-3e1a-46f1-af68-414a53f81a45.jpg">
-<img src="6284b0a9-2464-473b-bdae-4f6bb1c9ad3b.jpg">
-<img src="64d3e89b-9b65-43e6-bf6d-6aae6f02f80c.jpg">
-<img src="6d60a556-eefc-479d-bef7-0539feab43dd.jpg">
-<img src="6ef26115-6891-48ef-8f40-f20a99e03d3f.jpg">
-<img src="727e38c1-bc80-48ae-972d-021201cf4b22.jpg">
-<img src="74dcb9e5-a2d6-491b-a57e-18c405fb8c49.jpg">
-<img src="793d18f4-45ac-4ec5-8cc8-fc20b9e8d516.jpg">
-<img src="7c88a27f-7fa1-40c9-8b9e-2eb3da5511a7.jpg">
-<img src="7f5c72a1-e348-48fb-b3f9-61ae6fa46391.jpg">
-<img src="85df22e3-7daa-4c29-a1e1-a0510be2a004.jpg">
-<img src="85fff9fe-e29d-462c-a679-83ddd6ff74d0.jpg">
-<img src="9c49857d-e352-4a27-9d4e-afbf42ea4100.jpg">
-<img src="a0f89150-2fd0-4d51-8ad1-cdb36c27ed50.jpg">
-<img src="a123e4fc-7c8c-43db-93f2-9161552ce990.jpg">
-<img src="a168fe36-f5f0-42b2-bfc8-71d6c97f2386.jpg">
-<img src="a4d5dc34-5b97-4e29-be8e-67d28a454744.jpg">
-<img src="a6654b4b-836e-4767-afcc-6b2cff2bf334.jpg">
-<img src="a85415cb-8341-42e8-ba1e-4134b3e23638.jpg">
-<img src="ae8fc60d-4295-42c6-a549-c61410db55f2.jpg">
-<img src="b699b5b3-7310-4da3-8eef-777b7e548c56.jpg">
-<img src="b85ad644-47c8-4e58-9cc9-f87ff4579eab.jpg">
-<img src="c50d18ec-98e8-48db-89de-f183b86748f3.jpg">
-<img src="ccde1b49-2370-4a16-af21-d783dedf9bda.jpg">
-<img src="cdee124e-f0f7-4d58-bc0a-c3c18e210b0f.jpg">
-<img src="d2b8625b-36f9-467f-b146-482a8693b376.jpg">
-<img src="d324c233-178d-461d-b0ce-c96580f71452.jpg">
-<img src="d925e1d8-3eba-4a37-a64b-d3036df2bab0.jpg">
-<img src="deb977ed-c509-495f-b883-d2e606ab221f.jpg">
-<img src="e05d5979-92b3-4e91-9ef7-1caf7f49229f.jpg">
-<img src="e2aad443-c850-4213-b341-fa7802fbc76a.jpg">
-<img src="e2ac1b94-6f08-45e2-a774-59ab688b2a7f.jpg">
-<img src="e8440e66-e892-4501-a149-29de91bee37f.jpg">
-<img src="f880ccb5-9a47-43d7-b4e1-511189dcf7d7.jpg">
+    <img src="084b14cf-e85c-4bee-bdc5-cc4f332d9a9c.jpg">
+    <img src="3250db03-b976-4667-8732-5c91940fd70f.jpg">
+    <img src="37b97771-2970-4693-9f01-35ec34eebeeb.jpg">
+    <img src="4677dfb4-ffac-4f2b-86ec-2b640f871808.jpg">
+    <img src="4b51828f-d00f-455f-86a6-7f241bb0b1b3.jpg">
+    <img src="54021891-3e1a-46f1-af68-414a53f81a45.jpg">
+    <img src="6284b0a9-2464-473b-bdae-4f6bb1c9ad3b.jpg">
+    <img src="64d3e89b-9b65-43e6-bf6d-6aae6f02f80c.jpg">
+    <img src="6d60a556-eefc-479d-bef7-0539feab43dd.jpg">
+    <img src="6ef26115-6891-48ef-8f40-f20a99e03d3f.jpg">
+    <img src="727e38c1-bc80-48ae-972d-021201cf4b22.jpg">
+    <img src="74dcb9e5-a2d6-491b-a57e-18c405fb8c49.jpg">
+    <img src="793d18f4-45ac-4ec5-8cc8-fc20b9e8d516.jpg">
+    <img src="7c88a27f-7fa1-40c9-8b9e-2eb3da5511a7.jpg">
+    <img src="7f5c72a1-e348-48fb-b3f9-61ae6fa46391.jpg">
+    <img src="85df22e3-7daa-4c29-a1e1-a0510be2a004.jpg">
+    <img src="85fff9fe-e29d-462c-a679-83ddd6ff74d0.jpg">
+    <img src="9c49857d-e352-4a27-9d4e-afbf42ea4100.jpg">
+    <img src="a0f89150-2fd0-4d51-8ad1-cdb36c27ed50.jpg">
+    <img src="a123e4fc-7c8c-43db-93f2-9161552ce990.jpg">
+    <img src="a168fe36-f5f0-42b2-bfc8-71d6c97f2386.jpg">
+    <img src="a4d5dc34-5b97-4e29-be8e-67d28a454744.jpg">
+    <img src="a6654b4b-836e-4767-afcc-6b2cff2bf334.jpg">
+    <img src="a85415cb-8341-42e8-ba1e-4134b3e23638.jpg">
+    <img src="ae8fc60d-4295-42c6-a549-c61410db55f2.jpg">
+    <img src="b699b5b3-7310-4da3-8eef-777b7e548c56.jpg">
+    <img src="b85ad644-47c8-4e58-9cc9-f87ff4579eab.jpg">
+    <img src="c50d18ec-98e8-48db-89de-f183b86748f3.jpg">
+    <img src="ccde1b49-2370-4a16-af21-d783dedf9bda.jpg">
+    <img src="cdee124e-f0f7-4d58-bc0a-c3c18e210b0f.jpg">
+    <img src="d2b8625b-36f9-467f-b146-482a8693b376.jpg">
+    <img src="d324c233-178d-461d-b0ce-c96580f71452.jpg">
+    <img src="d925e1d8-3eba-4a37-a64b-d3036df2bab0.jpg">
+    <img src="deb977ed-c509-495f-b883-d2e606ab221f.jpg">
+    <img src="e05d5979-92b3-4e91-9ef7-1caf7f49229f.jpg">
+    <img src="e2aad443-c850-4213-b341-fa7802fbc76a.jpg">
+    <img src="e2ac1b94-6f08-45e2-a774-59ab688b2a7f.jpg">
+    <img src="e8440e66-e892-4501-a149-29de91bee37f.jpg">
+    <img src="f880ccb5-9a47-43d7-b4e1-511189dcf7d7.jpg">
 </div>
 </section>
 
@@ -178,15 +186,34 @@ footer{background:black;padding:40px 20px;text-align: center;}
     </div>
 </section>
 
+<section id="avaliacoes">
+    <h2>Avalie sua experiência</h2>
+    <div class="feedback-container">
+        <input type="text" id="fbNome" placeholder="Seu Nome">
+        <select id="fbEstrelas">
+            <option value="5">⭐⭐⭐⭐⭐ (Excelente)</option>
+            <option value="4">⭐⭐⭐⭐ (Muito Bom)</option>
+            <option value="3">⭐⭐⭐ (Bom)</option>
+            <option value="2">⭐⭐ (Regular)</option>
+            <option value="1">⭐ (Ruim)</option>
+        </select>
+        <textarea id="fbTexto" placeholder="Escreva seu feedback aqui..."></textarea>
+        <button class="botao" id="btnEnviarFeedback">Enviar Avaliação</button>
+
+        <div class="feedback-list" id="feedbackList">
+            </div>
+    </div>
+</section>
+
 <section id="contato">
 <h2>Localização & Contato</h2>
 <div class="texto-informativo" style="text-align: center;">
     <p>Rua Anezio Ruivo, 620 - Sítio São Francisco - Guarulhos - SP</p>
     <div class="map-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3661.161042795893!2d-46.3888352!3d-23.4185125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce8092289659f1%3A0xc07f59d4c2b29da4!2sR.%20An%C3%A9zio%20Ruivo%2C%20620%20-%20S%C3%ADtio%20S%C3%A3o%20Francisco%2C%20Guarulhos%20-%20SP%2C%2007260-150!5e0!3m2!1spt-BR!2sbr!4v1710000000000" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3661.3259838038676!2d-46.3980!3d-23.4180!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDI1JzA0LjgiUyA0NsKwMjMnNTIuOCJX!5e0!3m2!1spt-BR!2sbr!4v1700000000000" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
     <br>
-    <a class="botao" href="https://www.google.com/maps/dir//Rua+Anézio+Ruivo,+620+-+Sítio+São+Francisco,+Guarulhos+-+SP" target="_blank">
+    <a class="botao" href="https://www.google.com/maps/dir//Rua+Anezio+Ruivo,+620" target="_blank">
         <i class="fas fa-location-arrow"></i> Abrir no GPS (Google Maps)
     </a>
 </div>
@@ -197,7 +224,7 @@ footer{background:black;padding:40px 20px;text-align: center;}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, set, onValue, push } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCE-hdY_R8PsRgqUDRi2TlA8y3kU84RC7s",
@@ -212,14 +239,47 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const agendaRef = ref(db, 'agenda_salao');
+const fbRef = ref(db, 'feedbacks');
 
 let currentDate = new Date();
 let events = {};
 
+// Carregar Agenda
 onValue(agendaRef, (snapshot) => {
     events = snapshot.val() || {};
     renderCalendar();
 });
+
+// Carregar Feedbacks
+onValue(fbRef, (snapshot) => {
+    const list = document.getElementById("feedbackList");
+    list.innerHTML = "";
+    const data = snapshot.val();
+    if(data) {
+        Object.values(data).reverse().forEach(fb => {
+            const div = document.createElement("div");
+            div.className = "feedback-item";
+            div.innerHTML = `<div class="stars">${"⭐".repeat(fb.estrelas)}</div>
+                             <strong>${fb.nome}</strong>
+                             <p>${fb.texto}</p>`;
+            list.appendChild(div);
+        });
+    }
+});
+
+// Enviar Feedback
+document.getElementById("btnEnviarFeedback").onclick = () => {
+    const nome = document.getElementById("fbNome").value;
+    const estrelas = document.getElementById("fbEstrelas").value;
+    const texto = document.getElementById("fbTexto").value;
+
+    if(nome && texto) {
+        push(fbRef, { nome, estrelas, texto });
+        alert("Obrigado pelo seu feedback!");
+        document.getElementById("fbNome").value = "";
+        document.getElementById("fbTexto").value = "";
+    } else { alert("Por favor, preencha nome e comentário!"); }
+};
 
 function renderCalendar() {
     const grid = document.getElementById("calendarGrid");
@@ -265,10 +325,4 @@ document.getElementById("btnAdmin").onclick = () => {
 };
 
 let count = 0;
-setInterval(()=>{ if(count < 120){ count++; document.getElementById("contador").innerText = count + " Reservas"; }},30);
-document.querySelectorAll(".galeria img").forEach(img=>{ img.onclick=()=>{ document.getElementById("lightbox").style.display="flex"; document.getElementById("lightImg").src=img.src; }});
-document.getElementById("lightbox").onclick=function(){this.style.display="none";}
-renderCalendar();
-</script>
-</body>
-</html>
+setInterval
