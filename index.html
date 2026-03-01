@@ -6,9 +6,6 @@
 <title>Arena Chasqui & Velasco</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
 body{color:white;background:black;overflow-x:hidden;}
@@ -19,24 +16,8 @@ nav h1{color:#FFD700;}
 nav ul{list-style:none;display:flex;gap:25px;}
 nav a{color:white;text-decoration:none;transition:0.3s;}
 nav a:hover{color:#00ff00;}
-
-/* Ajuste do Hero para comportar os blocos laterais */
-.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:80px;position: relative;}
-.hero h2{font-size:45px;margin-bottom:10px;}
-.bandeiras { font-size: 50px; margin-bottom: 20px; }
-
-/* Blocos Laterais Adicionados */
-.horarios-fixo {
-    position: absolute; left: 40px; top: 120px; text-align: left; 
-    background: rgba(0,0,0,0.6); padding: 15px; border-radius: 15px; border-left: 4px solid #FFD700;
-}
-.clima-fixo {
-    position: absolute; right: 40px; top: 120px; text-align: right; 
-    background: rgba(0,0,0,0.6); padding: 15px; border-radius: 15px; border-right: 4px solid #00ff00;
-}
-.horarios-lista { font-size: 12px; list-style: none; line-height: 1.6; }
-.hoje { color: #00ff00; font-weight: bold; }
-
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:80px;}
+.hero h2{font-size:45px;margin-bottom:20px;}
 .botao{padding:15px 35px;background:linear-gradient(45deg,#FFD700,#00ff00);color:black;border-radius:40px;text-decoration:none;font-weight:600;transition:0.4s;display:inline-block;border:none;cursor:pointer;}
 .botao:hover{transform:scale(1.1);}
 section{padding:80px 20px;text-align:center;}
@@ -65,10 +46,6 @@ input, textarea, select {width: 100%; padding: 12px; margin-bottom: 15px; border
 .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:2000;}
 .lightbox img{max-width:90%;max-height:90%;border-radius:20px;}
 footer{background:black;padding:40px 20px;text-align: center;}
-
-@media (max-width: 768px) {
-    .horarios-fixo, .clima-fixo { position: static; width: 100%; margin: 10px 0; border: 1px solid #FFD700; text-align: center; }
-}
 </style>
 </head>
 <body>
@@ -95,30 +72,12 @@ footer{background:black;padding:40px 20px;text-align: center;}
 </div>
 
 <section class="hero">
-    <div class="horarios-fixo animate__animated animate__fadeInLeft">
-        <ul class="horarios-lista">
-            <li id="dia-0">Dom: 10:00 – 22:00</li>
-            <li id="dia-1">Seg: Fechado</li>
-            <li id="dia-2">Ter: Fechado</li>
-            <li id="dia-3">Qua: 08:00 – 22:00</li>
-            <li id="dia-4">Qui: 08:00 – 22:00</li>
-            <li id="dia-5">Sex: 08:00 – 23:00</li>
-            <li id="dia-6">Sáb: 08:00 – 23:00</li>
-        </ul>
-    </div>
-
-    <div class="clima-fixo animate__animated animate__fadeInRight">
-        <div id="clima">Carregando Clima...</div>
-    </div>
-
-    <h2 class="animate__animated animate__fadeInDown">A Melhor Quadra de Guarulhos</h2>
-    <div class="bandeiras animate__animated animate__zoomIn">🇧🇷 🇧🇴</div>
-    
-    <a class="botao" href="#agenda">Ver Agenda do Salão</a>
-    <div class="contador" id="contador" style="font-size: 30px; color: #00ff00; margin-top: 15px;">0 Reservas este mês</div>
+<h2>A Melhor Quadra de Guarulhos</h2>
+<a class="botao" href="#agenda">Ver Agenda do Salão</a>
+<div class="contador" id="contador" style="font-size: 30px; color: #00ff00; margin-top: 15px;">0 Reservas este mês</div>
 </section>
 
-<section id="quadras" data-aos="fade-up">
+<section id="quadras">
     <h2>QUADRA CHASQUI & VELASCO</h2>
     <div class="texto-informativo">
         <p>A Arena conta com <strong>2 quadras</strong> preparadas para o seu melhor jogo!</p>
@@ -133,7 +92,7 @@ footer{background:black;padding:40px 20px;text-align: center;}
     </div>
 </section>
 
-<section id="salao" data-aos="fade-up">
+<section id="salao">
     <h2>SALÃO DE FESTA CHASQUI LA PAZ</h2>
     <div class="texto-informativo">
         <p><strong>Estrutura VIP para seu Evento:</strong> Nosso salão é amplo, ventilado e totalmente coberto.</p>
@@ -142,7 +101,7 @@ footer{background:black;padding:40px 20px;text-align: center;}
     </div>
 </section>
 
-<section id="diversao" data-aos="fade-up">
+<section id="diversao">
     <h2>ÁREA DE DIVERSÃO</h2>
     <div class="texto-informativo">
         <p>Para a resenha ficar completa, temos uma área exclusiva com <strong>2 mesas de sinuca profissionais</strong>.</p>
@@ -153,7 +112,7 @@ footer{background:black;padding:40px 20px;text-align: center;}
     </div>
 </section>
 
-<section id="times" data-aos="fade-up">
+<section id="times">
 <h2>🏆 Times Campeões na Arena Chasqui & Velasco</h2>
 <div class="galeria">
     <img src="084b14cf-e85c-4bee-bdc5-cc4f332d9a9c.jpg">
@@ -198,7 +157,7 @@ footer{background:black;padding:40px 20px;text-align: center;}
 </div>
 </section>
 
-<section id="agenda" data-aos="fade-up">
+<section id="agenda">
     <h2>Agenda do Salão de Festa</h2>
     <div class="calendar-container">
         <div class="calendar-header">
@@ -213,7 +172,7 @@ footer{background:black;padding:40px 20px;text-align: center;}
     </div>
 </section>
 
-<section id="avaliacoes" data-aos="fade-up">
+<section id="avaliacoes">
     <h2>Avaliações dos Clientes</h2>
     <div class="feedback-container">
         <input type="text" id="fbNome" placeholder="Seu Nome">
@@ -230,16 +189,16 @@ footer{background:black;padding:40px 20px;text-align: center;}
     </div>
 </section>
 
-<section id="contato" data-aos="fade-up">
+<section id="contato">
     <h2>Localização & Contato</h2>
     <div class="texto-informativo" style="text-align: center;">
         <p>Rua Anezio Ruivo, 620 - Sítio São Francisco - Guarulhos - SP</p>
         <br>
         <div class="map-container" style="border-radius: 20px; overflow: hidden; border: 2px solid #FFD700;">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3661.325985068936!2d-46.4061!3d-23.4475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDI2JzUxLjAiUyA0NsKwMjQnMjIuMCJX!5e0!3m2!1spt-BR!2sbr!4v1640000000000!5m2!1spt-BR!2sbr" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3661.161110058966!2d-46.39869852542457!3d-23.41133185637217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce8092ec0f3a4b%3A0xe51737e192994406!2sR.%20An%C3%A9zio%20Ruivo%2C%20620%20-%20S%C3%ADtio%20S%C3%A3o%20Francisco%2C%20Guarulhos%20-%20SP%2C%2007260-170!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
         <br>
-        <a class="botao" href="https://www.google.com/maps?q=-23.4475,-46.4061" target="_blank">
+        <a class="botao" href="https://www.google.com/maps?q=Rua+Anezio+Ruivo+620+Guarulhos" target="_blank">
             <i class="fas fa-location-arrow"></i> Abrir no GPS (Google Maps)
         </a>
     </div>
@@ -248,7 +207,6 @@ footer{background:black;padding:40px 20px;text-align: center;}
 <footer>© 2026 Arena Chasqui & Velasco</footer>
 <div class="lightbox" id="lightbox"><img id="lightImg"></div>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, set, onValue, push, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
@@ -267,22 +225,6 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const agendaRef = ref(db, 'agenda_salao');
 const fbRef = ref(db, 'feedbacks');
-
-// Inicializa Animações
-AOS.init({ duration: 1000, once: true });
-
-// Função de Clima
-async function getClima() {
-    try {
-        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=-23.4475&longitude=-46.4061&current_weather=true`);
-        const data = await res.json();
-        document.getElementById('clima').innerHTML = `🌤️ Guarulhos<br><strong>${data.current_weather.temperature}°C</strong>`;
-    } catch (e) { document.getElementById('clima').innerText = "Clima OFF"; }
-}
-getClima();
-
-// Marca o dia atual nos horários
-document.getElementById(`dia-${new Date().getDay()}`).classList.add('hoje');
 
 let currentDate = new Date();
 let events = {};
