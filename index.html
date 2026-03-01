@@ -81,6 +81,47 @@
 
 <nav>
     <h1>Arena Chasqui & Velasco</h1>
+
+    <div style="margin-left: 20px; font-size: 10px; color: #00ff00; border-left: 1px solid #FFD700; padding-left: 15px; display: grid; grid-template-columns: auto auto; gap: 2px 10px; line-height: 1.1; text-transform: uppercase;">
+        <span><strong>Dom:</strong> 10h-22h</span>
+        <span><strong>Qua:</strong> 08h-22h</span>
+        <span><strong>Seg:</strong> Fechado</span>
+        <span><strong>Qui:</strong> 08h-22h</span>
+        <span><strong>Ter:</strong> Fechado</span>
+        <span><strong>Sex:</strong> 08h-23h</span>
+        <span><strong>Sáb:</strong> 08h-23h</span>
+    </div>
+
+    <div style="margin-left: auto; margin-right: 30px; color: #FFD700; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 10px; border: 1px solid rgba(255,215,0,0.3);">
+        <i class="fas fa-temperature-high"></i> 
+        <span id="temp-guarulhos">--°C</span>
+    </div>
+
+    <ul>
+        <li><a href="#quadras">Quadras</a></li>
+        <li><a href="#salao">Salão</a></li>
+        <li><a href="#diversao">Diversão</a></li>
+        <li><a href="#times">Times</a></li>
+        <li><a href="#avaliacoes">Avaliações</a></li>
+    </ul>
+</nav>
+
+<script>
+    async function pegarClima() {
+        try {
+            // Coordenadas da Rua Anezio Ruivo, 620 - Guarulhos
+            const resposta = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-23.41&longitude=-46.40&current_weather=true');
+            const dados = await resposta.json();
+            const temp = Math.round(dados.current_weather.temperature);
+            document.getElementById('temp-guarulhos').innerText = temp + '°C';
+        } catch (erro) {
+            document.getElementById('temp-guarulhos').innerText = 'Erro';
+        }
+    }
+    pegarClima();
+    setInterval(pegarClima, 900000); // Atualiza a cada 15 min
+</script>
+
     <ul>
         <li><a href="#quadras">Quadras</a></li>
         <li><a href="#salao">Salão</a></li>
@@ -97,6 +138,11 @@
 </div>
 
 <section class="hero">
+    <div style="display: flex; gap: 15px; margin-bottom: 10px; justify-content: center; align-items: center;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg" width="50" style="border-radius: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Flag_of_Bolivia.svg" width="50" style="border-radius: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+    </div>
+
     <h2>A Melhor Quadra de Guarulhos</h2>
     <a class="botao" href="#agenda">Ver Agenda do Salão</a>
     <div class="contador" id="contador" style="font-size: 30px; color: #00ff00; margin-top: 15px; font-weight: bold;">0 Reservas este mês</div>
