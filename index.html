@@ -79,47 +79,51 @@
 </video>
 <div class="overlay"></div>
 
-<nav>
-    <h1>Arena Chasqui & Velasco</h1>
-
-    <div style="margin-left: 20px; font-size: 10px; color: #00ff00; border-left: 1px solid #FFD700; padding-left: 15px; display: grid; grid-template-columns: auto auto; gap: 2px 10px; line-height: 1.1; text-transform: uppercase;">
-        <span><strong>Dom:</strong> 10h-22h</span>
-        <span><strong>Qua:</strong> 08h-22h</span>
-        <span><strong>Seg:</strong> Fechado</span>
-        <span><strong>Qui:</strong> 08h-22h</span>
-        <span><strong>Ter:</strong> Fechado</span>
-        <span><strong>Sex:</strong> 08h-23h</span>
-        <span><strong>Sáb:</strong> 08h-23h</span>
+<nav style="display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); position: fixed; top: 0; width: 100%; z-index: 1000;">
+    
+    <div style="display: flex; flex-direction: column; gap: 5px;">
+        <h1 style="margin: 0; color: #FFD700; font-size: 24px;">Arena Chasqui & Velasco</h1>
+        
+        <div style="font-size: 13px; color: #00ff00; display: grid; grid-template-columns: repeat(4, auto); gap: 5px 15px; border-top: 1px solid rgba(255, 215, 0, 0.3); padding-top: 5px;">
+            <span><strong>SEG:</strong> Fechado</span>
+            <span><strong>TER:</strong> Fechado</span>
+            <span><strong>QUA:</strong> 08h-22h</span>
+            <span><strong>QUI:</strong> 08h-22h</span>
+            <span><strong>SEX:</strong> 08h-23h</span>
+            <span><strong>SÁB:</strong> 08h-23h</span>
+            <span><strong>DOM:</strong> 10h-22h</span>
+        </div>
     </div>
 
-    <div style="margin-left: auto; margin-right: 30px; color: #FFD700; font-weight: bold; font-size: 16px; display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 5px 12px; border-radius: 10px; border: 1px solid rgba(255,215,0,0.3);">
-        <i class="fas fa-temperature-high"></i> 
-        <span id="temp-guarulhos">--°C</span>
-    </div>
+    <div style="display: flex; align-items: center; gap: 25px;">
+        
+        <div style="color: #FFD700; font-weight: 800; font-size: 20px; display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 12px; border: 1px solid rgba(255,215,0,0.5);">
+            <i class="fas fa-thermometer-half"></i>
+            <span id="temp-guarulhos">--°C</span>
+        </div>
 
-    <ul>
-        <li><a href="#quadras">Quadras</a></li>
-        <li><a href="#salao">Salão</a></li>
-        <li><a href="#diversao">Diversão</a></li>
-        <li><a href="#times">Times</a></li>
-        <li><a href="#avaliacoes">Avaliações</a></li>
-    </ul>
+        <ul style="list-style: none; display: flex; gap: 15px; margin: 0; padding: 0;">
+            <li><a href="#quadras" style="color: white; text-decoration: none; font-weight: 600;">Quadras</a></li>
+            <li><a href="#salao" style="color: white; text-decoration: none; font-weight: 600;">Salão</a></li>
+            <li><a href="#diversao" style="color: white; text-decoration: none; font-weight: 600;">Diversão</a></li>
+            <li><a href="#times" style="color: white; text-decoration: none; font-weight: 600;">Times</a></li>
+        </ul>
+    </div>
 </nav>
 
 <script>
     async function pegarClima() {
         try {
-            // Coordenadas da Rua Anezio Ruivo, 620 - Guarulhos
             const resposta = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-23.41&longitude=-46.40&current_weather=true');
             const dados = await resposta.json();
             const temp = Math.round(dados.current_weather.temperature);
             document.getElementById('temp-guarulhos').innerText = temp + '°C';
         } catch (erro) {
-            document.getElementById('temp-guarulhos').innerText = 'Erro';
+            document.getElementById('temp-guarulhos').innerText = '--°C';
         }
     }
     pegarClima();
-    setInterval(pegarClima, 900000); // Atualiza a cada 15 min
+    setInterval(pegarClima, 900000);
 </script>
 
     <ul>
