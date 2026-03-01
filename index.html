@@ -71,193 +71,158 @@
        
         footer { background:black; padding:40px 20px; text-align: center; color: #777; border-top: 1px solid #222; }
       <style>
-    #loader {
-        position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: black;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
+ /* --- ESTILO DA ABERTURA (LOADER) --- */
+        #loader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: black;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly; /* Distribui os 3 elementos na tela */
+            overflow: hidden;
+            transition: opacity 0.8s ease;
+        }
 
-    /* 1. NOME NO TOPO CENTRALIZADO */
-    .titulo-typing {
-        position: absolute;
-        top: 15%;
-        color: #FFD700;
-        font-size: 28px;
-        font-weight: bold;
-        white-space: nowrap;
-        overflow: hidden;
-        width: 0;
-        border-right: 3px solid #FFD700;
-        animation: typing 3s steps(22) forwards;
-    }
+        /* 1. TEXTO DIGITANDO */
+        .titulo-typing {
+            color: #FFD700;
+            font-size: 28px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            border-right: 3px solid #FFD700;
+            animation: typing 3s steps(22) forwards;
+        }
 
-    /* 2. BANDEIRAS NO MEIO */
-    .loader-flags { 
-        position: absolute;
-        top: 40%;
-        display: flex; 
-        gap: 25px; 
-        opacity: 0;
-        animation: fadeIn 0.5s forwards 3s;
-    }
-    .loader-flags img { width: 75px; animation: saltar 1s infinite alternate; }
+        /* 2. BANDEIRAS SALTANDO (O QUE VOCÊ JÁ TINHA) */
+        .loader-flags { 
+            display: flex; 
+            gap: 20px; 
+            opacity: 0;
+            animation: fadeIn 0.5s forwards 3s;
+        }
+        .loader-flags img { width: 70px; animation: saltar 1s infinite alternate; }
 
-    /* 3. CAMPO DE FUTEBOL NA BASE */
-    .area-jogo {
-        position: absolute;
-        bottom: 10%;
-        width: 100%;
-        height: 200px;
-    }
+        /* 3. ANIMAÇÃO DO BONECO BRANCO (JOGO) */
+        .campo-futebol {
+            position: relative;
+            width: 300px;
+            height: 120px;
+        }
 
-    /* Boneco Branco (SVG) - Fazendo Zig-Zag */
-    .jogador-branco {
-        position: absolute;
-        left: -100px;
-        bottom: 20px;
-        width: 60px;
-        height: 80px;
-        stroke: white;
-        stroke-width: 3;
-        fill: none;
-        animation: zig-zag 6s forwards 4s;
-    }
+        .stickman-branco {
+            position: absolute;
+            left: -50px; bottom: 10px;
+            stroke: white; stroke-width: 3; fill: none;
+            animation: zig-zag 6s forwards 4s;
+        }
 
-    .bola {
-        position: absolute;
-        left: -40px;
-        bottom: 20px;
-        font-size: 22px;
-        animation: bola-zig-zag 6s forwards 4s, chute-gol 1.2s forwards 10s;
-    }
+        .bola-animada {
+            position: absolute;
+            left: -10px; bottom: 15px;
+            font-size: 20px;
+            animation: bola-zig-zag 6s forwards 4s, chuta-pro-gol 1s forwards 10s;
+        }
 
-    .trave {
-        position: absolute;
-        right: 30px;
-        bottom: 20px;
-        width: 100px;
-        height: 120px;
-        border-left: 5px solid white;
-        border-top: 5px solid white;
-    }
+        .trave-branca {
+            position: absolute;
+            right: 0; bottom: 0;
+            width: 70px; height: 90px;
+            border-left: 3px solid white; border-top: 3px solid white;
+        }
 
-    .goleiro {
-        position: absolute;
-        right: 120px;
-        bottom: 25px;
-        stroke: white;
-        stroke-width: 3;
-        fill: none;
-        animation: goleiro-pula 0.8s forwards 10.5s;
-    }
+        .goleiro-palitinho {
+            position: absolute;
+            right: 60px; bottom: 10px;
+            stroke: white; stroke-width: 3; fill: none;
+            animation: goleiro-pula 0.6s forwards 10.5s;
+        }
 
-    .texto-gol {
-        position: absolute;
-        width: 100%;
-        text-align: center;
-        bottom: 220px;
-        color: #FFD700;
-        font-size: 50px;
-        font-weight: 900;
-        opacity: 0;
-        animation: fadeIn 0.4s forwards 11s;
-    }
+        .texto-gol-final {
+            position: absolute;
+            width: 100%; text-align: center;
+            top: -40px; color: #FFD700;
+            font-size: 40px; font-weight: 900;
+            opacity: 0;
+            animation: fadeIn 0.3s forwards 11s;
+        }
 
-    /* Boneco deslizando na comemoração */
-    .celebracao {
-        position: absolute;
-        left: 65%;
-        bottom: 20px;
-        opacity: 0;
-        animation: deslizar 2.5s forwards 11.5s;
-    }
+        /* BONECO COMEMORANDO (DESLIZANDO) */
+        .boneco-comemora {
+            position: absolute;
+            left: 65%; bottom: 10px;
+            opacity: 0;
+            animation: desliza-comemora 2s forwards 11.5s;
+        }
 
-    /* --- ANIMAÇÕES --- */
-    @keyframes typing { from { width: 0 } to { width: 360px } }
-    @keyframes fadeIn { to { opacity: 1; } }
-    @keyframes saltar { from { transform: translateY(0); } to { transform: translateY(-30px); } }
+        /* --- ANIMAÇÕES --- */
+        @keyframes typing { from { width: 0 } to { width: 340px } }
+        @keyframes saltar { from { transform: translateY(0); } to { transform: translateY(-25px); } }
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes zig-zag {
+            0% { left: -50px; bottom: 10px; }
+            30% { left: 20%; bottom: 40px; }
+            60% { left: 45%; bottom: 0px; }
+            100% { left: 65%; bottom: 15px; }
+        }
+        @keyframes bola-zig-zag {
+            0% { left: -10px; bottom: 15px; }
+            30% { left: calc(20% + 40px); bottom: 40px; }
+            60% { left: calc(45% + 40px); bottom: 0px; }
+            100% { left: calc(65% + 40px); bottom: 15px; }
+        }
+        @keyframes chuta-pro-gol { to { left: 280px; bottom: 70px; transform: rotate(720deg); } }
+        @keyframes goleiro-pula { to { transform: translate(-30px, -40px) rotate(-90deg); opacity: 0.5; } }
+        @keyframes desliza-comemora {
+            0% { opacity: 1; transform: rotate(0); }
+            100% { opacity: 1; transform: translateX(80px) rotate(80deg); bottom: 5px; }
+        }
 
-    @keyframes zig-zag {
-        0% { left: -100px; bottom: 20px; }
-        20% { left: 15%; bottom: 80px; }
-        40% { left: 30%; bottom: 10px; }
-        60% { left: 45%; bottom: 80px; }
-        80% { left: 60%; bottom: 10px; }
-        100% { left: 65%; bottom: 25px; }
-    }
-
-    @keyframes bola-zig-zag {
-        0% { left: -40px; bottom: 20px; }
-        20% { left: calc(15% + 40px); bottom: 80px; }
-        40% { left: calc(30% + 40px); bottom: 10px; }
-        60% { left: calc(45% + 40px); bottom: 80px; }
-        80% { left: calc(60% + 40px); bottom: 10px; }
-        100% { left: calc(65% + 40px); bottom: 25px; }
-    }
-
-    @keyframes chute-gol {
-        to { left: calc(100% - 50px); bottom: 90px; transform: rotate(1080deg); }
-    }
-
-    @keyframes goleiro-pula {
-        to { transform: translate(-40px, -70px) rotate(-60deg); opacity: 0.4; }
-    }
-
-    @keyframes deslizar {
-        0% { opacity: 1; transform: translateX(0) rotate(0); }
-        100% { opacity: 1; transform: translateX(150px) rotate(85deg); bottom: 5px; }
-    }
+        /* GARANTE QUE O SITE APAREÇA DEPOIS */
+        section { opacity: 0; transform: translateY(30px); transition: 1s; }
+        section.active { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
  <div id="loader">
-    <h1 class="titulo-typing">ARENA CHASQUI & VELASCO</h1>
+        <h1 class="titulo-typing">ARENA CHASQUI & VELASCO</h1>
 
-    <div class="loader-flags">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg" alt="Brasil">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Flag_of_Bolivia.svg" alt="Bolívia">
+        <div class="loader-flags">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg" alt="Brasil">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Flag_of_Bolivia.svg" alt="Bolívia">
+        </div>
+
+        <div class="campo-futebol">
+            <div class="texto-gol-final">GOOOOLLLLLL!!!</div>
+            <div class="trave-branca"></div>
+
+            <svg class="stickman-branco" width="40" height="60" viewBox="0 0 40 60">
+                <circle cx="20" cy="10" r="8" />
+                <line x1="20" y1="18" x2="20" y2="40" />
+                <line x1="20" y1="25" x2="5" y2="35" /><line x1="20" y1="25" x2="35" y2="35" />
+                <line x1="20" y1="40" x2="10" y2="58" /><line x1="20" y1="40" x2="30" y2="58" />
+            </svg>
+
+            <div class="bola-animada">⚽</div>
+
+            <svg class="goleiro-palitinho" width="40" height="60" viewBox="0 0 40 60">
+                <circle cx="20" cy="10" r="8" />
+                <line x1="20" y1="18" x2="20" y2="40" />
+                <line x1="20" y1="20" x2="5" y2="5" /><line x1="20" y1="20" x2="35" y2="5" />
+                <line x1="20" y1="40" x2="10" y2="58" /><line x1="20" y1="40" x2="30" y2="58" />
+            </svg>
+
+            <svg class="boneco-comemora" width="60" height="40" viewBox="0 0 60 40">
+                <circle cx="50" cy="15" r="7" stroke="white" stroke-width="3" fill="none" />
+                <line x1="43" y1="15" x2="10" y2="15" stroke="white" stroke-width="3" />
+            </svg>
+        </div>
     </div>
-
-    <div class="area-jogo">
-        <div class="texto-gol">GOOOOLLLLLL!!!</div>
-        
-        <div class="trave"></div>
-
-        <svg class="jogador-branco" viewBox="0 0 40 60">
-            <circle cx="20" cy="10" r="8" />
-            <line x1="20" y1="18" x2="20" y2="40" />
-            <line x1="20" y1="25" x2="5" y2="35" />
-            <line x1="20" y1="25" x2="35" y2="35" />
-            <line x1="20" y1="40" x2="10" y2="58" />
-            <line x1="20" y1="40" x2="30" y2="58" />
-        </svg>
-
-        <div class="bola">⚽</div>
-
-        <svg class="goleiro" width="40" height="60" viewBox="0 0 40 60">
-            <circle cx="20" cy="10" r="8" />
-            <line x1="20" y1="18" x2="20" y2="40" />
-            <line x1="20" y1="20" x2="5" y2="10" />
-            <line x1="20" y1="20" x2="35" y2="10" />
-            <line x1="20" y1="40" x2="10" y2="58" />
-            <line x1="20" y1="40" x2="30" y2="58" />
-        </svg>
-
-        <svg class="celebracao" width="70" height="40" viewBox="0 0 60 40">
-            <circle cx="50" cy="20" r="8" stroke="white" stroke-width="3" fill="none" />
-            <line x1="42" y1="20" x2="5" y2="20" stroke="white" stroke-width="3" />
-            <line x1="10" y1="20" x2="0" y2="35" stroke="white" stroke-width="2" />
-        </svg>
-    </div>
-</div>
-      
+    
     
 <video class="video-bg" autoplay muted loop playsinline>
     <source src="https://cdn.coverr.co/videos/coverr-football-stadium-1574/1080p.mp4" type="video/mp4">
@@ -696,11 +661,11 @@ renderCalendar();
     renderCalendar();
 
 <script>
-    // --- CONTROLE DA ANIMAÇÃO ÉPICA (ABERTURA ARENA) ---
+    // --- CONTROLE DA ANIMAÇÃO ARENA (PASSO 3 - VERSÃO DEFINITIVA) ---
     window.addEventListener('load', () => {
         
-        // 1. SINCRONIZAÇÃO DO CLIMA
-        // Pega a temperatura que a API carregou no site e joga para dentro da tela preta
+        // 1. SINCRONIZAÇÃO DA TEMPERATURA
+        // Tenta pegar a temperatura real do site para exibir no loader
         setTimeout(() => {
             const tempPrincipal = document.getElementById('temp-guarulhos')?.innerText;
             const loaderTemp = document.getElementById('loader-temp');
@@ -709,50 +674,50 @@ renderCalendar();
             }
         }, 1000);
 
-        // 2. CRONOGRAMA DA ANIMAÇÃO (15 SEGUNDOS)
-        // 0s - 3s: Nome Arena digitando
-        // 3s - 4s: Bandeiras aparecem saltando
-        // 4s - 10s: Boneco Branco faz Zig-Zag com a bola
-        // 10s - 11s: Chute e Goleiro tenta defender
-        // 11s - 14s: Texto GOOOOL e comemoração deslizando
-        // 15s: REVELAÇÃO DO SITE
-        
+        // 2. CRONOGRAMA DE REVELAÇÃO (O "GRAND FINALE")
+        // Esperamos 15 segundos para a "novela" do gol terminar na tela preta
         setTimeout(() => {
             const loader = document.getElementById('loader');
             if (loader) {
-                // Inicia o efeito de transparência (Fade Out)
+                // Inicia o sumiço suave da tela preta
                 loader.style.opacity = '0';
                 
-                // Após o fade, remove o loader para não travar os cliques no site
+                // Aguarda o tempo do efeito de transparência (800ms) para remover o loader
                 setTimeout(() => {
-                    loader.style.display = 'none';
+                    loader.style.display = 'none'; // Deleta a tela preta
                     
-                    // Dispara as animações de subida das seções do site (active)
+                    // ACORDA O SITE: Faz o calendário e as seções aparecerem
                     revealSections(); 
+                    
+                    // GARANTIA: Força todas as sections a ficarem visíveis imediatamente
+                    document.querySelectorAll("section").forEach(section => {
+                        section.classList.add("active");
+                    });
                 }, 800);
             }
-        }, 15000); // 15 segundos de show na tela preta
+        }, 15000); // 15 segundos: Tempo exato para o gol e a comemoração
     });
 
-    // 3. FUNÇÃO DE ROLAGEM (REVEAL SECTIONS)
-    // Faz o conteúdo do site (fotos, textos) subir suavemente quando você rola a página
+    // 3. FUNÇÃO DE REVELAÇÃO (REVEAL SECTIONS)
+    // Controla a entrada suave dos elementos quando você rola a página
     const revealSections = () => {
         const sections = document.querySelectorAll("section");
         sections.forEach(s => {
             const windowHeight = window.innerHeight;
             const revealTop = s.getBoundingClientRect().top;
-            
-            // Se a seção estiver visível na tela, adiciona a classe 'active'
-            if (revealTop < windowHeight - 100) {
+            const revealPoint = 150;
+
+            // Se a seção estiver visível, ela ganha a classe 'active' e aparece
+            if (revealTop < windowHeight - revealPoint) {
                 s.classList.add("active");
             }
         });
     };
 
-    // Escuta o movimento de scroll do mouse
+    // Ativa a função quando o usuário rola a página
     window.addEventListener("scroll", revealSections);
 
-    // Executa uma vez no início caso o usuário já comece no meio da página
+    // Executa uma vez no carregamento para garantir que o topo do site apareça
     revealSections();
 </script>
 </script>
