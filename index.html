@@ -9,40 +9,72 @@
     <style>
         * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
         body { color:white; background:black; overflow-x:hidden; }
-        
+       
+        /* Animação de Abertura */
+        #intro-loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: black; z-index: 9999; display: flex; justify-content: center; align-items: center;
+            flex-direction: column; transition: opacity 1s ease;
+        }
+        .loader-logo {
+            font-size: 35px; font-weight: 800; color: #FFD700;
+            animation: pulse 1.5s infinite alternate; text-align: center; line-height: 1.2;
+        }
+        @keyframes pulse { from { transform: scale(1); opacity: 0.6; } to { transform: scale(1.05); opacity: 1; } }
+
+        /* Efeito de Revelação (Scroll) */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1.2s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
         /* Fundo e Overlay */
         .video-bg { position:fixed; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-2; }
         .overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:linear-gradient(rgba(0,0,0,0.7),rgba(0,50,0,0.8)); z-index:-1; }
-        
+       
         /* Navegação */
         nav { position:fixed; top:0; width:100%; background:rgba(0,0,0,0.8); backdrop-filter:blur(8px); display:flex; justify-content:space-between; align-items:center; padding:15px 40px; z-index:1000; }
-        nav h1 { color:#FFD700; }
-        nav ul { list-style:none; display:flex; gap:25px; }
-        nav a { color:white; text-decoration:none; transition:0.3s; }
+        nav h1 { color:#FFD700; font-size: 20px; }
+        nav ul { list-style:none; display:flex; gap:20px; }
+        nav a { color:white; text-decoration:none; transition:0.3s; font-size: 14px; }
         nav a:hover { color:#00ff00; }
-        
+       
         /* Hero */
         .hero { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding-top:80px; }
-        .hero h2 { font-size:45px; margin-bottom:20px; }
-        .botao { padding:15px 35px; background:linear-gradient(45deg,#FFD700,#00ff00); color:black; border-radius:40px; text-decoration:none; font-weight:600; transition:0.4s; display:inline-block; border:none; cursor:pointer; }
+        .hero h2 { font-size:45px; margin-bottom:20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .botao { padding:15px 35px; background:linear-gradient(45deg,#FFD700,#00ff00); color:black; border-radius:40px; text-decoration:none; font-weight:600; transition:0.4s; display:inline-block; border:none; cursor:pointer; margin: 10px; }
         .botao:hover { transform:scale(1.1); box-shadow: 0 0 20px rgba(0,255,0,0.4); }
-        
+       
         /* Seções */
         section { padding:80px 20px; text-align:center; }
         .texto-informativo { max-width: 850px; margin: 0 auto 40px auto; line-height: 1.8; background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; text-align: left; border: 1px solid rgba(255,215,0,0.2); }
         h2 { margin-bottom:40px; font-size:35px; color:#FFD700; }
-        
+       
+        /* Clima e Bandeiras */
+        .nacoes { display: flex; gap: 20px; justify-content: center; margin-bottom: 15px; }
+        .nacoes img { width: 60px; border-radius: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        #clima-box { background: rgba(0,255,0,0.1); padding: 15px 25px; border-radius: 50px; display: inline-block; border: 1px solid #00ff00; margin-bottom: 30px; }
+
         /* Galeria */
         .galeria { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; margin-top:20px; }
         .galeria img, .galeria video { width:100%; border-radius:20px; transition:0.4s; aspect-ratio: 1/1; object-fit: cover; border: 1px solid rgba(255,215,0,0.3); cursor: pointer; }
         .galeria img:hover, .galeria video:hover { transform:scale(1.05); border-color: #00ff00; }
-        
+       
+        /* Horários */
+        .horarios-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; max-width: 900px; margin: 20px auto; }
+        .horario-card { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; border: 1px solid rgba(255,215,0,0.3); }
+        .horario-card.fechado { border-color: #ff4d4d; color: #ff4d4d; opacity: 0.7; }
+        .horario-card strong { display: block; color: #FFD700; margin-bottom: 5px; }
+
+        /* Botões de Transporte */
+        .transporte-container { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 30px; }
+        .btn-transporte { padding: 12px 25px; border-radius: 12px; text-decoration: none; color: white; font-weight: bold; display: flex; align-items: center; gap: 10px; transition: 0.3s; }
+        .btn-transporte:hover { transform: translateY(-5px); }
+
         /* Redes Sociais */
         .redes-flutuantes { position: fixed; bottom: 25px; right: 25px; display: flex; flex-direction: column; gap: 15px; z-index: 3000; }
         .icone-social { width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; color: white; text-decoration: none; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
         .zap { background-color: #25d366; }
         .tk { background-color: #000000; border: 2px solid #fff; }
-        
+       
         /* Calendário */
         .calendar-container { background: rgba(0,0,0,0.85); padding: 20px; border-radius: 20px; max-width: 900px; margin: auto; border: 1px solid #FFD700; }
         .calendar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
@@ -52,26 +84,27 @@
         .day:hover { background: rgba(255,215,0,0.1); }
         .event-tag { display: block; margin-top: 5px; background: #e74c3c; color: white; padding: 3px 6px; border-radius: 5px; font-size: 10px; font-weight: 600; }
         .btn-calendar { background: #FFD700; color: black; border: none; padding: 8px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; }
-        
+       
         /* Avaliações */
         .feedback-container { max-width: 850px; margin: auto; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 20px; margin-bottom: 40px; }
         .feedback-list { text-align: left; margin-top: 30px; max-height: 400px; overflow-y: auto; }
         .feedback-item { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; margin-bottom: 15px; border-left: 4px solid #FFD700; position: relative; }
         .stars { color: #FFD700; margin-bottom: 5px; }
         .btn-delete { background: #ff4d4d; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; position: absolute; top: 10px; right: 10px; display: none; }
-        
-        /* Inputs */
-        input, textarea, select { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: none; background: rgba(255,255,255,0.1); color: white; outline: none; }
-        input:focus, textarea:focus { border: 1px solid #FFD700; }
-        
+       
         /* Lightbox */
         .lightbox { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:2000; }
         .lightbox img, .lightbox video { max-width:90%; max-height:90%; border-radius:20px; border: 2px solid #FFD700; }
-        
+       
         footer { background:black; padding:40px 20px; text-align: center; color: #777; border-top: 1px solid #222; }
+        input, textarea, select { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: none; background: rgba(255,255,255,0.1); color: white; outline: none; }
     </style>
 </head>
 <body>
+
+<div id="intro-loader">
+    <div class="loader-logo">ARENA CHASQUI & VELASCO<br><span style="color:#00ff00; font-size:18px;">A MELHOR DE GUARULHOS</span></div>
+</div>
 
 <video class="video-bg" autoplay muted loop playsinline>
     <source src="https://cdn.coverr.co/videos/coverr-football-stadium-1574/1080p.mp4" type="video/mp4">
@@ -83,9 +116,8 @@
     <ul>
         <li><a href="#quadras">Quadras</a></li>
         <li><a href="#salao">Salão</a></li>
-        <li><a href="#diversao">Diversão</a></li>
         <li><a href="#times">Times</a></li>
-        <li><a href="#avaliacoes">Avaliações</a></li>
+        <li><a href="#contato">Contato</a></li>
     </ul>
 </nav>
 
@@ -95,20 +127,33 @@
 </div>
 
 <section class="hero">
-    <h2>A Melhor Quadra de Guarulhos</h2>
-    <a class="botao" href="#agenda">Ver Agenda do Salão</a>
+    <div class="nacoes reveal">
+        <img src="https://flagcdn.com/w80/br.png" alt="Brasil">
+        <img src="https://flagcdn.com/w80/bo.png" alt="Bolívia">
+    </div>
+    <h2 class="reveal">A Melhor Quadra de Guarulhos</h2>
+   
+    <div id="clima-box" class="reveal">
+        <span id="temp-info"><i class="fas fa-sun"></i> Carregando clima...</span>
+    </div>
+
+    <div class="reveal">
+        <a class="botao" href="#agenda">Ver Agenda do Salão</a>
+        <button class="botao" style="background: #007bff; color: white;" onclick="compartilharSite()">
+            <i class="fas fa-share-alt"></i> Compartilhar
+        </button>
+    </div>
     <div class="contador" id="contador" style="font-size: 30px; color: #00ff00; margin-top: 15px; font-weight: bold;">0 Reservas este mês</div>
 </section>
 
-<section id="quadras">
+<section id="quadras" class="reveal">
     <h2>QUADRA CHASQUI & VELASCO</h2>
     <div class="texto-informativo">
         <p>A Arena conta com <strong>2 quadras</strong> preparadas para o seu melhor jogo!</p>
-        <p><strong>Quadra Espaçosa:</strong> A Quadra CHASQUI VELASCO é ampla, com gramado sintético de alta performance e iluminação LED profissional.</p>
-        <p><strong>Ambiente Seguro:</strong> Estrutura totalmente cercada e monitorada para a segurança de todos.</p>
-        <p><strong>Estacionamento Gratuito:</strong> Possuímos estacionamento próprio dentro da Arena para sua total tranquilidade.</p>
+        <p><strong>Quadra Espaçosa:</strong> Gramado sintético de alta performance e iluminação LED profissional.</p>
+        <p><strong>Estacionamento Gratuito:</strong> Possuímos estacionamento próprio dentro da Arena.</p>
         <hr style="margin: 20px 0; border: 0; border-top: 1px solid rgba(255,215,0,0.3);">
-        <p>🌟 <strong>Novo Espaço:</strong> Na nossa quadra, temos também um <strong>pequeno salão de festas</strong>. Um lugar muito bonito, aconchegante e espaçoso para integrar o seu esporte com a sua comemoração!</p>
+        <p>🌟 <strong>Novo Espaço:</strong> Temos também um <strong>pequeno salão de festas</strong> aconchegante junto à quadra!</p>
     </div>
     <div class="galeria">
         <video src="a39231dab9da21dd11a3d9fdc8cc6b0e.mp4" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause()"></video>
@@ -122,12 +167,11 @@
     </div>
 </section>
 
-<section id="salao">
+<section id="salao" class="reveal">
     <h2>SALÃO DE FESTA CHASQUI LA PAZ</h2>
     <div class="texto-informativo">
-        <p><strong>Estrutura VIP para seu Evento:</strong> Nosso salão é amplo, ventilado e totalmente coberto.</p>
-        <p>Possuímos um <strong>palco profissional</strong> de grandes dimensões para shows, bandas e apresentações.</p>
-        <p><strong>Tradição em Eventos:</strong> O Salão Chasqui La Paz já foi palco de momentos inesquecíveis, como <strong>festas de 15 anos, batizados, licenciamento militar, Rotucha, Morenada</strong> e diversas outras festas tradicionais!</p>
+        <p><strong>Estrutura VIP:</strong> Salão amplo, ventilado e totalmente coberto com <strong>palco profissional</strong>.</p>
+        <p><strong>Tradição:</strong> Ideal para 15 anos, batizados, licenciamento militar, Rotucha e Morenada!</p>
     </div>
     <div class="galeria">
         <video src="4bd84b8d9eb2444d4bcf1bd4ec4f07b7.mp4" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause()"></video>
@@ -136,10 +180,10 @@
     </div>
 </section>
 
-<section id="diversao">
+<section id="diversao" class="reveal">
     <h2>ÁREA DE DIVERSÃO</h2>
     <div class="texto-informativo">
-        <p>Para a resenha ficar completa, temos uma área exclusiva com <strong>2 mesas de sinuca profissionais</strong>. É divertido demais para jogar com os amigos!</p>
+        <p>Duas mesas de sinuca profissionais para a resenha completa!</p>
         <p style="color: #00ff00; font-weight: bold; font-style: italic;">"Tem segurança de fofura" 🐶</p>
     </div>
     <div class="galeria">
@@ -150,53 +194,33 @@
     </div>
 </section>
 
-<section id="times">
-    <h2>🏆 Times Campeões na Arena Chasqui & Velasco</h2>
+<section id="times" class="reveal">
+    <h2>🏆 Times Campeões</h2>
     <div class="galeria">
-        <img src="084b14cf-e85c-4bee-bdc5-cc4f332d9a9c.jpg">
-        <img src="3250db03-b976-4667-8732-5c91940fd70f.jpg">
-        <img src="37b97771-2970-4693-9f01-35ec34eebeeb.jpg">
-        <img src="4677dfb4-ffac-4f2b-86ec-2b640f871808.jpg">
-        <img src="4b51828f-d00f-455f-86a6-7f241bb0b1b3.jpg">
-        <img src="54021891-3e1a-46f1-af68-414a53f81a45.jpg">
-        <img src="6284b0a9-2464-473b-bdae-4f6bb1c9ad3b.jpg">
-        <img src="64d3e89b-9b65-43e6-bf6d-6aae6f02f80c.jpg">
-        <img src="6d60a556-eefc-479d-bef7-0539feab43dd.jpg">
-        <img src="6ef26115-6891-48ef-8f40-f20a99e03d3f.jpg">
-        <img src="727e38c1-bc80-48ae-972d-021201cf4b22.jpg">
-        <img src="74dcb9e5-a2d6-491b-a57e-18c405fb8c49.jpg">
-        <img src="793d18f4-45ac-4ec5-8cc8-fc20b9e8d516.jpg">
-        <img src="7c88a27f-7fa1-40c9-8b9e-2eb3da5511a7.jpg">
-        <img src="7f5c72a1-e348-48fb-b3f9-61ae6fa46391.jpg">
-        <img src="85df22e3-7daa-4c29-a1e1-a0510be2a004.jpg">
-        <img src="85fff9fe-e29d-462c-a679-83ddd6ff74d0.jpg">
-        <img src="9c49857d-e352-4a27-9d4e-afbf42ea4100.jpg">
-        <img src="a0f89150-2fd0-4d51-8ad1-cdb36c27ed50.jpg">
-        <img src="a123e4fc-7c8c-43db-93f2-9161552ce990.jpg">
-        <img src="a168fe36-f5f0-42b2-bfc8-71d6c97f2386.jpg">
-        <img src="a4d5dc34-5b97-4e29-be8e-67d28a454744.jpg">
-        <img src="a6654b4b-836e-4767-afcc-6b2cff2bf334.jpg">
-        <img src="a85415cb-8341-42e8-ba1e-4134b3e23638.jpg">
-        <img src="ae8fc60d-4295-42c6-a549-c61410db55f2.jpg">
-        <img src="b699b5b3-7310-4da3-8eef-777b7e548c56.jpg">
-        <img src="b85ad644-47c8-4e58-9cc9-f87ff4579eab.jpg">
-        <img src="c50d18ec-98e8-48db-89de-f183b86748f3.jpg">
-        <img src="ccde1b49-2370-4a16-af21-d783dedf9bda.jpg">
-        <img src="cdee124e-f0f7-4d58-bc0a-c3c18e210b0f.jpg">
-        <img src="d2b8625b-36f9-467f-b146-482a8693b376.jpg">
-        <img src="d324c233-178d-461d-b0ce-c96580f71452.jpg">
-        <img src="d925e1d8-3eba-4a37-a64b-d3036df2bab0.jpg">
-        <img src="deb977ed-c509-495f-b883-d2e606ab221f.jpg">
-        <img src="e05d5979-92b3-4e91-9ef7-1caf7f49229f.jpg">
-        <img src="e2aad443-c850-4213-b341-fa7802fbc76a.jpg">
-        <img src="e2ac1b94-6f08-45e2-a774-59ab688b2a7f.jpg">
-        <img src="e8440e66-e892-4501-a149-29de91bee37f.jpg">
-        <img src="f880ccb5-9a47-43d7-b4e1-511189dcf7d7.jpg">
+        <img src="084b14cf-e85c-4bee-bdc5-cc4f332d9a9c.jpg"><img src="3250db03-b976-4667-8732-5c91940fd70f.jpg">
+        <img src="37b97771-2970-4693-9f01-35ec34eebeeb.jpg"><img src="4677dfb4-ffac-4f2b-86ec-2b640f871808.jpg">
+        <img src="4b51828f-d00f-455f-86a6-7f241bb0b1b3.jpg"><img src="54021891-3e1a-46f1-af68-414a53f81a45.jpg">
+        <img src="6284b0a9-2464-473b-bdae-4f6bb1c9ad3b.jpg"><img src="64d3e89b-9b65-43e6-bf6d-6aae6f02f80c.jpg">
+        <img src="6d60a556-eefc-479d-bef7-0539feab43dd.jpg"><img src="6ef26115-6891-48ef-8f40-f20a99e03d3f.jpg">
+        <img src="727e38c1-bc80-48ae-972d-021201cf4b22.jpg"><img src="74dcb9e5-a2d6-491b-a57e-18c405fb8c49.jpg">
     </div>
 </section>
 
-<section id="agenda">
-    <h2>Agenda do Salão de Festa</h2>
+<section id="horarios" class="reveal">
+    <h2>Horários de Funcionamento</h2>
+    <div class="horarios-grid">
+        <div class="horario-card"><strong>DOMINGO</strong>10:00 – 22:00</div>
+        <div class="horario-card fechado"><strong>SEGUNDA</strong>FECHADO</div>
+        <div class="horario-card fechado"><strong>TERÇA</strong>FECHADO</div>
+        <div class="horario-card"><strong>QUARTA</strong>08:00 – 22:00</div>
+        <div class="horario-card"><strong>QUINTA</strong>08:00 – 22:00</div>
+        <div class="horario-card"><strong>SEXTA</strong>08:00 – 23:00</div>
+        <div class="horario-card"><strong>SÁBADO</strong>08:00 – 23:00</div>
+    </div>
+</section>
+
+<section id="agenda" class="reveal">
+    <h2>Agenda do Salão</h2>
     <div class="calendar-container">
         <div class="calendar-header">
             <button class="btn-calendar" id="btnPrev">Anterior</button>
@@ -210,35 +234,34 @@
     </div>
 </section>
 
-<section id="avaliacoes">
-    <h2>Avaliações dos Clientes</h2>
+<section id="avaliacoes" class="reveal">
+    <h2>Avaliações</h2>
     <div class="feedback-container">
         <input type="text" id="fbNome" placeholder="Seu Nome">
         <select id="fbEstrelas">
             <option value="5">⭐⭐⭐⭐⭐ (Excelente)</option>
             <option value="4">⭐⭐⭐⭐ (Muito Bom)</option>
             <option value="3">⭐⭐⭐ (Bom)</option>
-            <option value="2">⭐⭐ (Regular)</option>
-            <option value="1">⭐ (Ruim)</option>
         </select>
-        <textarea id="fbTexto" placeholder="Conte como foi sua experiência na Arena..."></textarea>
+        <textarea id="fbTexto" placeholder="Conte sua experiência..."></textarea>
         <button class="botao" id="btnEnviarFeedback">Enviar Avaliação</button>
         <div class="feedback-list" id="feedbackList"></div>
     </div>
 </section>
 
-<section id="contato">
-    <h2>Localização & Contato</h2>
+<section id="contato" class="reveal">
+    <h2>Localização & Chegada</h2>
     <div class="texto-informativo" style="text-align: center;">
-        <p>Rua Anezio Ruivo, 620 - Sítio São Francisco - Guarulhos - SP</p>
-        <br><br>
-        <div class="map-container" style="border-radius: 20px; overflow: hidden; border: 2px solid #FFD700;">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3661.123!2d-46.388!3d-23.455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce7d5!2sRua%20An%C3%A9zio%20Ruivo%2C%20620!5e0!3m2!1spt-BR!2sbr!4v1" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <p>Rua Anézio Ruivo, 620 - Sítio São Francisco - Guarulhos - SP</p>
+        <div class="transporte-container">
+            <a href="https://waze.com/ul?ll=-23.444747,-46.406456&navigate=yes" target="_blank" class="btn-transporte" style="background:#33ccff"><i class="fab fa-waze"></i> Waze</a>
+            <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&destination[latitude]=-23.444747&destination[longitude]=-46.406456" class="btn-transporte" style="background:black; border:1px solid white;"><i class="fab fa-uber"></i> Uber</a>
+            <a href="https://indriver.com/ru/redirect?lat=-23.444747&lng=-46.406456" target="_blank" class="btn-transporte" style="background:#b8f41e; color:black;"><i class="fas fa-car"></i> inDrive</a>
         </div>
-        <br><br>
-        <a class="botao" href="https://maps.google.com/?q=Rua+Anezio+Ruivo+620+Guarulhos" target="_blank">
-            <i class="fas fa-location-arrow"></i> Abrir no GPS (Google Maps)
-        </a>
+        <br>
+        <div style="border-radius: 20px; overflow: hidden; border: 2px solid #FFD700; margin-top: 20px;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3661.3253678516!2d-46.409031!3d-23.444747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce6253456789ab%3A0x123456789abcdef!2sRua%20An%C3%A9zio%20Ruivo%2C%20620!5e0!3m2!1spt-BR!2sbr!4v1700000000000" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
     </div>
 </section>
 
@@ -250,13 +273,13 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getDatabase, ref, set, onValue, push, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCE-hdY_R8PsRgqUDRi2TlA8y3kU84RC7s",
-  authDomain: "arena-chasqui-velasco-6a21b.firebaseapp.com",
-  databaseURL: "https://arena-chasqui-velasco-6a21b-default-rtdb.firebaseio.com",
-  projectId: "arena-chasqui-velasco-6a21b",
-  storageBucket: "arena-chasqui-velasco-6a21b.firebasestorage.app",
-  messagingSenderId: "278041356492",
-  appId: "1:278041356492:web:9467602b630af6aed57a69"
+    apiKey: "AIzaSyCE-hdY_R8PsRgqUDRi2TlA8y3kU84RC7s",
+    authDomain: "arena-chasqui-velasco-6a21b.firebaseapp.com",
+    databaseURL: "https://arena-chasqui-velasco-6a21b-default-rtdb.firebaseio.com",
+    projectId: "arena-chasqui-velasco-6a21b",
+    storageBucket: "arena-chasqui-velasco-6a21b.firebasestorage.app",
+    messagingSenderId: "278041356492",
+    appId: "1:278041356492:web:9467602b630af6aed57a69"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -267,6 +290,45 @@ const fbRef = ref(db, 'feedbacks');
 let currentDate = new Date();
 let events = {};
 
+// Abertura e Animação de Scroll
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const loader = document.getElementById('intro-loader');
+        loader.style.opacity = '0';
+        setTimeout(() => loader.style.display = 'none', 1000);
+    }, 2000);
+});
+
+const revealOnScroll = () => {
+    document.querySelectorAll('.reveal').forEach(el => {
+        if(el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('active');
+    });
+};
+window.addEventListener('scroll', revealOnScroll);
+revealOnScroll();
+
+// Clima
+async function getClima() {
+    try {
+        const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=-23.44&longitude=-46.40&current_weather=true');
+        const data = await res.json();
+        document.getElementById('temp-info').innerHTML = `<i class="fas fa-thermometer-half"></i> Guarulhos agora: <strong>${Math.round(data.current_weather.temperature)}°C</strong>`;
+    } catch {
+        document.getElementById('temp-info').innerText = "Clima disponível em Guarulhos";
+    }
+}
+getClima();
+
+// Compartilhar
+window.compartilharSite = () => {
+    if (navigator.share) {
+        navigator.share({ title: 'Arena Chasqui & Velasco', url: window.location.href });
+    } else {
+        alert("Link copiado: " + window.location.href);
+    }
+};
+
+// Lógica original do Firebase (Agenda e Feedbacks)
 onValue(agendaRef, (snapshot) => {
     events = snapshot.val() || {};
     renderCalendar();
@@ -277,7 +339,6 @@ onValue(fbRef, (snapshot) => {
     list.innerHTML = "";
     const data = snapshot.val();
     const isAdmin = sessionStorage.getItem('isArenaAdmin') === 'true';
-
     if(data) {
         Object.entries(data).reverse().forEach(([key, fb]) => {
             const div = document.createElement("div");
@@ -285,17 +346,14 @@ onValue(fbRef, (snapshot) => {
             div.innerHTML = `
                 <button class="btn-delete" style="display: ${isAdmin ? 'block' : 'none'}" onclick="window.apagarFB('${key}')">Excluir</button>
                 <div class="stars">${"⭐".repeat(fb.estrelas)}</div>
-                <strong>${fb.nome}</strong>
-                <p>${fb.texto}</p>`;
+                <strong>${fb.nome}</strong><p>${fb.texto}</p>`;
             list.appendChild(div);
         });
     }
 });
 
 window.apagarFB = (key) => {
-    if(confirm("Dono, deseja apagar esse comentário?")) {
-        remove(ref(db, 'feedbacks/' + key));
-    }
+    if(confirm("Deseja apagar esse comentário?")) remove(ref(db, 'feedbacks/' + key));
 };
 
 document.getElementById("btnEnviarFeedback").onclick = () => {
@@ -304,10 +362,10 @@ document.getElementById("btnEnviarFeedback").onclick = () => {
     const texto = document.getElementById("fbTexto").value;
     if(nome && texto) {
         push(fbRef, { nome, estrelas: parseInt(estrelas), texto });
-        alert("Obrigado pelo seu feedback!");
+        alert("Obrigado pelo feedback!");
         document.getElementById("fbNome").value = "";
         document.getElementById("fbTexto").value = "";
-    } else { alert("Por favor, preencha nome e comentário!"); }
+    }
 };
 
 function renderCalendar() {
@@ -318,29 +376,27 @@ function renderCalendar() {
     const month = currentDate.getMonth();
     const namesMonths = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
     monthYear.innerText = `${namesMonths[month]} ${year}`;
-    const weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
-    weekDays.forEach(d => {
+    ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"].forEach(d => {
         const dDiv = document.createElement("div"); dDiv.className = "day-name"; dDiv.innerText = d; grid.appendChild(dDiv);
     });
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-    for(let i=0; i<firstDay; i++) { grid.appendChild(document.createElement("div")); }
+    for(let i=0; i<firstDay; i++) grid.appendChild(document.createElement("div"));
     for(let i=1; i<=daysInMonth; i++) {
         const dayDiv = document.createElement("div");
         dayDiv.className = "day";
         const dateKey = `${year}-${month}-${i}`;
         dayDiv.innerHTML = `<strong>${i}</strong>`;
-        if(events[dateKey]) { dayDiv.innerHTML += `<span class="event-tag">${events[dateKey]}</span>`; }
+        if(events[dateKey]) dayDiv.innerHTML += `<span class="event-tag">${events[dateKey]}</span>`;
         dayDiv.onclick = () => {
             if(sessionStorage.getItem('isArenaAdmin') === 'true') {
                 const info = prompt("Reserva:", events[dateKey] || "");
                 if(info !== null) {
                     const upEv = {...events};
-                    if(info === "") delete upEv[dateKey];
-                    else upEv[dateKey] = info;
+                    if(info === "") delete upEv[dateKey]; else upEv[dateKey] = info;
                     set(agendaRef, upEv);
                 }
-            } else { alert("Entre em contato para reservar o salão!"); }
+            } else { alert("Fale com a gente no WhatsApp para reservar!"); }
         };
         grid.appendChild(dayDiv);
     }
@@ -350,38 +406,25 @@ document.getElementById("btnPrev").onclick = () => { currentDate.setMonth(curren
 document.getElementById("btnNext").onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
 
 document.getElementById("btnAdmin").onclick = () => {
-    if(prompt("Senha:") === "MEV2000") { 
-        sessionStorage.setItem('isArenaAdmin', 'true'); 
-        alert("Dono Logado! Você agora pode apagar comentários e editar a agenda."); 
-        location.reload(); 
+    if(prompt("Senha:") === "MEV2000") {
+        sessionStorage.setItem('isArenaAdmin', 'true');
+        location.reload();
     }
-    else { alert("Senha Errada!"); }
 };
 
+// Contador de Reservas
 let count = 0;
 const interval = setInterval(() => {
-    if(count < 154) {
-        count++;
-        document.getElementById("contador").innerText = count + " Reservas este mês";
-    } else { clearInterval(interval); }
+    if(count < 154) { count++; document.getElementById("contador").innerText = count + " Reservas este mês"; }
+    else clearInterval(interval);
 }, 20);
 
+// Lightbox
 document.querySelectorAll(".galeria img, .galeria video").forEach(el => {
     el.onclick = () => {
         const lightbox = document.getElementById("lightbox");
         lightbox.style.display = "flex";
-        lightbox.innerHTML = "";
-        if(el.tagName === "IMG"){
-            const img = document.createElement("img");
-            img.src = el.src;
-            lightbox.appendChild(img);
-        } else {
-            const vid = document.createElement("video");
-            vid.src = el.src;
-            vid.controls = true;
-            vid.autoplay = true;
-            lightbox.appendChild(vid);
-        }
+        lightbox.innerHTML = el.tagName === "IMG" ? `<img src="${el.src}">` : `<video src="${el.src}" controls autoplay></video>`;
     };
 });
 document.getElementById("lightbox").onclick = function() { this.style.display = "none"; this.innerHTML = ""; };
