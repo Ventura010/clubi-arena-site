@@ -70,10 +70,150 @@
         .lightbox img, .lightbox video { max-width:90%; max-height:90%; border-radius:20px; border: 2px solid #FFD700; }
        
         footer { background:black; padding:40px 20px; text-align: center; color: #777; border-top: 1px solid #222; }
-    </style>
+      <style>
+/* --- TELA PRETA (LOADER) --- */
+#loader {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: black;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    overflow: hidden;
+    transition: opacity 0.8s ease;
+}
+
+/* NOME NO TOPO DIGITANDO */
+.titulo-typing {
+    color: #FFD700;
+    font-size: 28px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    border-right: 3px solid #FFD700;
+    animation: typing 3s steps(22) forwards;
+}
+
+/* BANDEIRAS NO MEIO */
+.loader-flags { 
+    display: flex; 
+    gap: 20px; 
+    opacity: 0;
+    animation: fadeIn 0.5s forwards 3s;
+}
+.loader-flags img { width: 70px; animation: saltar 1s infinite alternate; }
+
+/* ÁREA DO GOL E TROFÉU NA BASE */
+.campo-futebol {
+    position: relative;
+    width: 320px;
+    height: 150px;
+}
+
+.boneco-branco {
+    position: absolute;
+    left: -50px; bottom: 10px;
+    stroke: white; stroke-width: 3; fill: none;
+    animation: zig-zag 5s forwards 4s;
+}
+
+.bola {
+    position: absolute;
+    left: -10px; bottom: 15px;
+    font-size: 20px;
+    animation: bola-zig-zag 5s forwards 4s, chuta-gol 1s forwards 9s;
+}
+
+.trave {
+    position: absolute;
+    right: 0; bottom: 0;
+    width: 70px; height: 90px;
+    border-left: 3px solid white; border-top: 3px solid white;
+}
+
+.goleiro {
+    position: absolute;
+    right: 60px; bottom: 10px;
+    stroke: white; stroke-width: 3; fill: none;
+    animation: goleiro-pula 0.6s forwards 9.5s;
+}
+
+.texto-gol {
+    position: absolute;
+    width: 100%; text-align: center;
+    top: -30px; color: #FFD700;
+    font-size: 40px; font-weight: 900;
+    opacity: 0;
+    animation: fadeIn 0.3s forwards 10s;
+}
+
+.trofeu {
+    position: absolute;
+    left: 45%; bottom: 20px;
+    font-size: 40px;
+    opacity: 0;
+    animation: show-trofeu 1.5s forwards 11s;
+}
+
+/* ANIMAÇÕES */
+@keyframes typing { from { width: 0 } to { width: 340px } }
+@keyframes saltar { from { transform: translateY(0); } to { transform: translateY(-25px); } }
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes zig-zag {
+    0% { left: -50px; bottom: 10px; }
+    50% { left: 30%; bottom: 50px; }
+    100% { left: 60%; bottom: 10px; }
+}
+@keyframes bola-zig-zag {
+    0% { left: -10px; bottom: 15px; }
+    50% { left: calc(30% + 40px); bottom: 50px; }
+    100% { left: calc(60% + 40px); bottom: 15px; }
+}
+@keyframes chuta-gol { to { left: 290px; bottom: 70px; transform: rotate(720deg); } }
+@keyframes goleiro-pula { to { transform: translate(-30px, -40px) rotate(-90deg); opacity: 0.5; } }
+@keyframes show-trofeu { 0% { opacity: 0; transform: scale(0); } 100% { opacity: 1; transform: scale(1.2); } }
+
+/* IMPORTANTE: Garante que o site apareça depois */
+section { opacity: 1 !important; display: block !important; }
+</style>
 </head>
 <body>
+ <div id="loader">
+    <h1 class="titulo-typing">ARENA CHASQUI & VELASCO</h1>
 
+    <div class="loader-flags">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg" alt="Brasil">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Flag_of_Bolivia.svg" alt="Bolívia">
+    </div>
+
+    <div class="campo-futebol">
+        <div class="texto-gol">GOOOOLLLLLL!!!</div>
+        <div class="trofeu">🏆</div>
+        <div class="trave"></div>
+
+        <svg class="boneco-branco" width="40" height="60" viewBox="0 0 40 60">
+            <circle cx="20" cy="10" r="8" />
+            <line x1="20" y1="18" x2="20" y2="40" />
+            <line x1="20" y1="25" x2="5" y2="35" /><line x1="20" y1="25" x2="35" y2="35" />
+            <line x1="20" y1="40" x2="10" y2="58" /><line x1="20" y1="40" x2="30" y2="58" />
+        </svg>
+
+        <div class="bola">⚽</div>
+
+        <svg class="goleiro" width="40" height="60" viewBox="0 0 40 60">
+            <circle cx="20" cy="10" r="8" />
+            <line x1="20" y1="18" x2="20" y2="40" />
+            <line x1="20" y1="20" x2="5" y2="5" /><line x1="20" y1="20" x2="35" y2="5" />
+            <line x1="20" y1="40" x2="10" y2="58" /><line x1="20" y1="40" x2="30" y2="58" />
+        </svg>
+    </div>
+</div>
+    
+    
 <video class="video-bg" autoplay muted loop playsinline>
     <source src="https://cdn.coverr.co/videos/coverr-football-stadium-1574/1080p.mp4" type="video/mp4">
 </video>
@@ -173,9 +313,39 @@
     </div>
 
     <h2>A Melhor Quadra de Guarulhos</h2>
+
+    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 15px;">
+        
+        <button class="botao" onclick="compartilharSite()" style="background: linear-gradient(45deg, #FFD700, #b8860b); padding: 12px 25px; font-size: 14px;">
+            <i class="fas fa-share-alt"></i> COMPARTILHAR SITE
+        </button>
+
+        <a class="botao" style="background: linear-gradient(45deg, #25d366, #128c7e); color: white; padding: 12px 25px; font-size: 14px;" 
+           href="https://wa.me/?text=Bora%20jogar%20na%20Arena%20Chasqui%20%26%20Velasco?%20Confira%20o%20site:%20https://arenachasquivelasco.com.br" 
+           target="_blank">
+            <i class="fab fa-whatsapp"></i> CONVIDAR TIME
+        </a>
+    </div>
+
     <a class="botao" href="#agenda">Ver Agenda do Salão</a>
+    
     <div class="contador" id="contador" style="font-size: 30px; color: #00ff00; margin-top: 15px; font-weight: bold;">0 Reservas este mês</div>
 </section>
+
+<script>
+function compartilharSite() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Arena Chasqui & Velasco',
+            text: 'Olha essa quadra em Guarulhos!',
+            url: window.location.href
+        }).catch(console.error);
+    } else {
+        navigator.clipboard.writeText(window.location.href);
+        alert("Link do site copiado! Agora é só colar e enviar.");
+    }
+}
+</script>
 
 <section id="quadras">
     <h2>QUADRA CHASQUI & VELASCO</h2>
@@ -307,15 +477,30 @@
 <section id="contato">
     <h2>Localização & Contato</h2>
     <div class="texto-informativo" style="text-align: center;">
-        <p>Rua Anezio Ruivo, 620 - Sítio São Francisco - Guarulhos - SP</p>
-        <br><br>
-        <div class="map-container" style="border-radius: 20px; overflow: hidden; border: 2px solid #FFD700;">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3661.123!2d-46.388!3d-23.455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce7d5!2sRua%20An%C3%A9zio%20Ruivo%2C%20620!5e0!3m2!1spt-BR!2sbr!4v1" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        <p><strong><i class="fas fa-map-marker-alt"></i> Rua Anezio Ruivo, 620 - Sítio São Francisco - Guarulhos - SP</strong></p>
+        
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 25px 0;">
+            
+            <a href="https://waze.com/ul?q=Rua%20Anezio%20Ruivo%20620%20Guarulhos" target="_blank" 
+               class="botao" style="background: #33ccff; color: white; border: none; padding: 12px 20px;">
+                <i class="fab fa-waze"></i> ABRIR NO WAZE
+            </a>
+
+            <a href="https://uber.com/ul/?action=setPickup&dropoff[formatted_address]=Rua%20Anezio%20Ruivo%2C%20620%20-%20Guarulhos" target="_blank" 
+               class="botao" style="background: #000000; color: white; border: 1px solid #FFD700; padding: 12px 20px;">
+                <i class="fab fa-uber"></i> PEDIR UM UBER
+            </a>
+
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Rua+Anezio+Ruivo+620+Guarulhos" target="_blank" 
+               class="botao" style="background: #4285F4; color: white; border: none; padding: 12px 20px;">
+                <i class="fas fa-map-marked-alt"></i> GOOGLE MAPS
+            </a>
         </div>
-        <br><br>
-        <a class="botao" href="https://maps.google.com/?q=Rua+Anezio+Ruivo+620+Guarulhos" target="_blank">
-            <i class="fas fa-location-arrow"></i> Abrir no GPS (Google Maps)
-        </a>
+
+        <div class="map-container" style="border-radius: 20px; overflow: hidden; border: 2px solid #FFD700;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3661.1687431525693!2d-46.4010!3d-23.4140!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDI0JzUwLjQiUyA0NsKwMjQnMDMuNiJX!5e0!3m2!1spt-BR!2sbr!4v1700000000000" 
+                    width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
     </div>
 </section>
 
@@ -463,6 +648,61 @@ document.querySelectorAll(".galeria img, .galeria video").forEach(el => {
 });
 document.getElementById("lightbox").onclick = function() { this.style.display = "none"; this.innerHTML = ""; };
 renderCalendar();
+    renderCalendar();
+
+<script>
+    // --- CONTROLE DA ABERTURA ARENA (VERSÃO FINAL) ---
+    window.addEventListener('load', () => {
+        
+        // 1. SINCRONIZAÇÃO DA TEMPERATURA (OPCIONAL)
+        // Tenta buscar a temperatura de Guarulhos para exibir no loader
+        setTimeout(() => {
+            const tempPrincipal = document.getElementById('temp-guarulhos')?.innerText;
+            const loaderTemp = document.getElementById('loader-temp');
+            if (loaderTemp && tempPrincipal) {
+                loaderTemp.innerText = "Guarulhos: " + tempPrincipal;
+            }
+        }, 1000);
+
+        // 2. CRONOGRAMA DA ANIMAÇÃO (15 SEGUNDOS)
+        // Esse tempo garante que o usuário veja:
+        // Digitante -> Bandeiras -> Zig-Zag -> Gol -> Troféu
+        setTimeout(() => {
+            const loader = document.getElementById('loader');
+            if (loader) {
+                // Inicia o sumiço suave (Fade Out)
+                loader.style.opacity = '0';
+                
+                // Remove o loader do caminho para liberar os cliques no site
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    
+                    // GARANTIA: Remove qualquer trava de visibilidade das seções
+                    document.querySelectorAll("section").forEach(s => {
+                        s.style.opacity = "1";
+                        s.style.display = "block";
+                        s.classList.add("active");
+                    });
+                }, 800); // Tempo da transição de transparência
+            }
+        }, 15000); // Aguarda 15 segundos de animação
+    });
+
+    // 3. FUNÇÃO DE REVELAÇÃO AO ROLAR (OPCIONAL)
+    // Mantemos apenas para dar um efeito bonito ao descer a página
+    const revealSections = () => {
+        const sections = document.querySelectorAll("section");
+        sections.forEach(s => {
+            const windowHeight = window.innerHeight;
+            const revealTop = s.getBoundingClientRect().top;
+            if (revealTop < windowHeight - 100) {
+                s.classList.add("active");
+            }
+        });
+    };
+
+    window.addEventListener("scroll", revealSections);
+</script>
 </script>
 </body>
 </html>
