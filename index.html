@@ -7,12 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
         body{color:white;background:black;overflow-x:hidden;}
         
-        /* Preloader */
         #loader {
             position: fixed; width: 100%; height: 100vh; background: black; 
             display: flex; justify-content: center; align-items: center; z-index: 9999;
@@ -22,71 +22,64 @@
         .overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(rgba(0,0,0,0.7),rgba(0,50,0,0.8));z-index:-1;}
         
         nav{position:fixed;top:0;width:100%;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);display:flex;justify-content:space-between;align-items:center;padding:15px 40px;z-index:1000;}
-        nav h1{color:#FFD700;}
+        nav h1{color:#FFD700; font-size: 1.2rem;}
         nav ul{list-style:none;display:flex;gap:25px;}
         nav a{color:white;text-decoration:none;transition:0.3s;}
         nav a:hover{color:#00ff00;}
 
-        /* Hero e Info */
-        .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:80px;}
+        .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:80px; position: relative;}
         .hero h2{font-size:45px;margin-bottom:10px;}
+        .bandeiras { font-size: 55px; margin-bottom: 20px; }
         
-        .bandeiras { font-size: 30px; margin-bottom: 20px; }
-        
-        /* Container de Horários e Clima */
-        .top-info-container {
-            position: absolute; right: 40px; top: 120px; text-align: right; 
-            background: rgba(0,0,0,0.6); padding: 15px; border-radius: 15px; border: 1px solid #FFD700;
+        /* Horários no Canto Esquerdo */
+        .horarios-fixo {
+            position: absolute; left: 40px; top: 120px; text-align: left; 
+            background: rgba(0,0,0,0.6); padding: 15px; border-radius: 15px; border-left: 4px solid #FFD700;
         }
-        .horarios-lista { font-size: 12px; list-style: none; margin-bottom: 10px;}
-        .horarios-lista li { margin-bottom: 2px; }
+        /* Clima no Canto Direito */
+        .clima-fixo {
+            position: absolute; right: 40px; top: 120px; text-align: right; 
+            background: rgba(0,0,0,0.6); padding: 15px; border-radius: 15px; border-right: 4px solid #00ff00;
+        }
+        
+        .horarios-lista { font-size: 12px; list-style: none; }
         .hoje { color: #00ff00; font-weight: bold; }
-
-        .clima-box { border-top: 1px solid #FFD700; padding-top: 10px; font-size: 14px; }
 
         .botao{padding:15px 35px;background:linear-gradient(45deg,#FFD700,#00ff00);color:black;border-radius:40px;text-decoration:none;font-weight:600;transition:0.4s;display:inline-block;border:none;cursor:pointer; margin: 5px;}
         .botao:hover{transform:scale(1.1);}
-        .btn-time { background: #25d366; color: white; }
 
-        section{padding:80px 20px;text-align:center;}
+        section{padding:100px 20px;text-align:center;}
         .texto-informativo {max-width: 850px;margin: 0 auto 40px auto;line-height: 1.8;background: rgba(255,255,255,0.05);padding: 25px;border-radius: 20px;text-align: left;border: 1px solid rgba(255,215,0,0.2);}
         h2{margin-bottom:40px;font-size:35px;color:#FFD700;}
 
-        .galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:20px;}
-        .galeria img, .galeria video{width:100%;border-radius:20px;transition:0.4s;aspect-ratio: 1/1;object-fit: cover;border: 1px solid rgba(255,215,0,0.3); cursor: pointer;}
-        .galeria img:hover, .galeria video:hover{transform:scale(1.05); filter: brightness(1.2);}
+        .galeria{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:20px;}
+        .galeria img, .galeria video{width:100%; height: 320px; border-radius:20px; transition:0.4s; object-fit: cover; border: 1px solid rgba(255,215,0,0.3); cursor: pointer;}
+        .galeria img:hover, .galeria video:hover{transform:scale(1.05); border-color: #00ff00;}
 
-        /* Redes Flutuantes */
         .redes-flutuantes {position: fixed;bottom: 25px;right: 25px;display: flex;flex-direction: column;gap: 15px;z-index: 3000;}
-        .icone-social {width: 60px;height: 60px;border-radius: 50%;display: flex;justify-content: center;align-items: center;font-size: 30px;color: white;text-decoration: none;transition: 0.3s;box-shadow: 0 4px 15px rgba(0,0,0,0.5);}
+        .icone-social {width: 60px;height: 60px;border-radius: 50%;display: flex;justify-content: center;align-items: center;font-size: 30px;color: white;text-decoration: none;}
         .zap { background-color: #25d366; }
         .tk { background-color: #000000; border: 2px solid #fff; }
         .fb { background-color: #1877F2; }
 
-        /* Botões de Transporte */
-        .transporte-box { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
-        .btn-transp { padding: 10px 20px; border-radius: 10px; text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 8px; font-size: 14px; }
-        .waze { background: #33ccff; color: black; }
-        .uber { background: black; color: white; border: 1px solid white; }
-        .indrive { background: #00ff00; color: black; }
-
-        /* Estilos Originais do Calendário e Feedback */
         .calendar-container {background: rgba(0,0,0,0.85);padding: 20px;border-radius: 20px;max-width: 900px;margin: auto;border: 1px solid #FFD700;}
-        .calendar-header {display: flex;justify-content: space-between;align-items: center;margin-bottom: 20px;}
         .calendar-grid {display: grid;grid-template-columns: repeat(7, 1fr);gap: 8px;}
-        .day-name { color: #FFD700; font-weight: 800; padding-bottom: 10px; font-size: 14px;}
-        .day {background: rgba(255,255,255,0.05);min-height: 90px;padding: 8px;border-radius: 12px;font-size: 13px;text-align: left;cursor: pointer;}
-        .event-tag {display: block;margin-top: 5px;background: #e74c3c;color: white;padding: 3px 6px;border-radius: 5px;font-size: 10px;font-weight: 600;}
-        .btn-calendar { background: #FFD700; color: black; border: none; padding: 8px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; }
-        .feedback-container {max-width: 850px; margin: auto; background: rgba(255,255,255,0.05); padding: 30px; border-radius: 20px; margin-bottom: 40px;}
-        .feedback-list {text-align: left; margin-top: 30px; max-height: 400px; overflow-y: auto;}
-        .feedback-item {background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; margin-bottom: 15px; border-left: 4px solid #FFD700; position: relative;}
-        .stars {color: #FFD700; margin-bottom: 5px;}
-        .btn-delete { background: #ff4d4d; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-size: 12px; position: absolute; top: 10px; right: 10px; display: none;}
+        .day {background: rgba(255,255,255,0.05);min-height: 90px;padding: 8px;border-radius: 12px;font-size: 13px;text-align: left;}
+        .event-tag {display: block;margin-top: 5px;background: #e74c3c;color: white;padding: 3px 6px;border-radius: 5px;font-size: 10px;}
+        
+        .feedback-item {background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; margin-bottom: 15px; border-left: 4px solid #FFD700; position: relative; text-align: left;}
         input, textarea, select {width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: none; background: rgba(255,255,255,0.1); color: white;}
-        .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:2000;}
+        
+        .lightbox{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);justify-content:center;align-items:center;z-index:4000;}
         .lightbox img, .lightbox video{max-width:90%;max-height:90%;border-radius:20px;}
+        
         footer{background:black;padding:40px 20px;text-align: center;}
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .horarios-fixo, .clima-fixo { position: static; width: 100%; margin: 10px 0; text-align: center; border: 1px solid #FFD700;}
+            nav ul { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -95,7 +88,7 @@
     <h1 class="animate__animated animate__zoomIn">Arena Chasqui & Velasco</h1>
 </div>
 
-<video class="video-bg" autoplay muted loop>
+<video class="video-bg" autoplay muted loop playsinline>
     <source src="https://cdn.coverr.co/videos/coverr-football-stadium-1574/1080p.mp4" type="video/mp4">
 </video>
 <div class="overlay"></div>
@@ -106,7 +99,7 @@
         <li><a href="#quadras">Quadras</a></li>
         <li><a href="#salao">Salão</a></li>
         <li><a href="#diversao">Diversão</a></li>
-        <li><a href="#times">Times</a></li>
+        <li><a href="#agenda">Agenda</a></li>
         <li><a href="#avaliacoes">Avaliações</a></li>
     </ul>
 </nav>
@@ -118,10 +111,7 @@
 </div>
 
 <section class="hero">
-    <h2 class="animate__animated animate__fadeInDown">A Melhor Quadra de Guarulhos</h2>
-    <div class="bandeiras animate__animated animate__fadeInUp">🇧🇷 🇧🇴</div>
-    
-    <div class="top-info-container animate__animated animate__fadeInRight">
+    <div class="horarios-fixo animate__animated animate__fadeInLeft">
         <ul class="horarios-lista">
             <li id="dia-0">Domingo: 10:00 – 22:00</li>
             <li id="dia-1">Segunda: Fechado</li>
@@ -131,288 +121,238 @@
             <li id="dia-5">Sexta: 08:00 – 23:00</li>
             <li id="dia-6">Sábado: 08:00 – 23:00</li>
         </ul>
-        <div class="clima-box" id="clima">Carregando Clima...</div>
     </div>
 
+    <div class="clima-fixo animate__animated animate__fadeInRight">
+        <div id="clima">Carregando Clima...</div>
+    </div>
+
+    <h2 class="animate__animated animate__fadeInDown">A Melhor Quadra de Guarulhos</h2>
+    <div class="bandeiras animate__animated animate__fadeInUp">🇧🇷 🇧🇴</div>
+    
     <div>
         <a class="botao" href="#agenda">Ver Agenda do Salão</a>
-        <a class="botao btn-time" href="https://api.whatsapp.com/send?text=Bora%20jogar%20na%20Arena%20Chasqui%20%26%20Velasco%3F%20Olha%20o%20site%20deles%3A%20https%3A%2F%2Farenachasquivelasco.com" target="_blank">
-            <i class="fab fa-whatsapp"></i> Convidar meu time
-        </a>
+        <a class="botao" style="background: #25d366; color: white;" href="https://wa.me/5511998470234" target="_blank"><i class="fab fa-whatsapp"></i> Convidar meu time</a>
     </div>
-    <div class="contador" id="contador" style="font-size: 30px; color: #00ff00; margin-top: 15px;">0 Reservas este mês</div>
+    <div class="contador" id="contador" style="font-size: 30px; color: #00ff00; margin-top: 15px;">0 Reservas</div>
 </section>
 
-<section id="quadras">
+<section id="quadras" data-aos="fade-right">
     <h2>QUADRA CHASQUI & VELASCO</h2>
-    <div class="texto-informativo animate__animated animate__fadeInLeft">
+    <div class="texto-informativo">
         <p>A Arena conta com <strong>2 quadras</strong> preparadas para o seu melhor jogo!</p>
-        <p><strong>Quadra Espaçosa:</strong> A Quadra CHASQUI VELASCO é ampla, com gramado sintético de alta performance e iluminação LED profissional.</p>
-        <p><strong>Ambiente Seguro:</strong> Estrutura totalmente cercada e monitorada para a segurança de todos.</p>
-        <p><strong>Estacionamento Gratuito:</strong> Possuímos estacionamento próprio dentro da Arena para sua total tranquilidade.</p>
-        <hr style="margin: 20px 0; border: 0; border-top: 1px solid rgba(255,215,0,0.3);">
-        <p>🌟 <strong>Novo Espaço:</strong> Na nossa quadra, temos também um <strong>pequeno salão de festas</strong>. Um lugar muito bonito, aconchegante e espaçoso para integrar o seu esporte com a sua comemoração!</p>
+        <p><strong>Quadra Espaçosa:</strong> Gramado sintético de alta performance e iluminação LED profissional.</p>
+        <p><strong>Estacionamento Gratuito:</strong> Possuímos estacionamento próprio dentro da Arena.</p>
     </div>
     <div class="galeria">
-        <video src="a39231dab9da21dd11a3d9fdc8cc6b0e.mp4" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause()"></video>
-        <video src="e4f7a40151ed3c0cac424b14271ace41.mp4" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause()"></video>
-        <video src="14360ac8b992c1ec0dd1e970482ff2c6.mp4" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause()"></video>
+        <video src="a39231dab9da21dd11a3d9fdc8cc6b0e.mp4" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>
+        <video src="e4f7a40151ed3c0cac424b14271ace41.mp4" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>
+        <video src="14360ac8b992c1ec0dd1e970482ff2c6.mp4" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>
         <img src="c2643024-93aa-46b6-8444-ef0bf2fbff1e.jpg">
         <img src="c1f1e9ee-dd27-426f-a2c4-62015412d94c.jpg">
         <img src="401cf3b1-c876-467e-bcb7-84c20709091e.jpg">
     </div>
 </section>
 
-<section id="salao">
+<section id="salao" data-aos="fade-left">
     <h2>SALÃO DE FESTA CHASQUI LA PAZ</h2>
     <div class="texto-informativo">
-        <p><strong>Estrutura VIP para seu Evento:</strong> Nosso salão é amplo, ventilado e totalmente coberto.</p>
-        <p>Possuímos um <strong>palco profissional</strong> de grandes dimensões para shows, bandas e apresentações.</p>
-        <p><strong>Tradição em Eventos:</strong> O Salão Chasqui La Paz já foi palco de momentos inesquecíveis, como <strong>festas de 15 anos, batizados, licenciamento militar, Rotucha, Morenada</strong>!</p>
+        <p><strong>Estrutura VIP:</strong> Palco profissional para shows e eventos como festas de 15 anos, batizados e Morenada!</p>
     </div>
     <div class="galeria">
-        <video src="4bd84b8d9eb2444d4bcf1bd4ec4f07b7.mp4" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause()"></video>
-        <video src="7df266d97ef5d8ecf9cd3a57762ad7e1.mp4" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause()"></video>
+        <video src="4bd84b8d9eb2444d4bcf1bd4ec4f07b7.mp4" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>
+        <video src="7df266d97ef5d8ecf9cd3a57762ad7e1.mp4" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>
     </div>
 </section>
 
-<section id="diversao">
+<section id="diversao" data-aos="zoom-in">
     <h2>ÁREA DE DIVERSÃO</h2>
     <div class="texto-informativo">
-        <p>Para a resenha ficar completa, temos uma área exclusiva com <strong>2 mesas de sinuca profissionais</strong>. É divertido demais para jogar com os amigos!</p>
+        <p>Exclusiva área com <strong>2 mesas de sinuca profissionais</strong>.</p>
         <p style="color: #00ff00; font-weight: bold; font-style: italic;">"Tem segurança de fofura" 🐶</p>
     </div>
     <div class="galeria">
-        <video src="IMG_6071_2.mp4" muted loop playsinline onmouseover="this.play()" onmouseout="this.pause()"></video>
+        <video src="IMG_6071_2.mp4" muted loop onmouseover="this.play()" onmouseout="this.pause()"></video>
         <img src="c2a96f49-d828-40af-84b7-d6447ae7d5b4.jpg">
     </div>
 </section>
 
-<section id="times">
-    <h2>🏆 Times Campeões na Arena</h2>
-    <div class="galeria">
-        <img src="084b14cf-e85c-4bee-bdc5-cc4f332d9a9c.jpg">
-        <img src="3250db03-b976-4667-8732-5c91940fd70f.jpg">
-        <img src="37b97771-2970-4693-9f01-35ec34eebeeb.jpg">
-        </div>
-</section>
-
-<section id="agenda">
-    <h2>Agenda do Salão de Festa</h2>
+<section id="agenda" data-aos="fade-up">
+    <h2>Agenda do Salão</h2>
     <div class="calendar-container">
-        <div class="calendar-header">
-            <button class="btn-calendar" id="btnPrev">Anterior</button>
-            <h3 id="monthDisplay">Mês Ano</h3>
-            <button class="btn-calendar" id="btnNext">Próximo</button>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+            <button class="botao" id="btnPrev">Anterior</button>
+            <h3 id="monthDisplay"></h3>
+            <button class="botao" id="btnNext">Próximo</button>
         </div>
         <div class="calendar-grid" id="calendarGrid"></div>
-        <div style="margin-top: 30px;">
-            <button class="btn-calendar" id="btnAdmin">Administrar Arena (Dono)</button>
-        </div>
+        <button class="botao" id="btnAdmin" style="margin-top: 20px;">Administrar Arena (Dono)</button>
     </div>
 </section>
 
-<section id="avaliacoes">
+<section id="avaliacoes" data-aos="fade-up">
     <h2>Avaliações dos Clientes</h2>
-    <div class="feedback-container">
+    <div class="texto-informativo">
         <input type="text" id="fbNome" placeholder="Seu Nome">
         <select id="fbEstrelas">
-            <option value="5">⭐⭐⭐⭐⭐ (Excelente)</option>
-            <option value="4">⭐⭐⭐⭐ (Muito Bom)</option>
-            <option value="3">⭐⭐⭐ (Bom)</option>
-            <option value="2">⭐⭐ (Regular)</option>
-            <option value="1">⭐ (Ruim)</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
         </select>
-        <textarea id="fbTexto" placeholder="Conte como foi sua experiência..."></textarea>
+        <textarea id="fbTexto" placeholder="Sua experiência..."></textarea>
         <button class="botao" id="btnEnviarFeedback">Enviar Avaliação</button>
-        <div class="feedback-list" id="feedbackList"></div>
+        <div id="feedbackList" style="margin-top: 20px;"></div>
     </div>
 </section>
 
 <section id="contato">
-    <h2>Localização & Transporte</h2>
-    <div class="texto-informativo" style="text-align: center;">
-        <p>Rua Anezio Ruivo, 620 - Sítio São Francisco - Guarulhos - SP</p>
-        
-        <div class="transporte-box">
-            <a href="https://waze.com/ul?ll=-23.4475,-46.4061&navigate=yes" target="_blank" class="btn-transp waze"><i class="fab fa-waze"></i> Abrir no Waze</a>
-            <a href="https://m.uber.com/ul/?action=setPickup&pickup=my_location&destination[latitude]=-23.4475&destination[longitude]=-46.4061" target="_blank" class="btn-transp uber"><i class="fab fa-uber"></i> Pedir um Uber</a>
-            <a href="https://indrive.com/" target="_blank" class="btn-transp indrive"><i class="fas fa-car"></i> Pedir InDrive</a>
-        </div>
-
-        <div class="map-container" style="border-radius: 20px; overflow: hidden; border: 2px solid #FFD700; margin-top: 20px;">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3661.123!2d-46.4061!3d-23.4475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDI2JzUxLjAiUyA0NsKwMjQnMjIuMCJX!5e0!3m2!1spt-BR!2sbr!4v1677600000000" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
+    <h2>Localização</h2>
+    <p>Rua Anezio Ruivo, 620 - Sítio São Francisco - Guarulhos</p>
+    <div style="margin-top: 20px;">
+        <a href="https://waze.com/ul?ll=-23.4475,-46.4061&navigate=yes" target="_blank" class="botao" style="background: #33ccff;">Waze</a>
+        <a href="https://m.uber.com/ul/?action=setPickup&destination[latitude]=-23.4475&destination[longitude]=-46.4061" target="_blank" class="botao" style="background: black; color: white;">Uber</a>
     </div>
 </section>
 
 <footer>© 2026 Arena Chasqui & Velasco</footer>
+
 <div class="lightbox" id="lightbox"></div>
 
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, set, onValue, push, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getDatabase, ref, set, onValue, push, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCE-hdY_R8PsRgqUDRi2TlA8y3kU84RC7s",
-  authDomain: "arena-chasqui-velasco-6a21b.firebaseapp.com",
-  databaseURL: "https://arena-chasqui-velasco-6a21b-default-rtdb.firebaseio.com",
-  projectId: "arena-chasqui-velasco-6a21b",
-  storageBucket: "arena-chasqui-velasco-6a21b.firebasestorage.app",
-  messagingSenderId: "278041356492",
-  appId: "1:278041356492:web:9467602b630af6aed57a69"
-};
+    const firebaseConfig = {
+        apiKey: "AIzaSyCE-hdY_R8PsRgqUDRi2TlA8y3kU84RC7s",
+        authDomain: "arena-chasqui-velasco-6a21b.firebaseapp.com",
+        databaseURL: "https://arena-chasqui-velasco-6a21b-default-rtdb.firebaseio.com",
+        projectId: "arena-chasqui-velasco-6a21b",
+        storageBucket: "arena-chasqui-velasco-6a21b.firebasestorage.app",
+        appId: "1:278041356492:web:9467602b630af6aed57a69"
+    };
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const agendaRef = ref(db, 'agenda_salao');
-const fbRef = ref(db, 'feedbacks');
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const agendaRef = ref(db, 'agenda_salao');
+    const fbRef = ref(db, 'feedbacks');
 
-// Lógica de Clima (Simulação baseada em localização real de Guarulhos)
-async function getClima() {
-    try {
-        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=-23.4475&longitude=-46.4061&current_weather=true`);
-        const data = await res.json();
-        document.getElementById('clima').innerHTML = `🌤️ Clima na Rua Anézio: <strong>${data.current_weather.temperature}°C</strong>`;
-    } catch (e) { document.getElementById('clima').innerText = "Clima indisponível"; }
-}
-getClima();
+    // Inicializa Animações
+    AOS.init({ duration: 1000, once: true });
 
-// Destacar dia atual na lista de horários
-const hoje = new Date().getDay();
-document.getElementById(`dia-${hoje}`).classList.add('hoje');
-
-// Remover Loader após carregar
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        document.getElementById('loader').style.display = 'none';
-    }, 1500);
-});
-
-// --- RESTO DO SEU CÓDIGO ORIGINAL (CALENDÁRIO, FEEDBACK, ETC) ---
-
-let currentDate = new Date();
-let events = {};
-
-onValue(agendaRef, (snapshot) => {
-    events = snapshot.val() || {};
-    renderCalendar();
-});
-
-onValue(fbRef, (snapshot) => {
-    const list = document.getElementById("feedbackList");
-    list.innerHTML = "";
-    const data = snapshot.val();
-    const isAdmin = sessionStorage.getItem('isArenaAdmin') === 'true';
-    if(data) {
-        Object.entries(data).reverse().forEach(([key, fb]) => {
-            const div = document.createElement("div");
-            div.className = "feedback-item animate__animated animate__fadeInUp";
-            div.innerHTML = `
-                <button class="btn-delete" style="display: ${isAdmin ? 'block' : 'none'}" onclick="window.apagarFB('${key}')">Excluir</button>
-                <div class="stars">${"⭐".repeat(fb.estrelas)}</div>
-                <strong>${fb.nome}</strong>
-                <p>${fb.texto}</p>`;
-            list.appendChild(div);
-        });
+    // Clima
+    async function getClima() {
+        try {
+            const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=-23.4475&longitude=-46.4061&current_weather=true`);
+            const data = await res.json();
+            document.getElementById('clima').innerHTML = `🌤️ Guarulhos: <strong>${data.current_weather.temperature}°C</strong>`;
+        } catch (e) { document.getElementById('clima').innerText = "Clima indisponível"; }
     }
-});
+    getClima();
 
-window.apagarFB = (key) => {
-    if(confirm("Dono, deseja apagar esse comentário?")) {
-        remove(ref(db, 'feedbacks/' + key));
-    }
-};
-
-document.getElementById("btnEnviarFeedback").onclick = () => {
-    const nome = document.getElementById("fbNome").value;
-    const estrelas = document.getElementById("fbEstrelas").value;
-    const texto = document.getElementById("fbTexto").value;
-    if(nome && texto) {
-        push(fbRef, { nome, estrelas: parseInt(estrelas), texto });
-        alert("Obrigado pelo seu feedback!");
-        document.getElementById("fbNome").value = "";
-        document.getElementById("fbTexto").value = "";
-    }
-};
-
-function renderCalendar() {
-    const grid = document.getElementById("calendarGrid");
-    const monthYear = document.getElementById("monthDisplay");
-    grid.innerHTML = "";
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    const namesMonths = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-    monthYear.innerText = `${namesMonths[month]} ${year}`;
-    const weekDays = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
-    weekDays.forEach(d => {
-        const dDiv = document.createElement("div"); dDiv.className = "day-name"; dDiv.innerText = d; grid.appendChild(dDiv);
+    // Loader
+    window.addEventListener('load', () => {
+        setTimeout(() => document.getElementById('loader').style.display = 'none', 1000);
     });
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    for(let i=0; i<firstDay; i++) { grid.appendChild(document.createElement("div")); }
-    for(let i=1; i<=daysInMonth; i++) {
-        const dayDiv = document.createElement("div");
-        dayDiv.className = "day";
-        const dateKey = `${year}-${month}-${i}`;
-        dayDiv.innerHTML = `<strong>${i}</strong>`;
-        if(events[dateKey]) { dayDiv.innerHTML += `<span class="event-tag">${events[dateKey]}</span>`; }
-        dayDiv.onclick = () => {
-            if(sessionStorage.getItem('isArenaAdmin') === 'true') {
-                const info = prompt("Reserva:", events[dateKey] || "");
-                if(info !== null) {
-                    const upEv = {...events};
-                    if(info === "") delete upEv[dateKey];
-                    else upEv[dateKey] = info;
-                    set(agendaRef, upEv);
-                }
-            } else { alert("Entre em contato pelo WhatsApp para reservar!"); }
-        };
-        grid.appendChild(dayDiv);
+
+    // Dia Atual
+    document.getElementById(`dia-${new Date().getDay()}`).classList.add('hoje');
+
+    // Lógica do Calendário (Completa)
+    let currentDate = new Date();
+    let events = {};
+    onValue(agendaRef, (snapshot) => { events = snapshot.val() || {}; renderCalendar(); });
+
+    function renderCalendar() {
+        const grid = document.getElementById("calendarGrid");
+        const monthYear = document.getElementById("monthDisplay");
+        grid.innerHTML = "";
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        const names = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+        monthYear.innerText = `${names[month]} ${year}`;
+        
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        
+        for(let i=0; i<firstDay; i++) { grid.appendChild(document.createElement("div")); }
+        for(let i=1; i<=daysInMonth; i++) {
+            const dayDiv = document.createElement("div");
+            dayDiv.className = "day";
+            const dateKey = `${year}-${month}-${i}`;
+            dayDiv.innerHTML = `<strong>${i}</strong>`;
+            if(events[dateKey]) { dayDiv.innerHTML += `<span class="event-tag">${events[dateKey]}</span>`; }
+            dayDiv.onclick = () => {
+                if(sessionStorage.getItem('isArenaAdmin') === 'true') {
+                    const info = prompt("Reserva:", events[dateKey] || "");
+                    if(info !== null) {
+                        const upEv = {...events};
+                        if(info === "") delete upEv[dateKey]; else upEv[dateKey] = info;
+                        set(agendaRef, upEv);
+                    }
+                } else { alert("Chame no WhatsApp para reservar!"); }
+            };
+            grid.appendChild(dayDiv);
+        }
     }
-}
+    document.getElementById("btnPrev").onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
+    document.getElementById("btnNext").onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
 
-document.getElementById("btnPrev").onclick = () => { currentDate.setMonth(currentDate.getMonth() - 1); renderCalendar(); };
-document.getElementById("btnNext").onclick = () => { currentDate.setMonth(currentDate.getMonth() + 1); renderCalendar(); };
-
-document.getElementById("btnAdmin").onclick = () => {
-    if(prompt("Senha:") === "MEV2000") { 
-        sessionStorage.setItem('isArenaAdmin', 'true'); 
-        alert("Dono Logado!"); 
-        location.reload(); 
-    }
-};
-
-// Contador
-let count = 0;
-const interval = setInterval(() => {
-    if(count < 154) {
-        count++;
-        document.getElementById("contador").innerText = count + " Reservas este mês";
-    } else { clearInterval(interval); }
-}, 20);
-
-// Lightbox
-document.querySelectorAll(".galeria img, .galeria video").forEach(el => {
-    el.onclick = () => {
-        const lightbox = document.getElementById("lightbox");
-        lightbox.style.display = "flex";
-        lightbox.innerHTML = "";
-        if(el.tagName === "IMG"){
-            const img = document.createElement("img");
-            img.src = el.src;
-            lightbox.appendChild(img);
-        } else {
-            const vid = document.createElement("video");
-            vid.src = el.src;
-            vid.controls = true;
-            vid.autoplay = true;
-            lightbox.appendChild(vid);
+    // Admin
+    document.getElementById("btnAdmin").onclick = () => {
+        if(prompt("Senha:") === "MEV2000") {
+            sessionStorage.setItem('isArenaAdmin', 'true');
+            location.reload();
         }
     };
-});
-document.getElementById("lightbox").onclick = function() { this.style.display = "none"; this.innerHTML = ""; };
-renderCalendar();
+
+    // Feedbacks (Lógica Completa)
+    onValue(fbRef, (snapshot) => {
+        const list = document.getElementById("feedbackList");
+        list.innerHTML = "";
+        const data = snapshot.val();
+        if(data) {
+            Object.entries(data).reverse().forEach(([key, fb]) => {
+                const div = document.createElement("div");
+                div.className = "feedback-item";
+                div.innerHTML = `<strong>${fb.nome}</strong> (${"⭐".repeat(fb.estrelas)})<p>${fb.texto}</p>`;
+                if(sessionStorage.getItem('isArenaAdmin') === 'true') {
+                    const del = document.createElement("button");
+                    del.innerText = "Apagar";
+                    del.onclick = () => remove(ref(db, 'feedbacks/' + key));
+                    div.appendChild(del);
+                }
+                list.appendChild(div);
+            });
+        }
+    });
+    document.getElementById("btnEnviarFeedback").onclick = () => {
+        const nome = document.getElementById("fbNome").value;
+        const texto = document.getElementById("fbTexto").value;
+        const estrelas = document.getElementById("fbEstrelas").value;
+        if(nome && texto) {
+            push(fbRef, { nome, texto, estrelas: parseInt(estrelas) });
+            document.getElementById("fbNome").value = "";
+            document.getElementById("fbTexto").value = "";
+        }
+    };
+
+    // Contador Animado
+    let count = 0;
+    const interval = setInterval(() => {
+        if(count < 154) { count++; document.getElementById("contador").innerText = count + " Reservas"; }
+        else clearInterval(interval);
+    }, 20);
+
+    // Lightbox
+    document.querySelectorAll(".galeria img, .galeria video").forEach(el => {
+        el.onclick = () => {
+            const lb = document.getElementById("lightbox");
+            lb.style.display = "flex";
+            lb.innerHTML = el.tagName === "IMG" ? `<img src="${el.src}">` : `<video src="${el.src}" controls autoplay></video>`;
+        };
+    });
+    document.getElementById("lightbox").onclick = function() { this.style.display="none"; this.innerHTML=""; };
 </script>
 </body>
 </html>
