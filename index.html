@@ -122,8 +122,33 @@
     </div>
 </div>
 
-<div id="admin-views-box"><i class="fas fa-eye"></i> ACESSOS TOTAIS: <span id="view-count">0</span></div>
+<div id="admin-panel" style="display:none; position:fixed; top:120px; left:15px; background:#111; color:white; padding:20px; border-radius:15px; font-family:Poppins,sans-serif; z-index:5000; box-shadow:0 0 25px rgba(255,215,0,0.4); border:2px solid #FFD700; width:260px;">
+  <p style="color:#FFD700;font-weight:800;font-size:14px;margin:0 0 15px;">🔐 PAINEL DO DONO</p>
 
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:15px;">
+    <div style="background:#1a1a1a;padding:10px;border-radius:10px;">
+      <p style="font-size:10px;color:#aaa;margin:0 0 4px;">TOTAL ACESSOS</p>
+      <p style="font-size:22px;font-weight:800;color:#FFD700;margin:0;" id="p-total">--</p>
+    </div>
+    <div style="background:#1a1a1a;padding:10px;border-radius:10px;">
+      <p style="font-size:10px;color:#aaa;margin:0 0 4px;">HOJE</p>
+      <p style="font-size:22px;font-weight:800;color:#00ff00;margin:0;" id="p-hoje">--</p>
+    </div>
+    <div style="background:#1a1a1a;padding:10px;border-radius:10px;">
+      <p style="font-size:10px;color:#aaa;margin:0 0 4px;">AVALIAÇÕES</p>
+      <p style="font-size:22px;font-weight:800;color:white;margin:0;" id="p-avals">--</p>
+      <p style="font-size:10px;color:#FFD700;margin:2px 0 0;" id="p-media">★ --</p>
+    </div>
+    <div style="background:#1a1a1a;padding:10px;border-radius:10px;">
+      <p style="font-size:10px;color:#aaa;margin:0 0 4px;">RESERVAS MÊS</p>
+      <p style="font-size:22px;font-weight:800;color:white;margin:0;" id="p-reservas">--</p>
+    </div>
+  </div>
+
+  <button onclick="apagarTodosComentarios()" style="width:100%;background:#ff4d4d;color:white;border:none;padding:10px;border-radius:10px;font-weight:800;cursor:pointer;font-size:13px;">
+    Apagar todos os comentários
+  </button>
+</div>
     
 <video class="video-bg" autoplay muted loop playsinline>
     <source src="https://cdn.coverr.co/videos/coverr-football-stadium-1574/1080p.mp4" type="video/mp4">
@@ -420,7 +445,7 @@ function compartilharSite() {
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, ref, set, onValue, push, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, set, onValue, push, remove, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCE-hdY_R8PsRgqUDRi2TlA8y3kU84RC7s",
@@ -444,6 +469,57 @@ onValue(agendaRef, (snapshot) => {
     events = snapshot.val() || {};
     renderCalendar();
 });
+// === PAINEL DO DONO ===
+const hoje = new Date().toISOString().split('T')[0];
+const viewTotalRef = ref(db, 'analytics/visitas_total');
+const viewHojeRef  = ref(db, 'analytics/visitas_por_dia/' + hoje);
+
+runTransaction(viewTotalRef, (n) => (n || 0) + 1);
+runTransaction(viewHojeRef,  (n) => (n || 0) + 1);
+
+onValue(viewTotalRef, (snap) => {
+    const el = document.getElementById('p-total');
+    if(el) el.innerText = snap.val() || 0;
+});
+onValue(viewHojeRef, (snap) => {
+    const el = document.getElementById('p-hoje');
+    if(el) el.innerText = snap.val() || 0;
+});
+
+onValue(fbRef, (snap) => {
+    const data = snap.val();
+    const elAvals = document.getElementById('p-avals');
+    const elMedia = document.getElementById('p-media');
+    if(!data || !elAvals) return;
+    const lista = Object.values(data);
+    const total = lista.length;
+    const media = lista.reduce((acc, fb) => acc + (fb.estrelas || 0), 0) / total;
+    elAvals.innerText = total;
+    elMedia.innerText = '★ ' + media.toFixed(1);
+});
+
+onValue(agendaRef, (snap) => {
+    const data = snap.val() || {};
+    const mesAtual = new Date().getMonth();
+    const anoAtual = new Date().getFullYear();
+    const count = Object.keys(data).filter(key => {
+        const [a, m] = key.split('-').map(Number);
+        return a === anoAtual && m === mesAtual;
+    }).length;
+    const el = document.getElementById('p-reservas');
+    if(el) el.innerText = count;
+});
+
+window.apagarTodosComentarios = () => {
+    if(confirm('Dono, tem certeza que quer apagar TODOS os comentários?')) {
+        set(fbRef, null);
+        alert('Todos os comentários foram apagados!');
+    }
+};
+
+if(sessionStorage.getItem('isArenaAdmin') === 'true') {
+    document.getElementById('admin-panel').style.display = 'block';
+}
 
 onValue(fbRef, (snapshot) => {
     const list = document.getElementById("feedbackList");
