@@ -90,7 +90,12 @@
         /* Inputs */
         input, textarea, select { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: none; background: rgba(255,255,255,0.1); color: white; outline: none; }
         input:focus, textarea:focus { border: 1px solid #FFD700; }
-       
+
+        /* === CAMPEONATO OFICIAL === */
+.camp-wrap { max-width: 700px...
+...todo o código...
+.loading-camp { color: #aaa; font-size: 13px; text-align: center; padding: 30px; }
+        
         /* Lightbox */
         .lightbox { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:2000; }
         .lightbox img, .lightbox video { max-width:90%; max-height:90%; border-radius:20px; border: 2px solid #FFD700; }
@@ -332,7 +337,92 @@ function compartilharSite() {
         <img src="c2a96f49-d828-40af-84b7-d6447ae7d5b4.jpg">
     </div>
 </section>
+    
+<section id="campeonato">
+  <h2>🏆 Campeonato Oficial</h2>
 
+  <div class="camp-wrap">
+    <div class="gen-tabs">
+      <div class="gen-tab fem ativo" onclick="trocarGen('fem',this)">♀ Grupo A — Feminino</div>
+      <div class="gen-tab masc" onclick="trocarGen('masc',this)">♂ Grupo B — Masculino</div>
+    </div>
+
+    <!-- FEMININO -->
+    <div id="gen-fem" class="camp-body">
+      <div class="camp-header">
+        <div class="camp-titulo fem">Campeonato Feminino 2026</div>
+        <div class="camp-data">Início: — • Arena Chasqui & Velasco — Guarulhos SP</div>
+        <span class="badge-and" id="fem-status">● EM ANDAMENTO</span>
+      </div>
+      <div class="camp-sub-tabs">
+        <button class="camp-sub-tab fem ativo" onclick="trocarSub('fem','tabela',this)">Tabela</button>
+        <button class="camp-sub-tab fem" onclick="trocarSub('fem','matamata',this)">Mata-mata</button>
+        <button class="camp-sub-tab fem" onclick="trocarSub('fem','jogos',this)">Jogos</button>
+        <button class="camp-sub-tab fem" onclick="trocarSub('fem','camp',this)">Campeã</button>
+      </div>
+      <div id="fem-tabela"><p class="loading-camp">Carregando...</p></div>
+      <div id="fem-matamata" style="display:none"><p class="loading-camp">Carregando...</p></div>
+      <div id="fem-jogos" style="display:none"><p class="loading-camp">Carregando...</p></div>
+      <div id="fem-camp" style="display:none">
+        <div class="campeao-box">
+          <div style="font-size:38px;margin-bottom:8px">🏆</div>
+          <div style="color:#D4537E;font-size:15px;font-weight:800;margin-bottom:4px">Campeonato Feminino 2026</div>
+          <div style="color:#FFD700;font-size:14px;font-weight:800" id="fem-campeao-nome">A campeã será revelada aqui!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MASCULINO -->
+    <div id="gen-masc" class="camp-body" style="display:none">
+      <div class="camp-header">
+        <div class="camp-titulo masc">Campeonato Masculino 2026</div>
+        <div class="camp-data">Início: — • Arena Chasqui & Velasco — Guarulhos SP</div>
+        <span class="badge-and" id="masc-status">● EM ANDAMENTO</span>
+      </div>
+      <div class="camp-sub-tabs">
+        <button class="camp-sub-tab masc ativo" onclick="trocarSub('masc','tabela',this)">Tabela</button>
+        <button class="camp-sub-tab masc" onclick="trocarSub('masc','repesca',this)">Repescagem</button>
+        <button class="camp-sub-tab masc" onclick="trocarSub('masc','matamata',this)">Mata-mata</button>
+        <button class="camp-sub-tab masc" onclick="trocarSub('masc','jogos',this)">Jogos</button>
+        <button class="camp-sub-tab masc" onclick="trocarSub('masc','camp',this)">Campeão</button>
+      </div>
+      <div id="masc-tabela"><p class="loading-camp">Carregando...</p></div>
+      <div id="masc-repesca" style="display:none"><p class="loading-camp">Carregando...</p></div>
+      <div id="masc-matamata" style="display:none"><p class="loading-camp">Carregando...</p></div>
+      <div id="masc-jogos" style="display:none"><p class="loading-camp">Carregando...</p></div>
+      <div id="masc-camp" style="display:none">
+        <div class="campeao-box">
+          <div style="font-size:38px;margin-bottom:8px">🏆</div>
+          <div style="color:#378ADD;font-size:15px;font-weight:800;margin-bottom:4px">Campeonato Masculino 2026</div>
+          <div style="color:#FFD700;font-size:14px;font-weight:800" id="masc-campeao-nome">O campeão será revelado aqui!</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAINEL DO DONO -->
+    <div id="painel-camp" style="display:none; margin-top:20px; background:rgba(255,215,0,0.08); border:1px solid #FFD700; border-radius:15px; padding:20px;">
+      <p style="color:#FFD700;font-weight:800;font-size:14px;margin-bottom:15px;">⚙️ EDITAR CAMPEONATO</p>
+      <select id="camp-edit-gen" style="margin-bottom:10px; width:100%; padding:10px; background:rgba(255,255,255,0.1); color:white; border-radius:8px; border:none;">
+        <option value="fem">Feminino</option>
+        <option value="masc">Masculino</option>
+      </select>
+      <input type="text" id="camp-edit-nome" placeholder="Nome do campeonato">
+      <input type="text" id="camp-edit-data" placeholder="Data início (ex: 01/05/2026)">
+      <p style="color:#FFD700;font-size:12px;font-weight:700;margin-bottom:8px;">Times — um por linha:</p>
+      <textarea id="camp-edit-times" placeholder="Time 1&#10;Time 2&#10;Time 3..." rows="6"></textarea>
+      <p style="color:#FFD700;font-size:12px;font-weight:700;margin:10px 0 8px;">Jogos realizados (Time A x Time B | 2-1 | 10/05):</p>
+      <textarea id="camp-edit-jogos" placeholder="Os Brabos x FC Guarulhos | 2-1 | 08/05&#10;Arena Veterans x Raça Boliviana | 1-1 | 08/05" rows="6"></textarea>
+      <p style="color:#FFD700;font-size:12px;font-weight:700;margin:10px 0 8px;">Campeão (deixe vazio se em andamento):</p>
+      <input type="text" id="camp-edit-campeao" placeholder="Nome do time campeão">
+      <select id="camp-edit-status" style="margin-bottom:10px; width:100%; padding:10px; background:rgba(255,255,255,0.1); color:white; border-radius:8px; border:none;">
+        <option value="andamento">● Em Andamento</option>
+        <option value="encerrado">✅ Encerrado</option>
+      </select>
+      <button onclick="salvarCampeonato()" style="width:100%;background:#FFD700;color:black;border:none;padding:12px;border-radius:10px;font-weight:800;cursor:pointer;font-size:14px;">💾 Salvar Campeonato</button>
+    </div>
+  </div>
+</section>
+    
 <section id="times">
     <h2>🏆 Times Campeões na Arena Chasqui & Velasco</h2>
     <div class="galeria">
@@ -636,6 +726,166 @@ document.querySelectorAll(".galeria img, .galeria video").forEach(el => {
 document.getElementById("lightbox").onclick = function() { this.style.display = "none"; this.innerHTML = ""; };
 renderCalendar();
   // ... (este código substitui tudo após o primeiro renderCalendar();)
+    // === CAMPEONATO OFICIAL ===
+const campRef = ref(db, 'campeonato');
+
+function trocarGen(gen, btn) {
+    document.getElementById('gen-fem').style.display = gen === 'fem' ? 'block' : 'none';
+    document.getElementById('gen-masc').style.display = gen === 'masc' ? 'block' : 'none';
+    document.querySelectorAll('.gen-tab').forEach(t => t.classList.remove('ativo'));
+    btn.classList.add('ativo');
+}
+
+function trocarSub(gen, aba, btn) {
+    const abas = {
+        fem: ['tabela','matamata','jogos','camp'],
+        masc: ['tabela','repesca','matamata','jogos','camp']
+    };
+    abas[gen].forEach(id => {
+        const el = document.getElementById(gen + '-' + id);
+        if(el) el.style.display = 'none';
+    });
+    document.getElementById(gen + '-' + aba).style.display = 'block';
+    document.querySelectorAll('#gen-' + gen + ' .camp-sub-tab').forEach(t => t.classList.remove('ativo'));
+    btn.classList.add('ativo');
+}
+
+function renderTabela(gen, times) {
+    const el = document.getElementById(gen + '-tabela');
+    if(!el || !times || times.length === 0) return;
+    const isMasc = gen === 'masc';
+    let html = '<table class="camp-table"><thead><tr><th>#</th><th style="text-align:left">Time</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GP</th><th>GC</th><th>PTS</th></tr></thead><tbody>';
+    times.forEach((t, i) => {
+        const pos = i + 1;
+        let classe = '';
+        if(isMasc) {
+            if(pos <= 4) classe = 'classi-direto';
+            else if(pos <= 12) classe = 'repesca';
+            else classe = 'elim';
+        } else {
+            if(pos <= 4) classe = 'classi-direto';
+            else classe = 'elim';
+        }
+        const lider = pos === 1 ? 'camp-lider' : '';
+        html += `<tr class="${lider}"><td class="pos ${classe}">${pos}°</td><td class="t-nome">${t.nome}</td><td>${t.j||0}</td><td>${t.v||0}</td><td>${t.e||0}</td><td>${t.d||0}</td><td>${t.gp||0}</td><td>${t.gc||0}</td><td class="camp-pts">${t.pts||0}</td></tr>`;
+    });
+    html += '</tbody></table>';
+    if(isMasc) {
+        html += '<div class="camp-legenda"><div class="camp-legenda-item"><div class="camp-legenda-dot" style="background:#00ff00"></div> Top 4 — classificam direto</div><div class="camp-legenda-item"><div class="camp-legenda-dot" style="background:#FFA500"></div> 5° ao 12° — repescagem</div><div class="camp-legenda-item"><div class="camp-legenda-dot" style="background:#ff4d4d"></div> 13° ao 16° — eliminados</div></div>';
+    } else {
+        html += '<div class="camp-legenda"><div class="camp-legenda-item"><div class="camp-legenda-dot" style="background:#00ff00"></div> Top 4 — classificam pro mata-mata</div><div class="camp-legenda-item"><div class="camp-legenda-dot" style="background:#ff4d4d"></div> Eliminadas</div></div>';
+    }
+    el.innerHTML = html;
+}
+
+function renderJogos(gen, jogos) {
+    const el = document.getElementById(gen + '-jogos');
+    if(!el) return;
+    if(!jogos || jogos.length === 0) { el.innerHTML = '<p class="loading-camp">Nenhum jogo cadastrado ainda.</p>'; return; }
+    const realizados = jogos.filter(j => j.placar && j.placar !== '');
+    const proximos = jogos.filter(j => !j.placar || j.placar === '');
+    let html = '';
+    if(realizados.length > 0) {
+        html += '<div class="fase-titulo">Jogos Realizados</div>';
+        realizados.forEach(j => {
+            html += `<div class="camp-jogo-card"><div class="camp-jogo-time">${j.timeA}</div><div class="camp-placar">${j.placar}</div><div class="camp-jogo-time dir">${j.timeB}</div></div>`;
+        });
+    }
+    if(proximos.length > 0) {
+        html += '<div class="fase-titulo">Próximos Jogos</div>';
+        proximos.forEach(j => {
+            html += `<div class="camp-jogo-card"><div class="camp-jogo-time">${j.timeA}</div><div class="camp-placar pend">${j.data||'A definir'}</div><div class="camp-jogo-time dir">${j.timeB}</div></div>`;
+        });
+    }
+    el.innerHTML = html;
+}
+
+function renderMataMata(gen, fases) {
+    const el = document.getElementById(gen + '-matamata');
+    if(!el) return;
+    if(!fases || fases.length === 0) { el.innerHTML = '<p class="loading-camp">Mata-mata ainda não iniciado.</p>'; return; }
+    let html = '';
+    fases.forEach(fase => {
+        html += `<div class="fase-titulo">${fase.nome}</div>`;
+        fase.jogos.forEach(j => {
+            const placar = j.placar ? `<div class="camp-placar">${j.placar}</div>` : `<div class="camp-placar pend">${j.data||'A jogar'}</div>`;
+            html += `<div class="camp-jogo-card"><div class="camp-jogo-time">${j.timeA}</div>${placar}<div class="camp-jogo-time dir">${j.timeB}</div></div>`;
+        });
+    });
+    el.innerHTML = html;
+}
+
+function renderRepesca(jogos) {
+    const el = document.getElementById('masc-repesca');
+    if(!el) return;
+    if(!jogos || jogos.length === 0) { el.innerHTML = '<p class="loading-camp">Repescagem ainda não iniciada.</p>'; return; }
+    let html = '<div class="fase-titulo">Repescagem — 5° ao 12° disputam (4 passam)</div>';
+    jogos.forEach(j => {
+        const placar = j.placar ? `<div class="camp-placar">${j.placar}</div>` : `<div class="camp-placar pend">${j.data||'A jogar'}</div>`;
+        html += `<div class="camp-jogo-card"><div class="camp-jogo-time">${j.timeA}</div>${placar}<div class="camp-jogo-time dir">${j.timeB}</div></div>`;
+    });
+    el.innerHTML = html;
+}
+
+function renderCampeao(gen, campeao, status) {
+    const el = document.getElementById(gen + '-campeao-nome');
+    const statusEl = document.getElementById(gen + '-status');
+    if(!el) return;
+    if(campeao && status === 'encerrado') {
+        el.innerText = '🏆 ' + campeao;
+        el.style.fontSize = '20px';
+        if(statusEl) { statusEl.innerText = '✅ ENCERRADO'; statusEl.className = 'badge-enc'; }
+    } else {
+        el.innerText = gen === 'fem' ? 'A campeã será revelada aqui!' : 'O campeão será revelado aqui!';
+        if(statusEl) { statusEl.innerText = '● EM ANDAMENTO'; statusEl.className = 'badge-and'; }
+    }
+}
+
+onValue(campRef, (snap) => {
+    const data = snap.val() || {};
+    ['fem','masc'].forEach(gen => {
+        const d = data[gen] || {};
+        renderTabela(gen, d.times || []);
+        renderJogos(gen, d.jogos || []);
+        renderMataMata(gen, d.fases || []);
+        renderCampeao(gen, d.campeao, d.status);
+        if(gen === 'masc') renderRepesca(d.repesca || []);
+    });
+});
+
+window.salvarCampeonato = () => {
+    const gen = document.getElementById('camp-edit-gen').value;
+    const nome = document.getElementById('camp-edit-nome').value;
+    const data = document.getElementById('camp-edit-data').value;
+    const timesRaw = document.getElementById('camp-edit-times').value;
+    const jogosRaw = document.getElementById('camp-edit-jogos').value;
+    const campeao = document.getElementById('camp-edit-campeao').value;
+    const status = document.getElementById('camp-edit-status').value;
+
+    const times = timesRaw.split('\n').filter(t => t.trim()).map((nome, i) => ({
+        nome: nome.trim(), j:0, v:0, e:0, d:0, gp:0, gc:0, pts:0
+    }));
+
+    const jogos = jogosRaw.split('\n').filter(j => j.trim()).map(linha => {
+        const partes = linha.split('|');
+        const times = (partes[0]||'').split('x');
+        return {
+            timeA: (times[0]||'').trim(),
+            timeB: (times[1]||'').trim(),
+            placar: (partes[1]||'').trim(),
+            data: (partes[2]||'').trim()
+        };
+    });
+
+    set(ref(db, 'campeonato/' + gen), { nome, data, times, jogos, campeao, status });
+    alert('Campeonato salvo com sucesso!');
+};
+
+if(sessionStorage.getItem('isArenaAdmin') === 'true') {
+    const painelCamp = document.getElementById('painel-camp');
+    if(painelCamp) painelCamp.style.display = 'block';
+}
+    
 
     // FUNÇÃO PARA DESCONGELAR A TELA
     setTimeout(() => { 
